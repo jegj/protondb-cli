@@ -28,7 +28,7 @@ ProtonDB web page use two API sources for list the game ranking and provide the 
                               │                                                            }
                               │
                               │
-h                             │
+                              │
                               │
                               │
                               │
