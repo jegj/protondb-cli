@@ -38,7 +38,7 @@ ProtonDB web page use two API sources for list the game ranking and provide the 
                               │                                      │                    │  {
                               │                                      │                    │   "bestReportedTier": "platinum",
                               └──────────────────────────────────────►  protondb.com/api  │   "confidence": "strong",
- ttps://www.protondb.com/api/v1/reports/summaries/<objectId>         │                    │   "score": x,
+  https://www.protondb.com/api/v1/reports/summaries/<objectId>       │                    │   "score": x,
                                                                      │                    │   "tier": "gold",
                                                                      └────────────────────┘   "total": x,
                                                                                               "trendingTier":"platinum"
