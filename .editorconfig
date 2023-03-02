@@ -1,0 +1,30 @@
+; EditorConfig helps developers define and maintain consistent
+; coding styles between different editors and IDEs.
+
+; For more visit http://editorconfig.org.
+root = true
+
+[{src,scripts,lib}/**.{js,jsx,json}]
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+indent_style = space
+indent_size = 2
+
+[{vagrant}/**.{yml}]
+indent_style = space
+indent_size = 2
+
+; Choose between lf or rf on "end_of_line" property
+[*]
+indent_style = space
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.{js}]
+indent_size = 2
+
+[*.md]
