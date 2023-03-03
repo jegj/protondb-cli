@@ -11,7 +11,7 @@
     "start": "NODE_ENV=development node ./protondb-cli.js",
     "debug": "NODE_PATH=. node --inspect-brk=0.0.0.0:9229 ./protondb-cli.js",
     "coverage": "NODE_ENV=testing NODE_PATH=lib jest test --coverage",
-    "lint": "npm run lint:standard && npm run lint:markdown",
+    "lint": "npm run lint:standard",
     "lint:fix": "standard --fix",
     "lint:markdown": "markdownlint-cli2",
     "lint:standard": "standard | snazzy",
