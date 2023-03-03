@@ -2,7 +2,7 @@
 
 ProtonDB web page use two API sources for list the game ranking and provide the calification for the game:
 
-- `algolia.net` 
+- `algolia.net`
     - Provides the ranking list but needs the following `keys` in the HTTP requests
       -  `x-alogilia-api-key`: e.g 9ba0e69fb2974316cdaec8f5f257088f
       -  `x-algilia-application-id`: e.g 94HE6YATEI
@@ -46,6 +46,28 @@ ProtonDB web page use two API sources for list the game ranking and provide the 
 ```
 
 <!-- ## Algolia Query
+fetch("https://94he6yatei-dsn.algolia.net/1/indexes/steamdb/query", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "application/x-www-form-urlencoded",
+    "sec-ch-ua": "\"Chromium\";v=\"110\", \"Not A(Brand\";v=\"24\", \"Brave\";v=\"110\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Linux\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "cross-site",
+    "sec-gpc": "1",
+    "x-algolia-api-key": "9ba0e69fb2974316cdaec8f5f257088f",
+    "x-algolia-application-id": "94HE6YATEI",
+    "Referer": "https://www.protondb.com/",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": "{\"query\":\"fifaç\",\"attributesToHighlight\":[],\"attributesToSnippet\":[],\"facets\":[\"tags\"],\"facetFilters\":[[\"appType:Game\"]],\"hitsPerPage\":50,\"attributesToRetrieve\":[\"lastUpdated\",\"name\",\"objectID\",\"followers\",\"oslist\",\"releaseYear\",\"tags\",\"technologies\",\"userScore\"],\"page\":0}",
+  "method": "POST"
+});
+
+
 curl 'https://94he6yatei-dsn.algolia.net/1/indexes/steamdb/query?x-algolia-agent=Algolia%20for%20JavaScript%20(4.13.0)%3B%20Browser' \
   -H 'Accept: */*' \
   -H 'Accept-Language: en-US,en;q=0.5' \
@@ -103,7 +125,7 @@ curl 'https://94he6yatei-dsn.algolia.net/1/indexes/steamdb/query?x-algolia-agent
   -H 'x-algolia-application-id: 94HE6YATEI' \
   --data-raw '{"query":"gta","attributesToHighlight":[],"attributesToSnippet":[],"facets":["tags"],"facetFilters":[["appType:Game"]],"hitsPerPage":50,"attributesToRetrieve":["lastUpdated","name","objectID","followers","oslist","releaseYear","tags","technologies","userScore"],"page":0}' \
   --compressed
-  
+
 Get ObjectID
 
 

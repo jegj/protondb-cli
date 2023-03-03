@@ -12,7 +12,7 @@ protondb-cli
 Check your Steam Deck game compatibility reports!
 
 Positionals:
-  game_name  Game's name for checking compatibility.
+  game_name  Game's name for checking compatibility and score.
                          [string] [ protondb-cli Use STDIN by default]
 
 Options:
