@@ -16,7 +16,7 @@ tap.test('buildBodyRequest', (t) => {
     tt.plan(2)
     const response = buildBodyRequest({ query: qry })
     tt.hasProp(response, 'method', 'does not has method property')
-    tt.equal(response.method, 'POST', 'method property is not equal')
+    tt.equal(response.method, 'POST', 'method property is not equal to POST')
   })
 
   t.test('buildBodyRequest function must return an object with the property "body" and must be an object always', (tt) => {
