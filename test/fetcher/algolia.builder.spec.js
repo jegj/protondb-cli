@@ -3,7 +3,7 @@ const { buildBodyRequest } = require('../../lib/fetcher/algolia.builder')
 
 const qry = 'gta'
 
-tap.test('buildBodyRequest', (t) => {
+tap.test('algolia.builder', (t) => {
   t.plan(12)
 
   t.test('buildBodyRequest function must return an object always', (tt) => {
@@ -26,13 +26,13 @@ tap.test('buildBodyRequest', (t) => {
     tt.equal(typeof response.body === 'object', true, 'body property is not an object')
   })
 
-  t.test('body property must has the query property based on the argument', (tt) => {
+  t.test('buildBodyRequest function must return an object with the body property and must has the query property based on the argument', (tt) => {
     tt.plan(1)
     const response = buildBodyRequest({ query: qry })
     tt.hasProp(response.body, 'query', 'body does not has query property')
   })
 
-  t.test('body property must has the attributesToHighlight property and must be an empty array as default', (tt) => {
+  t.test('buildBodyRequest function must return an object with the body property and must has the attributesToHighlight property and must be an empty array as default', (tt) => {
     tt.plan(3)
     const response = buildBodyRequest({ query: qry })
     tt.hasProp(response.body, 'attributesToHighlight', 'body does not has attributesToHighlight property')
@@ -40,7 +40,7 @@ tap.test('buildBodyRequest', (t) => {
     tt.equal(response.body.attributesToHighlight.length, 0)
   })
 
-  t.test('body property must has the attributesToSnippet property and must be an empty array as default', (tt) => {
+  t.test('buildBodyRequest function must return an object with the body property and must has the attributesToSnippet property and must be an empty array as default', (tt) => {
     tt.plan(3)
     const response = buildBodyRequest({ query: qry })
     tt.hasProp(response.body, 'attributesToSnippet', 'body does not has attributesToSnippet property')
@@ -48,7 +48,7 @@ tap.test('buildBodyRequest', (t) => {
     tt.equal(response.body.attributesToSnippet.length, 0, 'attributesToSnippet has items')
   })
 
-  t.test('body property must has the facets property and must be an array with tags as the only value as default', (tt) => {
+  t.test('buildBodyRequest function must return an object with the body property and must has the facets property and must be an array with tags as the only value as default', (tt) => {
     tt.plan(4)
     const response = buildBodyRequest({ query: qry })
     tt.hasProp(response.body, 'facets', 'body does not has facets property')
@@ -57,7 +57,7 @@ tap.test('buildBodyRequest', (t) => {
     tt.equal(response.body.facets[0], 'tags', 'facets default value should be tags')
   })
 
-  t.test('body property must has the facetFilters property and must be an array with one value( another array, appType:Game) as default value', (tt) => {
+  t.test('buildBodyRequest function must return an object with body property and must has the facetFilters property and must be an array with one value( another array, appType:Game) as default value', (tt) => {
     tt.plan(4)
     const response = buildBodyRequest({ query: qry })
     tt.hasProp(response.body, 'facetFilters', 'body does not has facetFilters property')
@@ -66,14 +66,14 @@ tap.test('buildBodyRequest', (t) => {
     tt.same(response.body.facetFilters[0], ['appType:Game'], 'facetFilters should have a default value')
   })
 
-  t.test('body property must has the hitsPerPage property and must be equal to 50 as default', (tt) => {
+  t.test('buildBodyRequest function must return an object the body property and must has the hitsPerPage property and must be equal to 50 as default', (tt) => {
     tt.plan(2)
     const response = buildBodyRequest({ query: qry })
     tt.hasProp(response.body, 'hitsPerPage', 'body does not has hitsPerPage property')
     tt.equal(response.body.hitsPerPage, 50, 'hitsPerPage is not equal to 50')
   })
 
-  t.test('hitsPerPage property can be set', (tt) => {
+  t.test('buildBodyRequest aceep custom values for the hitsPerPage property', (tt) => {
     tt.plan(2)
     const hitsPerPage = 20
     const response = buildBodyRequest({ query: qry, hitsPerPage })
@@ -81,7 +81,7 @@ tap.test('buildBodyRequest', (t) => {
     tt.equal(response.body.hitsPerPage, hitsPerPage, 'hitsPerPage is not equal to parameter provided in the function')
   })
 
-  t.test('body property must has the attributesToRetrieve property and must be an array with a set of default values', (tt) => {
+  t.test('buildBodyRequest function must return an object with the body property and must has the attributesToRetrieve property and must be an array with a set of default values', (tt) => {
     tt.plan(3)
     const response = buildBodyRequest({ query: qry })
     const attributesToRetrieve = [
@@ -100,7 +100,7 @@ tap.test('buildBodyRequest', (t) => {
     tt.same(response.body.attributesToRetrieve, attributesToRetrieve, 'attributesToRetrieve should have a default set of values')
   })
 
-  t.test('body property must has the page property and must be 0 as default', (tt) => {
+  t.test('buildBodyRequest function must return an object with the body property and must has the page property and must be 0 as default', (tt) => {
     tt.plan(2)
     const response = buildBodyRequest({ query: qry })
     tt.hasProp(response.body, 'page', 'body does not has page property')
