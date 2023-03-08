@@ -2,7 +2,7 @@ const tap = require('tap')
 const { buildHeaderRequest } = require('../../lib/http/header.builder')
 
 tap.test('buildHeaderRequest', (t) => {
-  t.plan(3)
+  t.plan(4)
 
   t.test('buildHeaderRequest function must return an object always', (tt) => {
     tt.plan(1)
@@ -23,5 +23,13 @@ tap.test('buildHeaderRequest', (t) => {
     const header = buildHeaderRequest({ accept })
     tt.hasProp(header, 'accept', 'does not has accept property')
     tt.equal(header.accept, accept, 'accept property is not equal to custom value')
+  })
+
+  t.test('buildHeaderRequest function must set any other possible property for the headers', (tt) => {
+    tt.plan(2)
+    const contentType = 'application/x-www-form-urlencoded'
+    const header = buildHeaderRequest({ 'content-type': contentType })
+    tt.hasProp(header, 'accept', 'does not has accept property')
+    tt.equal(header['content-type'], contentType, 'custom property is not equal to custom value')
   })
 })
