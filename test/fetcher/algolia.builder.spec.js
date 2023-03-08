@@ -1,10 +1,10 @@
 const tap = require('tap')
-const { buildBodyRequest } = require('../../lib/fetcher/algolia.builder')
+const { buildBodyRequest, builddHeaderRequest } = require('../../lib/fetcher/algolia.builder')
 
 const qry = 'gta'
 
 tap.test('algolia.builder', (t) => {
-  t.plan(12)
+  t.plan(15)
 
   t.test('buildBodyRequest function must return an object always', (tt) => {
     tt.plan(1)
@@ -105,5 +105,25 @@ tap.test('algolia.builder', (t) => {
     const response = buildBodyRequest({ query: qry })
     tt.hasProp(response.body, 'page', 'body does not has page property')
     tt.equal(response.body.page, 0)
+  })
+
+  t.test('builddHeaderRequest function must return an object always', (tt) => {
+    tt.plan(1)
+    const headers = builddHeaderRequest({ query: qry })
+    tt.equal(typeof headers === 'object', true)
+  })
+
+  t.test('builddHeaderRequest function must return an object with the property "accept" and must be equal to "*/*" for algolia http request', (tt) => {
+    tt.plan(2)
+    const headers = builddHeaderRequest({})
+    tt.hasProp(headers, 'accept', 'does not has method property')
+    tt.equal(headers.accept, '*/*', 'accept property is not equal to */*')
+  })
+
+  t.test('builddHeaderRequest function must return an object with the property "accept-language" and must be equal to "en-US,en;q=0.9" for algolia http request', (tt) => {
+    tt.plan(2)
+    const headers = builddHeaderRequest({})
+    tt.hasProp(headers, 'accept-language', 'does not has method property')
+    tt.equal(headers['accept-language'], 'en-US,en;q=0.9', 'accept-language property is not equal to en-US,en;q=0.9')
   })
 })
