@@ -4,7 +4,7 @@ const { buildBodyRequest, builddHeaderRequest } = require('../../lib/fetcher/alg
 const qry = 'gta'
 
 tap.test('algolia.builder', (t) => {
-  t.plan(15)
+  t.plan(19)
 
   t.test('buildBodyRequest function must return an object always', (tt) => {
     tt.plan(1)
@@ -120,10 +120,38 @@ tap.test('algolia.builder', (t) => {
     tt.equal(headers.accept, '*/*', 'accept property is not equal to */*')
   })
 
-  t.test('builddHeaderRequest function must return an object with the property "accept-language" and must be equal to "en-US,en;q=0.9" for algolia http request', (tt) => {
+  t.test('builddHeaderRequest function must return an object with the property "accept-language" and must be equal to "application/x-www-form-urlencoded" for algolia http request', (tt) => {
     tt.plan(2)
     const headers = builddHeaderRequest({})
     tt.hasProp(headers, 'accept-language', 'does not has method property')
     tt.equal(headers['accept-language'], 'en-US,en;q=0.9', 'accept-language property is not equal to en-US,en;q=0.9')
+  })
+
+  t.test('builddHeaderRequest function must return an object with the property "content-type" and must be equal to "application/x-www-form-urlencoded" for algolia http request', (tt) => {
+    tt.plan(2)
+    const headers = builddHeaderRequest({})
+    tt.hasProp(headers, 'content-type', 'does not has method property')
+    tt.equal(headers['content-type'], 'application/x-www-form-urlencoded', 'content-type property is not equal to application/x-www-form-urlencoded')
+  })
+
+  t.test('builddHeaderRequest function must return an object with the property "referer" and must be equal to "https://www.protondb.com" for algolia http request', (tt) => {
+    tt.plan(2)
+    const headers = builddHeaderRequest({})
+    tt.hasProp(headers, 'referer', 'does not has method property')
+    tt.equal(headers.referer, 'https://www.protondb.com', 'referer property is not equal to https://www.protondb.com')
+  })
+
+  t.test('builddHeaderRequest function must return an object with the property "origin" and must be equal to "https://www.protondb.com" for algolia http request', (tt) => {
+    tt.plan(2)
+    const headers = builddHeaderRequest({})
+    tt.hasProp(headers, 'origin', 'does not has method property')
+    tt.equal(headers.origin, 'https://www.protondb.com', 'origin property is not equal to https://www.protondb.com')
+  })
+
+  t.test('builddHeaderRequest function must return an object with the property "connection" and must be equal to "keep-alive" for algolia http request', (tt) => {
+    tt.plan(2)
+    const headers = builddHeaderRequest({})
+    tt.hasProp(headers, 'connection', 'does not has method property')
+    tt.equal(headers.connection, 'keep-alive', 'connection property is not equal to keep-alive')
   })
 })
