@@ -67,8 +67,8 @@ fetch("https://94he6yatei-dsn.algolia.net/1/indexes/steamdb/query", {
   "method": "POST"
 });
 
-
-curl 'https://94he6yatei-dsn.algolia.net/1/indexes/steamdb/query?x-algolia-agent=Algolia%20for%20JavaScript%20(4.13.0)%3B%20Browser' \
+Min request for http call
+curl 'https://94he6yatei-dsn.algolia.net/1/indexes/steamdb/query' \
   -H 'Accept: */*' \
   -H 'Accept-Language: en-US,en;q=0.5' \
   -H 'Connection: keep-alive' \
