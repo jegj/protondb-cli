@@ -23,7 +23,7 @@ const getGames = async () => {
   })
   const body = await response.json()
   console.log('#hits===>', body.hits.length)
-  // console.log('===>', body.hits)
+  console.log('===>', body)
 }
 
 getGames()
