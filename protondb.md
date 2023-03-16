@@ -124,35 +124,11 @@ Get ObjectID
 ## Protondb Query
 https://www.protondb.com/api/v1/reports/summaries/802020.json
 
-curl 'https://www.protondb.com/api/v1/reports/summaries/802020.json' \
-  -H 'authority: www.protondb.com' \
-  -H 'accept: */*' \
-  -H 'accept-language: en-US,en;q=0.5' \
-  -H 'cookie: browserid=2798450749121349331; steamCountry=BR%7C594c1452a95f2ca630c287df316e843a' \
-  -H 'referer: https://www.protondb.com/search?q=acu' \
-  -H 'sec-ch-ua: "Not?A_Brand";v="8", "Chromium";v="108", "Brave";v="108"' \
-  -H 'sec-ch-ua-mobile: ?0' \
-  -H 'sec-ch-ua-platform: "Linux"' \
-  -H 'sec-fetch-dest: empty' \
-  -H 'sec-fetch-mode: cors' \
-  -H 'sec-fetch-site: same-origin' \
-  -H 'sec-gpc: 1' \
-  -H 'user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36' \
-  --compressed
-
   curl 'https://www.protondb.com/api/v1/reports/summaries/1486440.json' \
   -H 'authority: www.protondb.com' \
   -H 'accept: */*' \
   -H 'accept-language: en-US,en;q=0.8' \
   -H 'referer: https://www.protondb.com/search?q=count' \
-  -H 'sec-ch-ua: "Chromium";v="110", "Not A(Brand";v="24", "Brave";v="110"' \
-  -H 'sec-ch-ua-mobile: ?0' \
-  -H 'sec-ch-ua-platform: "Linux"' \
-  -H 'sec-fetch-dest: empty' \
-  -H 'sec-fetch-mode: cors' \
-  -H 'sec-fetch-site: same-origin' \
-  -H 'sec-gpc: 1' \
-  -H 'user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36' \
   --compressed
 -->
 
