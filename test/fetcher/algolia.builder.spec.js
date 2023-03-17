@@ -121,42 +121,42 @@ tap.test('algolia.builder', (t) => {
   t.test('builddHeaderRequest function must return an object with the property "accept" and must be equal to "*/*" for algolia http request', (tt) => {
     tt.plan(2)
     const headers = builddHeaderRequest(dheaders)
-    tt.hasProp(headers, 'accept', 'does not has method property')
+    tt.hasProp(headers, 'accept', 'does not has accept property')
     tt.equal(headers.accept, '*/*', 'accept property is not equal to */*')
   })
 
   t.test('builddHeaderRequest function must return an object with the property "accept-language" and must be equal to "application/x-www-form-urlencoded" for algolia http request', (tt) => {
     tt.plan(2)
     const headers = builddHeaderRequest(dheaders)
-    tt.hasProp(headers, 'accept-language', 'does not has method property')
+    tt.hasProp(headers, 'accept-language', 'does not has accept-language property')
     tt.equal(headers['accept-language'], 'en-US,en;q=0.9', 'accept-language property is not equal to en-US,en;q=0.9')
   })
 
   t.test('builddHeaderRequest function must return an object with the property "content-type" and must be equal to "application/x-www-form-urlencoded" for algolia http request', (tt) => {
     tt.plan(2)
     const headers = builddHeaderRequest(dheaders)
-    tt.hasProp(headers, 'content-type', 'does not has method property')
+    tt.hasProp(headers, 'content-type', 'does not has content-type property')
     tt.equal(headers['content-type'], 'application/x-www-form-urlencoded', 'content-type property is not equal to application/x-www-form-urlencoded')
   })
 
   t.test('builddHeaderRequest function must return an object with the property "referer" and must be equal to "https://www.protondb.com" for algolia http request', (tt) => {
     tt.plan(2)
     const headers = builddHeaderRequest(dheaders)
-    tt.hasProp(headers, 'referer', 'does not has method property')
+    tt.hasProp(headers, 'referer', 'does not has referer property')
     tt.equal(headers.referer, 'https://www.protondb.com', 'referer property is not equal to https://www.protondb.com')
   })
 
   t.test('builddHeaderRequest function must return an object with the property "origin" and must be equal to "https://www.protondb.com" for algolia http request', (tt) => {
     tt.plan(2)
     const headers = builddHeaderRequest(dheaders)
-    tt.hasProp(headers, 'origin', 'does not has method property')
+    tt.hasProp(headers, 'origin', 'does not has origin property')
     tt.equal(headers.origin, 'https://www.protondb.com', 'origin property is not equal to https://www.protondb.com')
   })
 
   t.test('builddHeaderRequest function must return an object with the property "connection" and must be equal to "keep-alive" for algolia http request', (tt) => {
     tt.plan(2)
     const headers = builddHeaderRequest(dheaders)
-    tt.hasProp(headers, 'connection', 'does not has method property')
+    tt.hasProp(headers, 'connection', 'does not has connection property')
     tt.equal(headers.connection, 'keep-alive', 'connection property is not equal to keep-alive')
   })
 
@@ -170,7 +170,7 @@ tap.test('algolia.builder', (t) => {
   t.test('builddHeaderRequest function must return an object with the property "x-algolia-api-key" for algolia http request', (tt) => {
     tt.plan(2)
     const headers = builddHeaderRequest(dheaders)
-    tt.hasProp(headers, 'x-algolia-api-key', 'does not has method property')
+    tt.hasProp(headers, 'x-algolia-api-key', 'does not has x-algolia-api-key property')
     tt.equal(headers['x-algolia-api-key'], dheaders['x-algolia-api-key'], 'x-algolia-api-key property is not equal')
   })
 
@@ -184,7 +184,7 @@ tap.test('algolia.builder', (t) => {
   t.test('builddHeaderRequest function must return an object with the property "x-algolia-application-id" for algolia http request', (tt) => {
     tt.plan(2)
     const headers = builddHeaderRequest(dheaders)
-    tt.hasProp(headers, 'x-algolia-application-id', 'does not has method property')
+    tt.hasProp(headers, 'x-algolia-application-id', 'does not has x-algolia-application-id property')
     tt.equal(headers['x-algolia-application-id'], dheaders['x-algolia-application-id'], 'x-algolia-application-id property is not equal')
   })
 })
