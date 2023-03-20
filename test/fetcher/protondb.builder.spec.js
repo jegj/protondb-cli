@@ -1,5 +1,5 @@
 const tap = require('tap')
-const { buildHeaderRequest } = require('../../lib/fetcher/protondb.builder')
+const { buildHeaderRequest, buildUrl } = require('../../lib/fetcher/protondb.builder')
 
 const query = 'some game'
 
@@ -45,5 +45,41 @@ tap.test('protondb.builder', (t) => {
     const headers = buildHeaderRequest(query)
     tt.hasProp(headers, 'referer', 'does not has referer property')
     tt.equal(headers.referer, `https://www.protondb.com/search?q=${query}`, 'referer property is not equal to the protondb search url')
+  })
+})
+
+tap.test('protondb.buildUrl', (t) => {
+  t.plan(3)
+
+  t.test('buildUrl function must throw an error if the url is not provided', (tt) => {
+    tt.plan(2)
+    try {
+      buildUrl()
+      tt.fail('error is expected')
+    } catch (error) {
+      tt.type(error, Error)
+      tt.match(error.message, 'url is required')
+    }
+  })
+
+  t.test('buildUrl function must throw an error if the objectId is not provided', (tt) => {
+    tt.plan(2)
+    try {
+      buildUrl('https://www.protondb.com/api/v1/reports/summaries')
+      tt.fail('error is expected')
+    } catch (error) {
+      tt.type(error, Error)
+      tt.match(error.message, 'objectId is required')
+    }
+  })
+
+  t.test('buildUrl function must return a final url with objectId', (tt) => {
+    tt.plan(1)
+    try {
+      const url = buildUrl('https://www.protondb.com/api/v1/reports/summaries/', '1486440')
+      tt.equal(url, 'https://www.protondb.com/api/v1/reports/summaries/1486440.json')
+    } catch (error) {
+      tt.fail('error is not expected')
+    }
   })
 })
