@@ -39,7 +39,8 @@
   },
   "license": "GPLv3",
   "dependencies": {
-    "node-fetch": "^2.6.9",
+    "blessed": "0.1.81",
+    "node-fetch": "2.6.9",
     "yargs": "17.7.1"
   },
   "devDependencies": {
