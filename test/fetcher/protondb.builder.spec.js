@@ -49,7 +49,7 @@ tap.test('protondb.builder', (t) => {
 })
 
 tap.test('protondb.buildUrl', (t) => {
-  t.plan(3)
+  t.plan(4)
 
   t.test('buildUrl function must throw an error if the url is not provided', (tt) => {
     tt.plan(2)
@@ -70,6 +70,16 @@ tap.test('protondb.buildUrl', (t) => {
     } catch (error) {
       tt.type(error, Error)
       tt.match(error.message, 'objectId is required')
+    }
+  })
+
+  t.test('buildUrl function must return the final url even if the url params comes without a slash at the end', (tt) => {
+    tt.plan(1)
+    try {
+      const url = buildUrl('https://www.protondb.com/api/v1/reports/summaries', '1486440')
+      tt.equal(url, 'https://www.protondb.com/api/v1/reports/summaries/1486440.json')
+    } catch (error) {
+      tt.fail('error is not expected')
     }
   })
 
