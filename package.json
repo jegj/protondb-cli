@@ -41,6 +41,7 @@
   "dependencies": {
     "blessed": "0.1.81",
     "node-fetch": "2.6.9",
+    "p-map": "5.5.0",
     "yargs": "17.7.1"
   },
   "devDependencies": {
