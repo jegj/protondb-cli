@@ -1,4 +1,4 @@
-const fetchMockedData = {
+const fetchAlgoliaMockedData = {
   hits: [
     {
       lastUpdated: 1653580973,
@@ -39,6 +39,16 @@ const fetchMockedData = {
   serverTimeMS: 5
 }
 
+const fetchProtondbMockedData = {
+  bestReportedTier: 'platinum',
+  confidence: 'good',
+  score: 0.57,
+  tier: 'gold',
+  total: 29,
+  trendingTier: 'platinum'
+}
+
 module.exports = {
-  fetchMockedData
+  fetchAlgoliaMockedData,
+  fetchProtondbMockedData
 }

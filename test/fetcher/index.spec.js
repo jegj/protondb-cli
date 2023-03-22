@@ -1,12 +1,14 @@
 const tap = require('tap')
-const { fetchMockedData } = require('./index.mock')
+const { fetchAlgoliaMockedData, fetchProtondbMockedData } = require('./index.mock')
 
 const mockFetchErr = async (url) => {
   throw new Error('unknown url: ' + url)
 }
 
-const mockFetchOk = async (url) => {
-  return fetchMockedData
+const generateFetchMock = (responseData) => {
+  return async function mockFetchOk (url) {
+    return { json: async () => responseData }
+  }
 }
 
 /*
@@ -19,7 +21,7 @@ tap.test('algoliaFetcher', (t) => {
   t.plan(6)
 
   const fetcher = t.mock('../../lib/fetcher/index.js', {
-    'node-fetch': mockFetchOk
+    'node-fetch': generateFetchMock(fetchAlgoliaMockedData)
   })
 
   t.test('algoliaFetcher must throw an error if the query is not provided', async tt => {
@@ -91,10 +93,10 @@ tap.test('algoliaFetcher', (t) => {
 })
 
 tap.test('protondbFetcher', (t) => {
-  t.plan(4)
+  t.plan(5)
 
   const fetcher = t.mock('../../lib/fetcher/index.js', {
-    'node-fetch': mockFetchOk
+    'node-fetch': generateFetchMock(fetchProtondbMockedData)
   })
 
   t.test('protondbFetcher must throw an error if the query is not provided', async tt => {
@@ -140,6 +142,21 @@ tap.test('protondbFetcher', (t) => {
       tt.fail('error is expected')
     } catch (error) {
       tt.type(error, Error)
+    }
+  })
+
+  t.test('protondbFetcher must return a json if there is not a problem with the algolia API', async tt => {
+    tt.plan(6)
+    try {
+      const result = await fetcher.protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries' })
+      tt.hasProp(result, 'bestReportedTier', 'does not has bestReportedTier property')
+      tt.hasProp(result, 'confidence', 'does not has confidence property')
+      tt.hasProp(result, 'score', 'does not has score property')
+      tt.hasProp(result, 'tier', 'does not has tier property')
+      tt.hasProp(result, 'total', 'does not has total property')
+      tt.hasProp(result, 'trendingTier', 'does not has trendingTier property')
+    } catch (error) {
+      tt.fail('error is not expected')
     }
   })
 })
