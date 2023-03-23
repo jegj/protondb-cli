@@ -5,22 +5,19 @@ const getGames = async () => {
   const url = 'https://94he6yatei-dsn.algolia.net/1/indexes/steamdb/query'
   const algoliaApiKey = '9ba0e69fb2974316cdaec8f5f257088f'
   const algoliaApplicationId = '94HE6YATEI'
-  const response = await algoliaFetcher({ query: 'fifa', hitsPerPage: 5, url, algoliaApiKey, algoliaApplicationId })
-  const body = await response.json()
+  const body = await algoliaFetcher({ query: 'fifa', hitsPerPage: 5, url, algoliaApiKey, algoliaApplicationId })
   console.log('#hits===>', body.hits.length)
-  console.log('===>', body)
+  // console.log('===>', body)
 }
 
 const getGameInfo = async () => {
   console.log('## get game info ##')
   const url = 'https://www.protondb.com/api/v1/reports/summaries'
-  const objectId = '240'
+  const objectId = '911240'
   const query = 'fifa'
 
   const response = await protondbFetcher({ query, url, objectId })
   console.log('===>', response)
-  const body = await response.json()
-  console.log('===>', body)
 }
 
 getGames()
