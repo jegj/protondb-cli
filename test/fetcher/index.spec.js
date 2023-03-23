@@ -5,9 +5,16 @@ const mockFetchErr = async (url) => {
   throw new Error('unknown url: ' + url)
 }
 
+const mockFetchInvalidCode = async (url) => {
+  return {
+    ok: () => false,
+    json: async () => null
+  }
+}
+
 const generateFetchMock = (responseData) => {
   return async function mockFetchOk (url) {
-    return { json: async () => responseData }
+    return { json: async () => responseData, ok: () => true }
   }
 }
 
@@ -93,7 +100,7 @@ tap.test('algoliaFetcher', (t) => {
 })
 
 tap.test('protondbFetcher', (t) => {
-  t.plan(5)
+  t.plan(6)
 
   const fetcher = t.mock('../../lib/fetcher/index.js', {
     'node-fetch': generateFetchMock(fetchProtondbMockedData)
@@ -132,16 +139,29 @@ tap.test('protondbFetcher', (t) => {
     }
   })
 
-  t.test('protondbFetcher must throw an error if there is a problem requesting to protondb API', async tt => {
+  t.test('protondbFetcher must return null if there is a problem requesting to protondb API', async tt => {
     tt.plan(1)
     const fetcher = tt.mock('../../lib/fetcher/index.js', {
       'node-fetch': mockFetchErr
     })
     try {
-      await fetcher.protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries' })
-      tt.fail('error is expected')
+      const result = await fetcher.protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries' })
+      tt.equal(result, null)
     } catch (error) {
-      tt.type(error, Error)
+      tt.fail('error is not expected')
+    }
+  })
+
+  t.test('protondbFetcher must return null if protondb API return an invalid http code for the game', async tt => {
+    tt.plan(1)
+    const fetcher = tt.mock('../../lib/fetcher/index.js', {
+      'node-fetch': mockFetchInvalidCode
+    })
+    try {
+      const result = await fetcher.protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries' })
+      tt.equal(result, null)
+    } catch (error) {
+      tt.fail('error is not expected')
     }
   })
 
