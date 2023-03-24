@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "start": "NODE_ENV=development node ./main.js"
+  }
+}
