@@ -5,16 +5,17 @@ const mockFetchErr = async (url) => {
   throw new Error('unknown url: ' + url)
 }
 
-const mockFetchInvalidCode = async (url) => {
+const mockFetchInvalidCode = async () => {
   return {
-    ok: () => false,
-    json: async () => null
+    ok: false,
+    json: async () => null,
+    status: 500
   }
 }
 
 const generateFetchMock = (responseData) => {
-  return async function mockFetchOk (url) {
-    return { json: async () => responseData, ok: () => true }
+  return async function mockFetchOk () {
+    return { json: async () => responseData, ok: true }
   }
 }
 
@@ -25,7 +26,7 @@ const generateFetchMock = (responseData) => {
 */
 
 tap.test('algoliaFetcher', (t) => {
-  t.plan(6)
+  t.plan(7)
 
   const fetcher = t.mock('../../lib/fetcher/index.js', {
     'node-fetch': generateFetchMock(fetchAlgoliaMockedData)
@@ -82,6 +83,20 @@ tap.test('algoliaFetcher', (t) => {
     })
     try {
       await fetcher.algoliaFetcher({ query: 'fifa', url: 'angolia.api', algoliaApiKey: 'x1x11212', algoliaApplicationId: 'X2123ZAS123' })
+      tt.fail('error is expected')
+    } catch (error) {
+      tt.type(error, Error)
+    }
+  })
+
+  t.test('algoliaFetcher must return an error if algolia API return an invalid http code for the initial fetch', async tt => {
+    tt.plan(1)
+    const fetcher = tt.mock('../../lib/fetcher/index.js', {
+      'node-fetch': mockFetchInvalidCode
+    })
+    try {
+      const res = await fetcher.algoliaFetcher({ query: 'fifa', url: 'angolia.api', algoliaApiKey: 'x1x11212', algoliaApplicationId: 'X2123ZAS123' })
+      console.log('====>', res)
       tt.fail('error is expected')
     } catch (error) {
       tt.type(error, Error)
