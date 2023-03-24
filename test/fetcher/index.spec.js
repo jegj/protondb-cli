@@ -1,5 +1,5 @@
 const tap = require('tap')
-const { fetchAlgoliaMockedData, fetchProtondbMockedData } = require('./index.mock')
+const { fetchAlgoliaMockedData, fetchProtondbMockedData } = require('../mock/index.mock')
 
 const mockFetchErr = async (url) => {
   throw new Error('unknown url: ' + url)
