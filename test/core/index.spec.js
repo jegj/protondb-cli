@@ -30,6 +30,7 @@ tap.test('getGamesReport', (t) => {
     }
   })
 
+  // TODO: IMprove test and avoid protondb fetcher return the same result
   t.test('getGamesReport must return an array of results from protondb API', async (tt) => {
     tt.plan(1)
     const core = await esmock('../../lib/core/index.js', {
