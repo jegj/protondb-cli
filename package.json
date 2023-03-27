@@ -21,7 +21,7 @@
     "test:report": "npm run lint && npm run unit:report",
     "test:watch": "npm run unit -- -w --no-coverage-report -R terse",
     "test:integration": "./integration/test.sh",
-    "unit": "tap",
+    "unit": "c8 tap",
     "unit:junit": "tap-mocha-reporter xunit < out.tap > test/junit-testresults.xml",
     "unit:report": "tap --cov --coverage-report=html --coverage-report=cobertura | tee out.tap",
     "prepare": "node -e \"try { require('husky').install() } catch (e) {if (e.code !== 'MODULE_NOT_FOUND') throw e}\""
@@ -48,6 +48,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.5.0",
     "@commitlint/config-conventional": "^17.4.4",
+    "c8": "^7.13.0",
     "eslint": "^8.35.0",
     "esmock": "^2.2.0",
     "husky": "^8.0.3",

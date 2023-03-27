@@ -2,7 +2,7 @@ ts: false
 jsx: false
 flow: false
 check-coverage: true
-coverage: true
+coverage: false
 "node-arg": [
   "--no-warnings",
   "--experimental-loader",
