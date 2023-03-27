@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "scripts": {
     "start": "NODE_ENV=development node ./index.js",
     "start:fetch": "NODE_ENV=development node ./fetch.js"

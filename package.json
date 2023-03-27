@@ -1,5 +1,6 @@
 {
   "name": "protondb-cli",
+  "type": "module",
   "version": "1.0.0",
   "description": "CLI for the protondb project",
   "main": "protondb.js",
@@ -40,7 +41,7 @@
   "license": "GPLv3",
   "dependencies": {
     "blessed": "0.1.81",
-    "node-fetch": "2.6.9",
+    "node-fetch": "3.3.1",
     "p-map": "5.5.0",
     "yargs": "17.7.1"
   },
@@ -48,8 +49,10 @@
     "@commitlint/cli": "^17.5.0",
     "@commitlint/config-conventional": "^17.4.4",
     "eslint": "^8.35.0",
+    "esmock": "^2.2.0",
     "husky": "^8.0.3",
     "markdownlint-cli2": "^0.6.0",
+    "sinon": "^15.0.2",
     "snazzy": "^9.0.0",
     "standard": "^17.0.0",
     "tap": "^16.3.4"

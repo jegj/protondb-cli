@@ -1,5 +1,6 @@
-const tap = require('tap')
-const { fetchAlgoliaMockedData, fetchProtondbMockedData } = require('../mock/index.mock')
+import tap from 'tap'
+import esmock from 'esmock'
+import { fetchAlgoliaMockedData, fetchProtondbMockedData } from '../mock/index.mock.js'
 
 const mockFetchErr = async (url) => {
   throw new Error('unknown url: ' + url)
@@ -25,12 +26,13 @@ const generateFetchMock = (responseData) => {
   - check url can be customize
 */
 
-tap.test('algoliaFetcher', (t) => {
+tap.test('algoliaFetcher', async (t) => {
   t.plan(7)
 
-  const fetcher = t.mock('../../lib/fetcher/index.js', {
-    'node-fetch': generateFetchMock(fetchAlgoliaMockedData)
-  })
+  const fetcher = await esmock(
+    '../../lib/fetcher/index.js',
+    { 'node-fetch': generateFetchMock(fetchAlgoliaMockedData) }
+  )
 
   t.test('algoliaFetcher must throw an error if the query is not provided', async tt => {
     tt.plan(2)
@@ -78,7 +80,7 @@ tap.test('algoliaFetcher', (t) => {
 
   t.test('algoliaFetcher must throw an error if there is a problem requesting to algolia API', async tt => {
     tt.plan(1)
-    const fetcher = tt.mock('../../lib/fetcher/index.js', {
+    const fetcher = await esmock('../../lib/fetcher/index.js', {
       'node-fetch': mockFetchErr
     })
     try {
@@ -91,12 +93,11 @@ tap.test('algoliaFetcher', (t) => {
 
   t.test('algoliaFetcher must return an error if algolia API return an invalid http code for the initial fetch', async tt => {
     tt.plan(1)
-    const fetcher = tt.mock('../../lib/fetcher/index.js', {
+    const fetcher = await esmock('../../lib/fetcher/index.js', {
       'node-fetch': mockFetchInvalidCode
     })
     try {
-      const res = await fetcher.algoliaFetcher({ query: 'fifa', url: 'angolia.api', algoliaApiKey: 'x1x11212', algoliaApplicationId: 'X2123ZAS123' })
-      console.log('====>', res)
+      await fetcher.algoliaFetcher({ query: 'fifa', url: 'angolia.api', algoliaApiKey: 'x1x11212', algoliaApplicationId: 'X2123ZAS123' })
       tt.fail('error is expected')
     } catch (error) {
       tt.type(error, Error)
@@ -114,10 +115,10 @@ tap.test('algoliaFetcher', (t) => {
   })
 })
 
-tap.test('protondbFetcher', (t) => {
+tap.test('protondbFetcher', async (t) => {
   t.plan(6)
 
-  const fetcher = t.mock('../../lib/fetcher/index.js', {
+  const fetcher = await esmock('../../lib/fetcher/index.js', {
     'node-fetch': generateFetchMock(fetchProtondbMockedData)
   })
 
@@ -156,7 +157,7 @@ tap.test('protondbFetcher', (t) => {
 
   t.test('protondbFetcher must return null if there is a problem requesting to protondb API', async tt => {
     tt.plan(1)
-    const fetcher = tt.mock('../../lib/fetcher/index.js', {
+    const fetcher = await esmock('../../lib/fetcher/index.js', {
       'node-fetch': mockFetchErr
     })
     try {
@@ -169,7 +170,7 @@ tap.test('protondbFetcher', (t) => {
 
   t.test('protondbFetcher must return null if protondb API return an invalid http code for the game', async tt => {
     tt.plan(1)
-    const fetcher = tt.mock('../../lib/fetcher/index.js', {
+    const fetcher = await esmock('../../lib/fetcher/index.js', {
       'node-fetch': mockFetchInvalidCode
     })
     try {

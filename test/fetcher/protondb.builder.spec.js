@@ -1,5 +1,5 @@
-const tap = require('tap')
-const { buildHeaderRequest, buildUrl } = require('../../lib/fetcher/protondb.builder')
+import tap from 'tap'
+import { buildHeaderRequest, buildUrl } from '../../lib/fetcher/protondb.builder.js'
 
 const query = 'some game'
 

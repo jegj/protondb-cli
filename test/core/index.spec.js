@@ -1,5 +1,6 @@
-const tap = require('tap')
-const { fetchAlgoliaMockedData, fetchProtondbMockedData } = require('../mock/index.mock')
+import tap from 'tap'
+import { fetchAlgoliaMockedData, fetchProtondbMockedData } from '../mock/index.mock.js'
+import esmock from 'esmock'
 
 const algoliaUrl = 'https://94he6yatei-dsn.algolia.net/1/indexes/steamdb/query'
 const algoliaApiKey = '9basom4fb297k3Y16cdaec8f5f257088f'
@@ -14,7 +15,7 @@ tap.test('getGamesReport', (t) => {
 
   t.test('getGamesReport must throw an error when Algolia API is not reachable', async (tt) => {
     tt.plan(2)
-    const core = t.mock('../../lib/core/index.js', {
+    const core = await esmock('../../lib/core/index.js', {
       '../../lib/fetcher/index.js': {
         algoliaFetcher: () => { throw new Error('unreachable') }
       }
@@ -29,9 +30,9 @@ tap.test('getGamesReport', (t) => {
     }
   })
 
-  t.skip('getGamesReport must return an array of results from protondb API', async (tt) => {
+  t.test('getGamesReport must return an array of results from protondb API', async (tt) => {
     tt.plan(1)
-    const core = t.mock('../../lib/core/index.js', {
+    const core = await esmock('../../lib/core/index.js', {
       '../../lib/fetcher/index.js': {
         algoliaFetcher: () => fetchAlgoliaMockedData,
         protondbFetcher: () => fetchProtondbMockedData

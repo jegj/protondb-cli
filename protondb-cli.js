@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-const yargs = require('yargs/yargs')
-const { hideBin } = require('yargs/helpers')
-const blessed = require('blessed')
+import yargs from 'yargs/yargs'
+import { hideBin } from 'yargs/helpers'
+import blessed from 'blessed'
 
 function input (protondbCLI) {
   console.log('==>', protondbCLI.game)

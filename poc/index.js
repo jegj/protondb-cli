@@ -1,4 +1,4 @@
-const { algoliaFetcher, protondbFetcher } = require('../lib/fetcher')
+import { algoliaFetcher, protondbFetcher } from '../lib/fetcher/index.js'
 
 const getGames = async () => {
   console.log('## get games ##')

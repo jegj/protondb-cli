@@ -1,4 +1,4 @@
-const fetchAlgoliaMockedData = {
+export const fetchAlgoliaMockedData = {
   hits: [
     {
       lastUpdated: 1653580973,
@@ -39,16 +39,11 @@ const fetchAlgoliaMockedData = {
   serverTimeMS: 5
 }
 
-const fetchProtondbMockedData = {
+export const fetchProtondbMockedData = {
   bestReportedTier: 'platinum',
   confidence: 'good',
   score: 0.57,
   tier: 'gold',
   total: 29,
   trendingTier: 'platinum'
-}
-
-module.exports = {
-  fetchAlgoliaMockedData,
-  fetchProtondbMockedData
 }

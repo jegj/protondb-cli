@@ -1,5 +1,5 @@
-const tap = require('tap')
-const { buildBodyRequest, buildHeaderRequest } = require('../../lib/fetcher/algolia.builder')
+import tap from 'tap'
+import { buildBodyRequest, buildHeaderRequest } from '../../lib/fetcher/algolia.builder.js'
 
 const qry = 'gta'
 
