@@ -1,0 +1,8 @@
+{
+  "DEFAULT_PROTONDB_CLI_CONCURRENCY": 2,
+  "DEFAULT_PROTONDB_CLI_HITS": 10,
+  "DEFAULT_ALGOLIA_QUERY_URL": "https://94he6yatei-dsn.algolia.net/1/indexes/steamdb/query",
+  "DEFAULT_X_ALGOLIA_API_KEY": "9ba0e69fb2974316cdaec8f5f257088f",
+  "DEFAULT_X_ALGOLIA_APPLICATION_ID": "94HE6YATEI",
+  "DEFAULT_PROTONDB_URL": "https://www.protondb.com/api/v1/reports/summaries"
+}
