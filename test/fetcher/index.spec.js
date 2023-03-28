@@ -20,12 +20,6 @@ const generateFetchMock = (responseData) => {
   }
 }
 
-/*
-  TODO:
-  - check payload is serialized
-  - check url can be customize
-*/
-
 tap.test('algoliaFetcher', async (t) => {
   t.plan(7)
 
