@@ -54,7 +54,8 @@ const protondbCLI = yargs(hideBin(process.argv))
       alias: 'pu',
       type: 'string',
       description: 'Protondb URL for search game information. Obtain from https://www.protondb.com/',
-      default: OPTS.DEFAULT_PROTONDB_URL
+      default: OPTS.DEFAULT_PROTONDB_URL,
+      coerce: isValidUrl
     }).example([
       ['$0 gta --concurrency 5 --hits 15', 'Search the last 15 like gta using an conccurency of 5']
     ]).fail(function (msg, err, yargs) {
