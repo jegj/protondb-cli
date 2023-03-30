@@ -46,11 +46,12 @@ tap.test('format', async (t) => {
   t.plan(1)
 
   t.test('format must return an array of arrays and each array child must have a length of 3', (tt) => {
-    const asserts = 2 + mergedGames.length * 2
+    const header = 1
+    const asserts = 2 + (mergedGames.length + header) * 2
     tt.plan(asserts)
     const result = format(mergedGames)
     tt.ok(Array.isArray(result))
-    tt.equal(result.length, mergedGames.length)
+    tt.equal(result.length, mergedGames.length + header)
     result.forEach((gameFormated) => {
       tt.ok(Array.isArray(gameFormated))
       tt.equal(gameFormated.length, 3)
