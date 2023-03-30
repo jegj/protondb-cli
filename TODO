@@ -1,0 +1,5 @@
+- FIXME: Limit game name to avoid table show less columns e.g dota with more than 10 results
+- TODO: Provide algolia & protondb API info in a better way
+- TODO: Display console.warn when verbose enable and use a better log
+- TODO: Create docker image
+- TODO: enable github action for CI/CD
