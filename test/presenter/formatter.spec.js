@@ -1,5 +1,5 @@
 import tap from 'tap'
-import { formatGame, format } from '../../lib/presenter/formatter.js'
+import { formatGame, format, formatGameName } from '../../lib/presenter/formatter.js'
 import { mergedGameDataComplete, mergedGameDataUncomplete, mergedGames } from '../mock/index.mock.js'
 
 tap.test('formatGame', async (t) => {
@@ -56,5 +56,23 @@ tap.test('format', async (t) => {
       tt.ok(Array.isArray(gameFormated))
       tt.equal(gameFormated.length, 3)
     })
+  })
+})
+
+tap.test('formatGameName', async (t) => {
+  t.plan(2)
+
+  t.test('formatGameName must return a shortter version of the name when the length is bigger than limit(15) characters', (tt) => {
+    tt.plan(1)
+    const name = 'Artificial Life 2061: Cybersys - (Fantasy Diva Of The Terrarian Vrchatworlds, Babel Tower Final Project: "Kodota Komori 1416") [Made by: Joseph Sanz]'
+    const result = formatGameName(name)
+    tt.equal(result, 'Artificial Life...')
+  })
+
+  t.test('formatGameName can accept different limit values based on the argument', (tt) => {
+    tt.plan(1)
+    const name = 'Artificial Life 2061: Cybersys - (Fantasy Diva Of The Terrarian Vrchatworlds, Babel Tower Final Project: "Kodota Komori 1416") [Made by: Joseph Sanz]'
+    const result = formatGameName(name, 10)
+    tt.equal(result, 'Artificial...')
   })
 })
