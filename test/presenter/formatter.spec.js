@@ -14,7 +14,7 @@ tap.test('formatGame', async (t) => {
   t.test('first item must be the game\'s name', (tt) => {
     tt.plan(1)
     const result = formatGame(mergedGameDataComplete)
-    tt.equal(result[0], mergedGameDataComplete.name)
+    tt.equal(result[0], formatGameName(mergedGameDataComplete.name))
   })
 
   t.test('2th item must be the game\'s tier if there are result from protondb API', (tt) => {
