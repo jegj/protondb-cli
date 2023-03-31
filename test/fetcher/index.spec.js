@@ -1,5 +1,6 @@
 import tap from 'tap'
 import esmock from 'esmock'
+import sinon from 'sinon'
 import { fetchAlgoliaMockedData, fetchProtondbMockedData } from '../mock/index.mock.js'
 
 const mockFetchErr = async (url) => {
@@ -110,7 +111,7 @@ tap.test('algoliaFetcher', async (t) => {
 })
 
 tap.test('protondbFetcher', async (t) => {
-  t.plan(6)
+  t.plan(8)
 
   const fetcher = await esmock('../../lib/fetcher/index.js', {
     'node-fetch': generateFetchMock(fetchProtondbMockedData)
@@ -155,8 +156,37 @@ tap.test('protondbFetcher', async (t) => {
       'node-fetch': mockFetchErr
     })
     try {
-      const result = await fetcher.protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries' })
+      const logger = { warn: sinon.spy() }
+      const result = await fetcher.protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries' }, logger)
       tt.equal(result, null)
+    } catch (error) {
+      tt.fail('error is not expected')
+    }
+  })
+
+  t.test('protondbFetcher must call the logger warn method when verbose is true and when there is a problem requesting to protondb API', async tt => {
+    tt.plan(1)
+    const fetcher = await esmock('../../lib/fetcher/index.js', {
+      'node-fetch': mockFetchErr
+    })
+    try {
+      const logger = { warn: sinon.spy() }
+      await fetcher.protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries', verbose: true }, logger)
+      tt.ok(logger.warn.calledOnce, 'logger is not being called')
+    } catch (error) {
+      tt.fail('error is not expected')
+    }
+  })
+
+  t.test('protondbFetcher must not call the logger warn method when verbose is false and when there is a problem requesting to protondb API', async tt => {
+    tt.plan(1)
+    const fetcher = await esmock('../../lib/fetcher/index.js', {
+      'node-fetch': mockFetchErr
+    })
+    try {
+      const logger = { warn: sinon.spy() }
+      await fetcher.protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries', verbose: false }, logger)
+      tt.equal(logger.warn.calledOnce, false, 'logger is being called when verbose is false')
     } catch (error) {
       tt.fail('error is not expected')
     }
@@ -168,7 +198,8 @@ tap.test('protondbFetcher', async (t) => {
       'node-fetch': mockFetchInvalidCode
     })
     try {
-      const result = await fetcher.protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries' })
+      const logger = { warn: sinon.spy() }
+      const result = await fetcher.protondbFetcher({ name: 'fifa', query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries' }, logger)
       tt.equal(result, null)
     } catch (error) {
       tt.fail('error is not expected')
