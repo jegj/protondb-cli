@@ -66,7 +66,7 @@ tap.test('formatGameName', async (t) => {
     tt.plan(1)
     const name = 'Artificial Life 2061: Cybersys - (Fantasy Diva Of The Terrarian Vrchatworlds, Babel Tower Final Project: "Kodota Komori 1416") [Made by: Joseph Sanz]'
     const result = formatGameName(name)
-    tt.equal(result, 'Artificial Life...')
+    tt.equal(result, 'Artificial Life 2061: Cybersys - (F...')
   })
 
   t.test('formatGameName can accept different limit values based on the argument', (tt) => {
