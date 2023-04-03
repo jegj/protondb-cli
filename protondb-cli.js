@@ -26,33 +26,33 @@ const protondbCLI = yargs(hideBin(process.argv))
       alias: 'h',
       type: 'number',
       description: 'Limit the number of result on the search',
-      default: config.get('DEFAULT_PROTONDB_CLI_HITS')
+      default: config.DEFAULT_PROTONDB_CLI_HITS
     }).option('concurrency', {
       alias: 'c',
       type: 'number',
       description: 'Limit the concurrency for the search',
-      default: config.get('DEFAULT_PROTONDB_CLI_CONCURRENCY')
+      default: config.DEFAULT_PROTONDB_CLI_CONCURRENCY
     }).option('algolia_query_url', {
       alias: 'aqu',
       type: 'string',
       description: 'Algolia main URL for the search.',
-      default: config.get('DEFAULT_ALGOLIA_QUERY_URL'),
+      default: config.DEFAULT_ALGOLIA_QUERY_URL,
       coerce: isValidUrl
     }).option('algolia_api_key', {
       alias: 'aak',
       type: 'string',
       description: 'Algolia API key.',
-      default: config.get('DEFAULT_X_ALGOLIA_API_KEY')
+      default: config.DEFAULT_X_ALGOLIA_API_KEY
     }).option('algolia_application_id', {
       alias: 'aai',
       type: 'string',
       description: 'Algolia application id.',
-      default: config.get('DEFAULT_X_ALGOLIA_APPLICATION_ID')
+      default: config.DEFAULT_X_ALGOLIA_APPLICATION_ID
     }).option('protondb_url', {
       alias: 'pu',
       type: 'string',
       description: 'Protondb URL for search game information.',
-      default: config.get('DEFAULT_PROTONDB_URL'),
+      default: config.DEFAULT_PROTONDB_URL,
       coerce: isValidUrl
     }).example([
       ['$0 gta --concurrency 5 --hits 15', 'Search the last 15 like gta using an conccurency of 5']
