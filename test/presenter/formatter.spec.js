@@ -1,5 +1,5 @@
 import tap from 'tap'
-import { formatGame, format, formatGameName } from '../../lib/presenter/formatter.js'
+import { formatGame, format, formatGameName, GAME_NA } from '../../lib/presenter/formatter.js'
 import { mergedGameDataComplete, mergedGameDataUncomplete, mergedGames } from '../mock/index.mock.js'
 
 tap.test('formatGame', async (t) => {
@@ -29,16 +29,16 @@ tap.test('formatGame', async (t) => {
     tt.equal(result[2], mergedGameDataComplete.confidence)
   })
 
-  t.test('2th item must be equal to "pending" if the has not result from protondb API', (tt) => {
+  t.test('2th item must be equal to "{gray-fg}N/A{/gray-fg}" if the has not result from protondb API', (tt) => {
     tt.plan(1)
     const result = formatGame(mergedGameDataUncomplete)
-    tt.equal(result[1], 'pending')
+    tt.equal(result[1], GAME_NA)
   })
 
-  t.test('3th item must be equal to "pending" if the has not result from protondb API', (tt) => {
+  t.test('3th item must be equal to "{gray-fg}N/A{/gray-fg}" if the has not result from protondb API', (tt) => {
     tt.plan(1)
     const result = formatGame(mergedGameDataUncomplete)
-    tt.equal(result[2], 'pending')
+    tt.equal(result[2], GAME_NA)
   })
 })
 
