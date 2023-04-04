@@ -4,3 +4,4 @@
 - TODO: Create docker image
 - TODO: enable github action for CI/CD
 - FIXME: chalk inside blessed component
+- TODO: Sort results
