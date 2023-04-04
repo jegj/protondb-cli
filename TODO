@@ -3,5 +3,6 @@
 - DONE: Display console.warn when verbose enable and use a better log
 - TODO: Create docker image
 - TODO: enable github action for CI/CD
-- FIXME: chalk inside blessed component
+- DONE: chalk inside blessed component
 - TODO: Sort results
+- TODO: Function to provide styles for the results
