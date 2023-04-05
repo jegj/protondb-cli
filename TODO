@@ -5,4 +5,5 @@
 - TODO: enable github action for CI/CD
 - DONE: chalk inside blessed component
 - TODO: Sort results
-- TODO: Function to provide styles for the results
+- DONE: Function to provide styles for the tier
+- TODO: Function to provide styles for the confidence

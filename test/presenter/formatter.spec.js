@@ -1,5 +1,5 @@
 import tap from 'tap'
-import { formatGame, format, formatGameName, GAME_NA } from '../../lib/presenter/formatter.js'
+import { formatGame, format, formatGameName, formatTierGame, GAME_NA, SILVER_TIER, GOLD_TIER, BRONZE_TIER, PLATINUM_TIER, PENDING_TIER } from '../../lib/presenter/formatter.js'
 import { mergedGameDataComplete, mergedGameDataUncomplete, mergedGames } from '../mock/index.mock.js'
 
 tap.test('formatGame', async (t) => {
@@ -20,7 +20,7 @@ tap.test('formatGame', async (t) => {
   t.test('2th item must be the game\'s tier if there are result from protondb API', (tt) => {
     tt.plan(1)
     const result = formatGame(mergedGameDataComplete)
-    tt.equal(result[1], mergedGameDataComplete.tier)
+    tt.equal(result[1], formatTierGame(mergedGameDataComplete.tier))
   })
 
   t.test('3th item must be the game\'s confidence if there are result from protondb API', (tt) => {
@@ -74,5 +74,45 @@ tap.test('formatGameName', async (t) => {
     const name = 'Artificial Life 2061: Cybersys - (Fantasy Diva Of The Terrarian Vrchatworlds, Babel Tower Final Project: "Kodota Komori 1416") [Made by: Joseph Sanz]'
     const result = formatGameName(name, 10)
     tt.equal(result, 'Artificial...')
+  })
+})
+
+tap.test('formatTierGame', async (t) => {
+  t.plan(6)
+
+  t.test('formatTierGame must return the silver tier with the respective tag for font color', (tt) => {
+    tt.plan(1)
+    const result = formatTierGame('silver')
+    tt.equal(result, SILVER_TIER)
+  })
+
+  t.test('formatTierGame must return the gold tier with the respective tag for font color', (tt) => {
+    tt.plan(1)
+    const result = formatTierGame('gold')
+    tt.equal(result, GOLD_TIER)
+  })
+
+  t.test('formatTierGame must return the bronze tier with the respective tag for font color', (tt) => {
+    tt.plan(1)
+    const result = formatTierGame('bronze')
+    tt.equal(result, BRONZE_TIER)
+  })
+
+  t.test('formatTierGame must return the platinum tier with the respective tag for font color', (tt) => {
+    tt.plan(1)
+    const result = formatTierGame('platinum')
+    tt.equal(result, PLATINUM_TIER)
+  })
+
+  t.test('formatTierGame must return the pending tier with the respective tag for font color', (tt) => {
+    tt.plan(1)
+    const result = formatTierGame('pending')
+    tt.equal(result, PENDING_TIER)
+  })
+
+  t.test('formatTierGame must return the tier without the tag if the tier is unknow', (tt) => {
+    tt.plan(1)
+    const result = formatTierGame('new_tier')
+    tt.equal(result, 'new_tier')
   })
 })
