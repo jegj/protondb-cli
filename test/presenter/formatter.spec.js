@@ -1,5 +1,6 @@
 import tap from 'tap'
-import { formatGame, format, formatGameName, formatGameTier, GAME_NA, SILVER_TIER, GOLD_TIER, BRONZE_TIER, PLATINUM_TIER, PENDING_TIER } from '../../lib/presenter/formatter.js'
+import { formatGame, format, formatGameName, formatGameTier } from '../../lib/presenter/formatter.js'
+import { GAME_NA, SILVER_TIER, GOLD_TIER, BRONZE_TIER, PLATINUM_TIER, PENDING_TIER } from '../../lib/presenter/formats.js'
 import { mergedGameDataComplete, mergedGameDataUncomplete, mergedGames } from '../mock/index.mock.js'
 
 tap.test('formatGame', async (t) => {
