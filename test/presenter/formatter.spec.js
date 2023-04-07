@@ -1,6 +1,6 @@
 import tap from 'tap'
-import { formatGame, format, formatGameName, formatGameTier } from '../../lib/presenter/formatter.js'
-import { GAME_NA, SILVER_TIER, GOLD_TIER, BRONZE_TIER, PLATINUM_TIER, PENDING_TIER } from '../../lib/presenter/formats.js'
+import { formatGame, format, formatGameName, formatGameTier, formatGameConfidence } from '../../lib/presenter/formatter.js'
+import { GAME_NA, SILVER_TIER, GOLD_TIER, BRONZE_TIER, PLATINUM_TIER, PENDING_TIER, INADEQUATE_CONFIDENCE, LOW_CONFIDENCE, MODERATE_CONFIDENCE, GOOD_CONFIDENCE, STRONG_CONFIDENCE } from '../../lib/presenter/formats.js'
 import { mergedGameDataComplete, mergedGameDataUncomplete, mergedGames } from '../mock/index.mock.js'
 
 tap.test('formatGame', async (t) => {
@@ -27,7 +27,7 @@ tap.test('formatGame', async (t) => {
   t.test('3th item must be the game\'s confidence if there are result from protondb API', (tt) => {
     tt.plan(1)
     const result = formatGame(mergedGameDataComplete)
-    tt.equal(result[2], mergedGameDataComplete.confidence)
+    tt.equal(result[2], formatGameConfidence(mergedGameDataComplete.confidence))
   })
 
   t.test('2th item must be equal to "{gray-fg}N/A{/gray-fg}" if the has not result from protondb API', (tt) => {
@@ -115,5 +115,45 @@ tap.test('formatGameTier', async (t) => {
     tt.plan(1)
     const result = formatGameTier('new_tier')
     tt.equal(result, 'new_tier')
+  })
+})
+
+tap.test('formatGameConfidence', async (t) => {
+  t.plan(6)
+
+  t.test('formatGameConfidence must return inadequate confidence with the respective tag for font color', (tt) => {
+    tt.plan(1)
+    const result = formatGameConfidence('inadequate')
+    tt.equal(result, INADEQUATE_CONFIDENCE)
+  })
+
+  t.test('formatGameConfidence must return low confidence with the respective tag for font color', (tt) => {
+    tt.plan(1)
+    const result = formatGameConfidence('low')
+    tt.equal(result, LOW_CONFIDENCE)
+  })
+
+  t.test('formatGameConfidence must return moderate confidence with the respective tag for font color', (tt) => {
+    tt.plan(1)
+    const result = formatGameConfidence('moderate')
+    tt.equal(result, MODERATE_CONFIDENCE)
+  })
+
+  t.test('formatGameConfidence must return good confidence with the respective tag for font color', (tt) => {
+    tt.plan(1)
+    const result = formatGameConfidence('good')
+    tt.equal(result, GOOD_CONFIDENCE)
+  })
+
+  t.test('formatGameConfidence must return strong confidence with the respective tag for font color', (tt) => {
+    tt.plan(1)
+    const result = formatGameConfidence('strong')
+    tt.equal(result, STRONG_CONFIDENCE)
+  })
+
+  t.test('formatGameTier must return the confidence without the tag if the confidence is unknow', (tt) => {
+    tt.plan(1)
+    const result = formatGameTier('new_confidence')
+    tt.equal(result, 'new_confidence')
   })
 })
