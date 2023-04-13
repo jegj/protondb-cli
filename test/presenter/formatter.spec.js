@@ -1,7 +1,8 @@
 import tap from 'tap'
-import { formatGame, format, formatGameName, formatGameTier, formatGameConfidence } from '../../lib/presenter/formatter.js'
+import { formatGame, format, formatGameName, formatGameTier, formatGameConfidence, sortGames } from '../../lib/presenter/formatter.js'
 import { GAME_NA, SILVER_TIER, GOLD_TIER, BRONZE_TIER, PLATINUM_TIER, PENDING_TIER, INADEQUATE_CONFIDENCE, LOW_CONFIDENCE, MODERATE_CONFIDENCE, GOOD_CONFIDENCE, STRONG_CONFIDENCE } from '../../lib/presenter/formats.js'
 import { mergedGameDataComplete, mergedGameDataUncomplete, mergedGames } from '../mock/index.mock.js'
+import { createMergedGame } from '../factories/index.js'
 
 tap.test('formatGame', async (t) => {
   t.plan(6)
@@ -155,5 +156,82 @@ tap.test('formatGameConfidence', async (t) => {
     tt.plan(1)
     const result = formatGameTier('new_confidence')
     tt.equal(result, 'new_confidence')
+  })
+})
+
+tap.test('sortGames', async (t) => {
+  t.plan(7)
+
+  t.test('sorting just one game', (tt) => {
+    tt.plan(1)
+    const games = [createMergedGame({ tier: 'silver', confidence: 'strong' })]
+    const sortedGames = sortGames(games)
+    tt.same(sortedGames, games)
+  })
+
+  t.test('N/A games have the lowest priority for the sorting', (tt) => {
+    tt.plan(1)
+    const naGame = createMergedGame({ tier: GAME_NA, confidence: 'strong' })
+    const silverGame = createMergedGame({ tier: 'silver', confidence: 'strong' })
+    const games = [naGame, silverGame]
+    const sortedGames = sortGames(games)
+    tt.same(sortedGames, [silverGame, naGame])
+  })
+
+  t.test('pending games have the first low priority for the sorting', (tt) => {
+    tt.plan(1)
+    const naGame = createMergedGame({ tier: GAME_NA, confidence: 'strong' })
+    const pendingGame = createMergedGame({ tier: 'pending', confidence: 'strong' })
+    const silverGame = createMergedGame({ tier: 'silver', confidence: 'strong' })
+    const games = [pendingGame, naGame, silverGame]
+    const sortedGames = sortGames(games)
+    tt.same(sortedGames, [silverGame, pendingGame, naGame])
+  })
+
+  t.test('bronze games have the 2th lower priority for the sorting', (tt) => {
+    tt.plan(1)
+    const naGame = createMergedGame({ tier: GAME_NA, confidence: 'strong' })
+    const pendingGame = createMergedGame({ tier: 'pending', confidence: 'strong' })
+    const silverGame = createMergedGame({ tier: 'silver', confidence: 'strong' })
+    const bronzeGame = createMergedGame({ tier: 'bronze', confidence: 'strong' })
+    const games = [pendingGame, silverGame, naGame, bronzeGame]
+    const sortedGames = sortGames(games)
+    tt.same(sortedGames, [silverGame, bronzeGame, pendingGame, naGame])
+  })
+
+  t.test('silver games have the 3th lower priority for the sorting', (tt) => {
+    tt.plan(1)
+    const naGame = createMergedGame({ tier: GAME_NA, confidence: 'strong' })
+    const pendingGame = createMergedGame({ tier: 'pending', confidence: 'strong' })
+    const silverGame = createMergedGame({ tier: 'silver', confidence: 'strong' })
+    const bronzeGame = createMergedGame({ tier: 'bronze', confidence: 'strong' })
+    const games = [naGame, bronzeGame, pendingGame, silverGame]
+    const sortedGames = sortGames(games)
+    tt.same(sortedGames, [silverGame, bronzeGame, pendingGame, naGame])
+  })
+
+  t.test('gold games have the 4th lower priority for the sorting', (tt) => {
+    tt.plan(1)
+    const naGame = createMergedGame({ tier: GAME_NA, confidence: 'strong' })
+    const pendingGame = createMergedGame({ tier: 'pending', confidence: 'strong' })
+    const silverGame = createMergedGame({ tier: 'silver', confidence: 'strong' })
+    const bronzeGame = createMergedGame({ tier: 'bronze', confidence: 'strong' })
+    const goldGame = createMergedGame({ tier: 'gold', confidence: 'strong' })
+    const games = [bronzeGame, naGame, pendingGame, goldGame, silverGame]
+    const sortedGames = sortGames(games)
+    tt.same(sortedGames, [goldGame, silverGame, bronzeGame, pendingGame, naGame])
+  })
+
+  t.test('platinum games have the 5th lower priority for the sorting', (tt) => {
+    tt.plan(1)
+    const naGame = createMergedGame({ tier: GAME_NA, confidence: 'strong' })
+    const pendingGame = createMergedGame({ tier: 'pending', confidence: 'strong' })
+    const silverGame = createMergedGame({ tier: 'silver', confidence: 'strong' })
+    const bronzeGame = createMergedGame({ tier: 'bronze', confidence: 'strong' })
+    const goldGame = createMergedGame({ tier: 'gold', confidence: 'strong' })
+    const platinumGame = createMergedGame({ tier: 'platinum', confidence: 'strong' })
+    const games = [naGame, bronzeGame, pendingGame, platinumGame, goldGame, silverGame]
+    const sortedGames = sortGames(games)
+    tt.same(sortedGames, [platinumGame, goldGame, silverGame, bronzeGame, pendingGame, naGame])
   })
 })
