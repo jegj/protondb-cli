@@ -1,7 +1,7 @@
 - DONE: Limit game name to avoid table show less columns e.g dota with more than 10 results
 - DONE: Provide algolia & protondb API info in a better way
 - DONE: Display console.warn when verbose enable and use a better log
-- TODO: Create docker image
+- DONE: Create docker image
 - TODO: enable github action for CI/CD
 - DONE: chalk inside blessed component
 - DONE: Sort results
@@ -9,3 +9,4 @@
 - DONE: Function to provide styles for the confidence
 - TODO: Add select event on list for display more game information
 - TODO: Make a GIF for Readme
+- TODO: Create dockerhub package

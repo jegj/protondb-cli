@@ -46,3 +46,17 @@ Examples:
   protondb-cli gta --concurrency 5 --hits   Search the last 15 like gta using an
   15                                        conccurency of 5
 ```
+
+## Docker Support
+
+### Run from Docker
+
+### Build
+
+```sh
+$ docker build -t protondb-cli .
+
+$ docker run -it --rm protondb-cli:latest "Skyrim"
+```
+
+<!-- https://tonylixu.medium.com/gitops-github-actions-docker-build-workflow-157cc53e9a0d -->
