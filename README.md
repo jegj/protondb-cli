@@ -1,3 +1,6 @@
+[![CI](https://github.com/jegj/protondb-cli/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/jegj/protondb-cli/actions/workflows/build.yml)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://standardjs.com/)
+
 # protondb-cli
 A simple CLI for [ProtonDB project](https://www.protondb.com/). Let's face it, if you know about ProtonDB you must love video games and Linux and what better than an CLI for a Linux fan to check your games compatibility.
 
