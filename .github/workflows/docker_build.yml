@@ -29,14 +29,14 @@ jobs:
         password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
     - name: Docker meta
-        id: meta
-        uses: docker/metadata-action@v4
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          flavor: |
-            latest=true
-            prefix=
-            suffix=
+      id: meta
+      uses: docker/metadata-action@v4
+      with:
+        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+        flavor: |
+          latest=true
+          prefix=
+          suffix=
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v2
