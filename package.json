@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0",
   "description": "CLI for the protondb project",
-  "main": "protondb.js",
+  "main": "protondb-cli.js",
   "engines": {
     "node": ">=18.x",
     "npm": ">=8.19.2"
@@ -36,7 +36,7 @@
     "steam"
   ],
   "bin": {
-    "protondb": "protondb.js"
+    "protondb-cli": "protondb-cli.js"
   },
   "license": "GPLv3",
   "dependencies": {
@@ -47,6 +47,12 @@
     "p-map": "5.5.0",
     "yargs": "17.7.1"
   },
+  "files": [
+    "protondb-cli.js",
+    "lib/",
+    "README.md",
+    "LICENSE"
+  ],
   "devDependencies": {
     "@commitlint/cli": "^17.5.0",
     "@commitlint/config-conventional": "^17.4.4",
