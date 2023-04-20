@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/jegj/protondb-cli/compare/v1.0.0...v1.0.1) (2023-04-20)
+
+
+### Bug Fixes
+
+* update files and bin ([9e74e87](https://github.com/jegj/protondb-cli/commit/9e74e875be2c1b6bc5609b62f8ad70e0de0921b6))
+
 # 1.0.0 (2023-04-20)
 
 
