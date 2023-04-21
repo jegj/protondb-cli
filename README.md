@@ -4,7 +4,7 @@
 [![view on npm](http://img.shields.io/npm/l/protondb-cli.svg)](https://www.npmjs.com/package/protondb-cli)
 
 # protondb-cli
-A simple CLI for [ProtonDB project](https://www.protondb.com/). Let's face it, if you know about ProtonDB you must love video games and Linux and what better than an CLI for a Linux fan to check your games compatibility.
+A simple CLI for [ProtonDB project](https://www.protondb.com/). Let's face it, if you know about ProtonDB you must love video games and Linux and what better than an CLI for a Linux fan to check your games compatibility on Steam.
 
 ## Installation
 ```bash
@@ -52,16 +52,17 @@ Examples:
 
 ### Run from Docker
 
+```sh
+$ docker run -it --rm jegj/protondb-cli
+```
+
 ### Build
 
 ```sh
 $ docker build -t protondb-cli .
 
-$ docker run -it --rm protondb-cli:latest "Skyrim"
+$ docker run -it --rm --name protondb-cli protondb-cli "Skyrim"
 ```
-
-<!-- https://tonylixu.medium.com/gitops-github-actions-docker-build-workflow-157cc53e9a0d -->
-
 ## How ProtonDB.com works
 For more information about how [ProtonDB](https://www.protondb.com/) works, check the [protondb specification](./protondb.md).
 
