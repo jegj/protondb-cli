@@ -12,3 +12,4 @@
 - DONE: Create dockerhub package
 - TODO: Add workflow to deploy gihub pages
 - TODO: Check why on container, gold label is not working on blessed
+- TODO: Add worflow for snap store
