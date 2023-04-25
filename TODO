@@ -13,3 +13,4 @@
 - DONE: Add workflow to deploy gihub repos
 - TODO: Check why on container, gold label is not working on blessed
 - TODO: Add worflow for snap store
+- TODO: Show a better error message when query is null
