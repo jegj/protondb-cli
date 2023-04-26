@@ -3,7 +3,7 @@
 import yargs from 'yargs/yargs'
 import { hideBin } from 'yargs/helpers'
 import start from './lib/process/index.js'
-import { isValidUrl } from './lib/utils.js'
+import { isValidUrl, isValidGameName } from './lib/utils.js'
 import chalk from 'chalk'
 import config from './lib/config/index.js'
 
@@ -17,7 +17,8 @@ const protondbCLI = yargs(hideBin(process.argv))
       type: 'string',
       default: null,
       defaultDescription: 'null. protondb-cli Use STDIN by default',
-      normalize: true
+      normalize: true,
+      coerce: isValidGameName
     }).option('verbose', {
       alias: 'v',
       type: 'boolean',
