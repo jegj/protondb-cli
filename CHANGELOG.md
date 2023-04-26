@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/jegj/protondb-cli/compare/v1.1.0...v1.1.1) (2023-04-26)
+
+
+### Bug Fixes
+
+* game name validation issue ([f1bf14d](https://github.com/jegj/protondb-cli/commit/f1bf14dabc0f1ef5fdc511db5a65d48ce91adc19))
+
 # [1.1.0](https://github.com/jegj/protondb-cli/compare/v1.0.1...v1.1.0) (2023-04-26)
 
 
