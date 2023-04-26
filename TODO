@@ -15,3 +15,4 @@
 - TODO: Add worflow for snap store
 - DONE: Show a better error message when query is null
 - TODO: Add integration workflow (with a cron )to check algolia keys are still valid
+- TODO: Fix engine section on the package.json
