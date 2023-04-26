@@ -1,3 +1,16 @@
+# [1.1.0](https://github.com/jegj/protondb-cli/compare/v1.0.1...v1.1.0) (2023-04-26)
+
+
+### Bug Fixes
+
+* add validation for the game's name ([428683b](https://github.com/jegj/protondb-cli/commit/428683bcb4909765ab03b7a776b4e0d45412142e))
+* pending tier tag ([e21ddbe](https://github.com/jegj/protondb-cli/commit/e21ddbe427c0a64530e57c7832d5d0b4bf3cd38d))
+
+
+### Features
+
+* usea new tag for gold and use symbols for enums ([d8b6e65](https://github.com/jegj/protondb-cli/commit/d8b6e653c0fd1a518db093a17b375c1365ca5f3d))
+
 ## [1.0.1](https://github.com/jegj/protondb-cli/compare/v1.0.0...v1.0.1) (2023-04-20)
 
 
