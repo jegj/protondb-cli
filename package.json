@@ -20,7 +20,7 @@
     "test:ci": "npm run unit -- -R terse --cov --coverage-report=lcovonly",
     "test:report": "npm run lint && npm run unit:report",
     "test:watch": "npm run unit -- -w --no-coverage-report -R terse",
-    "test:integration": "./integration/test.sh",
+    "test:keys": "npm start --prefix ./lib/core",
     "unit": "c8 tap",
     "unit:junit": "tap-mocha-reporter xunit < out.tap > test/junit-testresults.xml",
     "unit:report": "tap --cov --coverage-report=html --coverage-report=cobertura | tee out.tap",
