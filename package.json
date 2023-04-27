@@ -5,8 +5,8 @@
   "description": "CLI for the protondb project",
   "main": "protondb-cli.js",
   "engines": {
-    "node": ">=18.x",
-    "npm": ">=8.19.2"
+    "node": ">=14.x",
+    "npm": ">=6.14.18"
   },
   "scripts": {
     "start": "NODE_ENV=development node ./protondb-cli.js",
