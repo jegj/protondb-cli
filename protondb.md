@@ -1,14 +1,17 @@
 # ProtonDB
 
-ProtonDB web page use two API sources for list the game ranking and provide the calification for the game:
+ProtonDB web page use two API sources for list the game ranking and
+provide the calification for the game:
 
 - `algolia.net`
     - Provides the ranking list but needs the following `keys` in the HTTP requests
       -  `x-alogilia-api-key`: e.g 9ba0e69fb2974316cdaec8f5f257088f
       -  `x-algilia-application-id`: e.g 94HE6YATEI
-    - Return a list of hits, each one of them has a `objectId` which is required to get the protondb clasification
+    - Return a list of hits, each one of them has a `objectId` which
+    is required to get the protondb clasification
 - `protondb.com`
-    - This API return the game's calification based on the `objectId` from the previous request
+    - This API return the game's calification based on
+     the `objectId` from the previous request
 
 ```
                                                                                            {

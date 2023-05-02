@@ -4,7 +4,10 @@
 [![view on npm](http://img.shields.io/npm/l/protondb-cli.svg)](https://www.npmjs.com/package/protondb-cli)
 
 # protondb-cli
-A simple CLI for [ProtonDB project](https://www.protondb.com/). Let's face it, if you know about ProtonDB you must love video games and Linux and what better than an CLI for a Linux fan to check your games compatibility on Steam.
+A simple CLI for [ProtonDB project](https://www.protondb.com/).
+Let's face it, if you know about ProtonDB you must love video
+games and Linux and what better than an CLI for a Linux fan
+to check your games compatibility on Steam.
 
 ## Installation
 ```bash
@@ -64,9 +67,13 @@ $ docker build -t protondb-cli .
 $ docker run -it --rm --name protondb-cli protondb-cli "Skyrim"
 ```
 ## How ProtonDB.com works
-For more information about how [ProtonDB](https://www.protondb.com/) works, check the [protondb specification](./protondb.md).
+For more information about how [ProtonDB](https://www.protondb.com/)
+works, check the [protondb specification](./protondb.md).
 
 ## How protondb-cli works
-We use the information that you can find out in [ProtonDB web page](https://www.protondb.com/) to emulate the HTTP requests, parse and show the results.
+We use the information that you can find out in [ProtonDB web page](https://www.protondb.com/)
+ to emulate the HTTP requests, parse and show the results.
 ### Limitations
-- Keys, id and urls may change in the future. That is why those kind of params can be provided to the CLI. Perhaps in the future there is a better way to support this changes...
+- Keys, id and urls may change in the future. That is why those kind
+ of params can be provided to the CLI. Perhaps in the future there
+  is a better way to support this changes...
