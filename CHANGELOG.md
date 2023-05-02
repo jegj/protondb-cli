@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/jegj/protondb-cli/compare/v1.1.1...v1.1.2) (2023-05-02)
+
+
+### Bug Fixes
+
+* adjust node and npm version ([a1da4d3](https://github.com/jegj/protondb-cli/commit/a1da4d3ccad1ffdcce7397aefb2539d8dbe720a5))
+
 ## [1.1.1](https://github.com/jegj/protondb-cli/compare/v1.1.0...v1.1.1) (2023-04-26)
 
 
