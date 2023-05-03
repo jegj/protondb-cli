@@ -14,6 +14,6 @@
 - TODO: Check why on container, gold label is not working on blessed
 - TODO: Add worflow for snap store
 - DONE: Show a better error message when query is null
-- TODO: Add integration workflow (with a cron )to check algolia keys are still valid
+- DONE: Add integration workflow (with a cron )to check algolia keys are still valid
 - DONE: Fix engine section on the package.json
 - TODO: Use config module for test check script

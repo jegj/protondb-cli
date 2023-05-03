@@ -68,7 +68,7 @@ $ docker run -it --rm --name protondb-cli protondb-cli "Skyrim"
 ```
 ## How ProtonDB.com works
 For more information about how [ProtonDB](https://www.protondb.com/)
-works, check the [protondb specification](./protondb.md).
+works, check the [protondb specification](./docs/protondb.md).
 
 ## How protondb-cli works
 We use the information that you can find out in [ProtonDB web page](https://www.protondb.com/)
