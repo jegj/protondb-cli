@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/jegj/protondb-cli/compare/v1.1.2...v1.2.0) (2023-05-04)
+
+
+### Features
+
+* improve config module ([1aab839](https://github.com/jegj/protondb-cli/commit/1aab8394600f41879384fc0a10c9aabb22167768))
+
 ## [1.1.2](https://github.com/jegj/protondb-cli/compare/v1.1.1...v1.1.2) (2023-05-02)
 
 
