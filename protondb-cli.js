@@ -5,7 +5,9 @@ import { hideBin } from 'yargs/helpers'
 import start from './lib/process/index.js'
 import { isValidUrl, isValidGameName } from './lib/utils.js'
 import chalk from 'chalk'
-import config from './lib/config/index.js'
+import getConfig from './lib/config/index.js'
+
+const config = getConfig()
 
 const protondbCLI = yargs(hideBin(process.argv))
   .scriptName('protondb-cli')

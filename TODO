@@ -16,4 +16,4 @@
 - DONE: Show a better error message when query is null
 - DONE: Add integration workflow (with a cron )to check algolia keys are still valid
 - DONE: Fix engine section on the package.json
-- TODO: Use config module for test check script
+- DONE: Use config module for test check script
