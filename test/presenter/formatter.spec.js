@@ -80,7 +80,7 @@ tap.test('formatGameName', async (t) => {
 })
 
 tap.test('formatGameTier', async (t) => {
-  t.plan(6)
+  t.plan(7)
 
   t.test('formatGameTier must return the silver tier with the respective tag for font color', (tt) => {
     tt.plan(1)
@@ -104,6 +104,12 @@ tap.test('formatGameTier', async (t) => {
     tt.plan(1)
     const result = formatGameTier('platinum')
     tt.equal(result, TAG_TIERS.platinum.description)
+  })
+
+  t.test('formatGameTier must return the borked tier with the respective tag for font color', (tt) => {
+    tt.plan(1)
+    const result = formatGameTier('borked')
+    tt.equal(result, TAG_TIERS.borked.description)
   })
 
   t.test('formatGameTier must return the pending tier with the respective tag for font color', (tt) => {
@@ -160,7 +166,7 @@ tap.test('formatGameConfidence', async (t) => {
 })
 
 tap.test('sortGames', async (t) => {
-  t.plan(8)
+  t.plan(9)
 
   t.test('sorting just one game', (tt) => {
     tt.plan(1)
@@ -186,6 +192,17 @@ tap.test('sortGames', async (t) => {
     const games = [pendingGame, naGame, silverGame]
     const sortedGames = sortGames(games)
     tt.same(sortedGames, [silverGame, pendingGame, naGame])
+  })
+
+  t.test('borked games have the 2th low priority for the sorting', (tt) => {
+    tt.plan(1)
+    const naGame = createMergedGame({ tier: GAME_NA, confidence: 'strong' })
+    const pendingGame = createMergedGame({ tier: 'pending', confidence: 'strong' })
+    const borkedGame = createMergedGame({ tier: 'borked', confidence: 'strong' })
+    const silverGame = createMergedGame({ tier: 'silver', confidence: 'strong' })
+    const games = [pendingGame, borkedGame, naGame, silverGame]
+    const sortedGames = sortGames(games)
+    tt.same(sortedGames, [silverGame, borkedGame, pendingGame, naGame])
   })
 
   t.test('bronze games have the 2th lower priority for the sorting', (tt) => {
@@ -247,8 +264,9 @@ tap.test('sortGames', async (t) => {
     const game8 = createMergedGame({ name: 'CounterAttack', tier: 'GAME_NA', confidence: 'strong' })
     const game9 = createMergedGame({ name: 'Counterpack', tier: 'GAME_NA', confidence: 'strong' })
     const game10 = createMergedGame({ name: 'Counterrealstic Syndrome', tier: 'GAME_NA', confidence: 'strong' })
-    const games = [game1, game2, game3, game4, game5, game6, game7, game8, game9, game10]
+    const game11 = createMergedGame({ name: 'Counterrealstic Borked', tier: 'borked', confidence: 'strong' })
+    const games = [game1, game2, game3, game4, game5, game6, game7, game8, game9, game10, game11]
     const sortedGames = sortGames(games)
-    tt.same(sortedGames, [game3, game6, game1, game2, game4, game5, game7, game8, game9, game10])
+    tt.same(sortedGames, [game3, game6, game1, game2, game4, game5, game11, game7, game8, game9, game10])
   })
 })
