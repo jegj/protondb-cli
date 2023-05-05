@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/jegj/protondb-cli/compare/v1.2.1...v1.2.2) (2023-05-05)
+
+
+### Bug Fixes
+
+* add missing file ([804ec76](https://github.com/jegj/protondb-cli/commit/804ec762bd20196a4055db549874e8114f61fe1b))
+
 ## [1.2.1](https://github.com/jegj/protondb-cli/compare/v1.2.0...v1.2.1) (2023-05-05)
 
 
