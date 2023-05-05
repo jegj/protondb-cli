@@ -33,7 +33,7 @@ Describe the support on Linux with ProtonDB
 
 
 ### Confidence
-Describe the support of the community under the tier based on the user's reports
+Describe the support of the community under the tier
 
 ## Docker Support
 
