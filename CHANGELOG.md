@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/jegj/protondb-cli/compare/v1.2.0...v1.2.1) (2023-05-05)
+
+
+### Bug Fixes
+
+* config reference path ([808e1b0](https://github.com/jegj/protondb-cli/commit/808e1b01ba2ee71996f4e82b5905af1d41cb02d0))
+
 # [1.2.0](https://github.com/jegj/protondb-cli/compare/v1.1.2...v1.2.0) (2023-05-04)
 
 
