@@ -52,7 +52,8 @@
     "lib/",
     "default.json",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "package.json"
   ],
   "devDependencies": {
     "@commitlint/cli": "^17.5.0",
