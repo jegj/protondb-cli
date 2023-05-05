@@ -50,6 +50,7 @@
   "files": [
     "protondb-cli.js",
     "lib/",
+    "default.json",
     "README.md",
     "LICENSE"
   ],
