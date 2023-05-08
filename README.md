@@ -37,20 +37,10 @@ Describe the support on Linux with ProtonDB
 ### Confidence
 Describe the support of the community under the tier
 
-## Docker Support
-
-### Run from Docker
+## Using Docker
 
 ```sh
-$ docker run -it --rm jegj/protondb-cli
-```
-
-### Build
-
-```sh
-$ docker build -t protondb-cli .
-
-$ docker run -it --rm --name protondb-cli protondb-cli "Skyrim"
+$ docker run -it --rm jegj/protondb-cli fifa
 ```
 ## How ProtonDB.com works
 For more information about how [ProtonDB](https://www.protondb.com/)
