@@ -9,6 +9,8 @@ Let's face it, if you know about ProtonDB you must love video
 games and Linux and what better than an CLI for a Linux fan
 to check your games compatibility on Steam.
 
+![protondb-cli.gif](docs/imgs/readme.gif)
+
 ## Installation
 ```bash
 npm i protondb-cli -g
