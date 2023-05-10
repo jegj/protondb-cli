@@ -8,7 +8,7 @@
 - DONE: Function to provide styles for the tier
 - DONE: Function to provide styles for the confidence
 - TODO: Add select event on list for display more game information
-- TODO: Make a GIF for Readme
+- DONE: Make a GIF for Readme
 - DONE: Create dockerhub package
 - DONE: Add workflow to deploy gihub repos
 - TODO: Check why on container, gold label is not working on blessed
