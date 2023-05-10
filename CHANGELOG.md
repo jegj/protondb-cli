@@ -1,3 +1,17 @@
+# [1.3.0](https://github.com/jegj/protondb-cli/compare/v1.2.2...v1.3.0) (2023-05-10)
+
+
+### Bug Fixes
+
+* add missing file ([e131574](https://github.com/jegj/protondb-cli/commit/e131574e150647dea05720da1e46081a573cca96))
+* config reference path ([b1cb154](https://github.com/jegj/protondb-cli/commit/b1cb154a4198409f888c1bf78ddf4a036c4232a0))
+* display version correctly ([e5b36e7](https://github.com/jegj/protondb-cli/commit/e5b36e76f2d3caba02e8dfee1e5d33fc5d57c72d))
+
+
+### Features
+
+* add support for borked tier ([f3a5844](https://github.com/jegj/protondb-cli/commit/f3a5844bb1c32811f460a0c4b284a785ed875f23))
+
 ## [1.2.2](https://github.com/jegj/protondb-cli/compare/v1.2.1...v1.2.2) (2023-05-05)
 
 
