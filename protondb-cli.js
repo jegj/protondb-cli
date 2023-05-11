@@ -6,13 +6,16 @@ import start from './lib/process/index.js'
 import { isValidUrl, isValidGameName } from './lib/utils.js'
 import chalk from 'chalk'
 import getConfig from './lib/config/index.js'
+import fs from 'fs'
+
+const info = JSON.parse(fs.readFileSync('package.json', 'utf8'))
 
 const config = getConfig()
 
 const protondbCLI = yargs(hideBin(process.argv))
   .scriptName('protondb-cli')
   .env('PROTONDB_CLI')
-  .version()
+  .version(info.version)
   .usage('$0 [game]', 'Search for games based on a key word and show their protondb compatability, score and any other information related', (yargs) => {
     yargs.positional('game', {
       describe: 'Game\'s name.',
