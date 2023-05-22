@@ -1,3 +1,15 @@
+# [1.4.0](https://github.com/jegj/protondb-cli/compare/v1.3.0...v1.4.0) (2023-05-22)
+
+
+### Bug Fixes
+
+* get the version from package always ([4a1b168](https://github.com/jegj/protondb-cli/commit/4a1b1681cf8a20e782ae7d2d0fe36b8b44df9c80))
+
+
+### Features
+
+* update dependecies and remove support for Node 14.x ([b28293d](https://github.com/jegj/protondb-cli/commit/b28293df2a63c59a7e9fe53005aad023475e67ff))
+
 # [1.3.0](https://github.com/jegj/protondb-cli/compare/v1.2.2...v1.3.0) (2023-05-10)
 
 
