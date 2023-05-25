@@ -18,6 +18,7 @@ const line = grid.set(0, 0, 1, 1, contrib.line,
     label: 'Stocks'
   })
 
+// eslint-disable-next-line no-unused-vars
 const map = grid.set(1, 0, 1, 1, contrib.map, { label: 'Servers Location' })
 
 const lineData = {
