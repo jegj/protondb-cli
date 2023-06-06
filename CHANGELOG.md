@@ -1,3 +1,11 @@
+# [1.5.0](https://github.com/jegj/protondb-cli/compare/v1.4.0...v1.5.0) (2023-06-06)
+
+
+### Features
+
+* encode request data ([665f04a](https://github.com/jegj/protondb-cli/commit/665f04a9c71cab11134f8a35bf11523cd9d48fc5))
+* improve display view ([440d3e7](https://github.com/jegj/protondb-cli/commit/440d3e76b261da4a03f2cad9b74ccbc38d3e4bc2))
+
 # [1.4.0](https://github.com/jegj/protondb-cli/compare/v1.3.0...v1.4.0) (2023-05-22)
 
 
