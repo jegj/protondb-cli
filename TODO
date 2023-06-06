@@ -17,3 +17,4 @@
 - DONE: Add integration workflow (with a cron )to check algolia keys are still valid
 - DONE: Fix engine section on the package.json
 - DONE: Use config module for test check script
+- FIXME: Fix cell display when there are too many data or text to show
