@@ -48,12 +48,12 @@ const protondbCLI = yargs(hideBin(process.argv))
       alias: 'aak',
       type: 'string',
       description: 'Algolia API key.',
-      default: config.DEFAULT_X_ALGOLIA_API_KEY
+      default: Buffer.from(config.DEFAULT_X_ALGOLIA_API_KEY, 'base64').toString('utf-8')
     }).option('algolia_application_id', {
       alias: 'aai',
       type: 'string',
       description: 'Algolia application id.',
-      default: config.DEFAULT_X_ALGOLIA_APPLICATION_ID
+      default: Buffer.from(config.DEFAULT_X_ALGOLIA_APPLICATION_ID, 'base64').toString('utf-8')
     }).option('protondb_url', {
       alias: 'pu',
       type: 'string',
