@@ -7,7 +7,7 @@
 - DONE: Sort results
 - DONE: Function to provide styles for the tier
 - DONE: Function to provide styles for the confidence
-- TODO: Add select event on list for display more game information
+- DONE: Add select event on list for display more game information
 - DONE: Make a GIF for Readme
 - DONE: Create dockerhub package
 - DONE: Add workflow to deploy gihub repos
@@ -18,3 +18,4 @@
 - DONE: Fix engine section on the package.json
 - DONE: Use config module for test check script
 - FIXME: Fix cell display when there are too many data or text to show
+- FIXME: Fix version option
