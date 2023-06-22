@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/jegj/protondb-cli/compare/v1.5.0...v1.5.1) (2023-06-22)
+
+
+### Bug Fixes
+
+* get version correctly ([70df8eb](https://github.com/jegj/protondb-cli/commit/70df8eb1c50d9d007fdb51d2e5a632160f535ae4))
+
 # [1.5.0](https://github.com/jegj/protondb-cli/compare/v1.4.0...v1.5.0) (2023-06-06)
 
 
