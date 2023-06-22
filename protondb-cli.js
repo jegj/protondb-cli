@@ -7,9 +7,13 @@ import { isValidUrl, isValidGameName } from './lib/utils.js'
 import chalk from 'chalk'
 import getConfig from './lib/config/index.js'
 import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
 
-const info = JSON.parse(fs.readFileSync('package.json', 'utf8'))
-
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+const pkg = path.join(__dirname, 'package.json')
+const info = JSON.parse(fs.readFileSync(pkg, 'utf8'))
 const config = getConfig()
 
 const protondbCLI = yargs(hideBin(process.argv))

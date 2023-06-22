@@ -18,4 +18,4 @@
 - DONE: Fix engine section on the package.json
 - DONE: Use config module for test check script
 - FIXME: Fix cell display when there are too many data or text to show
-- FIXME: Fix version option
+- DONE: Fix version option
