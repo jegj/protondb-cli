@@ -49,6 +49,7 @@ works, check the [protondb specification](./docs/protondb.md).
 ## How protondb-cli works
 We use the information that you can find out in [ProtonDB web page](https://www.protondb.com/)
  to emulate the HTTP requests, parse and show the results.
+
 ### Limitations
 - Keys, id and urls may change in the future. That is why those kind
  of params can be provided to the CLI. Perhaps in the future there
