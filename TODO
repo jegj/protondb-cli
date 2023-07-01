@@ -20,3 +20,4 @@
 - FIXME: Fix cell display when there are too many data or text to show
 - DONE: Fix version option
 - TODO: Add caching using etags and a local cache
+- TODO: Remove Algoilia data from code
