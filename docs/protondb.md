@@ -5,8 +5,8 @@ provide the calification for the game:
 
 - `algolia.net`
     - Provides the ranking list but needs the following `keys` in the HTTP requests
-      -  `x-alogilia-api-key`: e.g 9ba0e69fb2974316cdaec8f5f257088f
-      -  `x-algilia-application-id`: e.g 94HE6YATEI
+      -  `x-alogilia-api-key`
+      -  `x-algilia-application-id`
     - Return a list of hits, each one of them has a `objectId` which
     is required to get the protondb clasification
 - `protondb.com`
