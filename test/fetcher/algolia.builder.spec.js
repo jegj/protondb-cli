@@ -4,8 +4,8 @@ import { buildBodyRequest, buildHeaderRequest } from '../../lib/fetcher/algolia.
 const qry = 'gta'
 
 const dheaders = {
-  'x-algolia-api-key': '9ba0e69fb2974316cdaec8f5f257088f',
-  'x-algolia-application-id': '94HE6YATEI'
+  'x-algolia-api-key': 'xxxx-yyyyy-zzzz',
+  'x-algolia-application-id': 'S0M3_R4ND0M_ID'
 }
 
 tap.test('buildBodyRequest function must return an object always', (tt) => {
