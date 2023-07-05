@@ -41,9 +41,10 @@
   "license": "GPLv3",
   "dependencies": {
     "blessed": "0.1.81",
-    "chalk": "5.2.0",
+    "chalk": "5.3.0",
+    "lowdb": "6.0.1",
     "node-fetch": "3.3.1",
-    "ora": "6.3.0",
+    "ora": "6.3.1",
     "p-map": "6.0.0",
     "word-wrap": "1.2.3",
     "yargs": "17.7.2"
@@ -58,16 +59,16 @@
   ],
   "devDependencies": {
     "@commitlint/cli": "^17.6.3",
-    "@commitlint/config-conventional": "^17.6.3",
+    "@commitlint/config-conventional": "^17.6.6",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "c8": "^7.13.0",
     "eslint": "^8.40.0",
-    "esmock": "^2.2.2",
+    "esmock": "^2.3.1",
     "husky": "^8.0.3",
     "markdownlint-cli2": "^0.7.1",
     "semantic-release": "^21.0.2",
-    "sinon": "^15.0.4",
+    "sinon": "^15.2.0",
     "snazzy": "^9.0.0",
     "standard": "^17.0.0",
     "tap": "^16.3.4"
