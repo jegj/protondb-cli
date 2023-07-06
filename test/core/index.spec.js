@@ -1,6 +1,7 @@
 import tap from 'tap'
 import { fetchAlgoliaMockedData, fetchProtondbMockedData } from '../mock/index.mock.js'
 import esmock from 'esmock'
+import sinon from 'sinon'
 
 const algoliaUrl = 'https://94he6yatei-dsn.algolia.net/1/indexes/steamdb/query'
 const algoliaApiKey = '9basom4fb297k3Y16cdaec8f5f257088f'
@@ -42,6 +43,19 @@ tap.test('getGamesReport must return an array of results always', async (tt) => 
   } catch (error) {
     tt.fail('error is not expected')
   }
+})
+
+tap.test('getGamesReport must call the cache read method if the cache is a valid object', async (tt) => {
+  tt.plan(1)
+  const core = await esmock('../../lib/core/index.js', {
+    '../../lib/fetcher/index.js': {
+      algoliaFetcher: () => fetchAlgoliaMockedData,
+      protondbFetcher: () => fetchProtondbMockedData
+    }
+  })
+  const cache = { read: sinon.spy() }
+  await core.getGamesReport(options, cache)
+  tt.ok(cache.read.calledOnce, 'cache read method is not being called')
 })
 
 tap.test('getGamesReport must return an array of objects, the merge from algolia call + protondb call', async (tt) => {
