@@ -17,16 +17,17 @@ const mockFetchInvalidCode = async () => {
 
 const etag = 'ee98d63c9d4b7d42725a91260be97daf-ss'
 
-const generateFetchMock = (responseData) => {
+const generateFetchMock = (responseData, e = etag, status = 200) => {
   return async function mockFetchOk () {
     return {
       json: async () => responseData,
       ok: true,
       headers: {
         raw: () => ({
-          etag: [etag]
+          etag: [e]
         })
-      }
+      },
+      status
     }
   }
 }
@@ -121,7 +122,7 @@ tap.test('algoliaFetcher', async (t) => {
 })
 
 tap.test('protondbFetcher', async (t) => {
-  t.plan(10)
+  t.plan(11)
 
   const fetcher = await esmock('../../lib/fetcher/index.js', {
     'node-fetch': generateFetchMock(fetchProtondbMockedData)
@@ -268,5 +269,38 @@ tap.test('protondbFetcher', async (t) => {
     await fetcher.protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries', cache })
     tt.notOk(cache.write.calledOnce, 'cache write is being called on a cache hit')
   })
-  // t.test('protondbFetcher must return the data from the server if there is a cache hit but the server responded with a 200 and also call cache write method with the new data from the server')
+
+  t.test('AAAA protondbFetcher must return the data from the server if there is a cache hit but the server responded with a 200 and also call cache write method with the new data from the server', async tt => {
+    tt.plan(3)
+    const newETag = 'aa23dc3c9d457da272b79126k8le97daf-ss'
+    const cache = {
+      write: sinon.spy(),
+      etags: {
+        1486440: {
+          ...fetchProtondbMockedData, ...{ etag }
+        }
+      } // after read()
+    }
+
+    const mockFetch200Code = async (_url, requestOpts) => {
+      const headers = requestOpts.headers
+      tt.hasProp(headers, 'If-None-Match', 'headers does not have the if-none-match header on a cache hit')
+      tt.equal(headers['If-None-Match'], etag, 'etag does not match on a cache hit')
+      return {
+        json: async () => fetchProtondbMockedData,
+        ok: true,
+        headers: {
+          raw: () => ({
+            etag: [newETag]
+          })
+        },
+        status: 200
+      }
+    }
+    const fetcher = await esmock('../../lib/fetcher/index.js', {
+      'node-fetch': mockFetch200Code
+    })
+    await fetcher.protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries', cache })
+    tt.ok(cache.write.calledOnce, 'cache write is not being called when the server responde a 200 with an etag')
+  })
 })
