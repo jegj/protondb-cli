@@ -66,7 +66,7 @@ const protondbCLI = yargs(hideBin(process.argv))
       coerce: isValidUrl
     }).example([
       ['$0 gta --concurrency 5 --hits 15', 'Search the last 15 like gta using an conccurency of 5']
-    ]).fail(function (msg, err, yargs) {
+    ]).fail(function (msg, _err, yargs) {
       // if (err) throw err // preserve stack
       // console.error(err.stack)
       const errorStyle = chalk.bold.red
