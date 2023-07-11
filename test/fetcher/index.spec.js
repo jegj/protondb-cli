@@ -236,7 +236,9 @@ tap.test('protondbFetcher', async (t) => {
     tt.plan(1)
     const cache = {
       write: sinon.spy(),
-      etags: {} // after read()
+      data: {
+        etags: {} // after read()
+      }
     }
     await fetcher.protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries', cache })
     tt.ok(cache.write.calledOnce, 'cache not being called')
@@ -246,11 +248,13 @@ tap.test('protondbFetcher', async (t) => {
     tt.plan(3)
     const cache = {
       write: sinon.spy(),
-      etags: {
-        1486440: {
-          ...fetchProtondbMockedData, ...{ etag }
+      data: {
+        etags: {
+          1486440: {
+            ...fetchProtondbMockedData, ...{ etag }
+          }
         }
-      } // after read()
+      }
     }
 
     const mockFetch304Code = async (_url, requestOpts) => {
@@ -275,11 +279,13 @@ tap.test('protondbFetcher', async (t) => {
     const newETag = 'aa23dc3c9d457da272b79126k8le97daf-ss'
     const cache = {
       write: sinon.spy(),
-      etags: {
-        1486440: {
-          ...fetchProtondbMockedData, ...{ etag }
+      data: {
+        etags: {
+          1486440: {
+            ...fetchProtondbMockedData, ...{ etag }
+          }
         }
-      } // after read()
+      } // after cache read()
     }
 
     const mockFetch200Code = async (_url, requestOpts) => {
