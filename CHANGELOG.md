@@ -1,3 +1,13 @@
+# [1.6.0](https://github.com/jegj/protondb-cli/compare/v1.5.1...v1.6.0) (2023-07-13)
+
+
+### Features
+
+* add basic support for etag cache ([fa20975](https://github.com/jegj/protondb-cli/commit/fa20975341d89ef00bd88fa2672ad9f40d0a09fa))
+* add cli option to disable cache usage ([e8cdfcb](https://github.com/jegj/protondb-cli/commit/e8cdfcb7aac425d09fc461e64a6818520e164e9c))
+* add if-none-match header for etags ([5b63832](https://github.com/jegj/protondb-cli/commit/5b6383208cdcb40912496524edf0dda2020468d0))
+* add support for a lowdb cache ([ba93864](https://github.com/jegj/protondb-cli/commit/ba938648346e8f8f23be00532401663d5a6055b0))
+
 ## [1.5.1](https://github.com/jegj/protondb-cli/compare/v1.5.0...v1.5.1) (2023-06-22)
 
 
