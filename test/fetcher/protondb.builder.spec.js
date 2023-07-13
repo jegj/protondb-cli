@@ -1,10 +1,10 @@
 import tap from 'tap'
 import { buildHeaderRequest, buildUrl } from '../../lib/fetcher/protondb.builder.js'
 
-const query = 'some game'
+const query = 'skyrim'
 
 tap.test('protondb.builder', (t) => {
-  t.plan(6)
+  t.plan(7)
 
   t.test('buildHeaderRequest function must return an object always', (tt) => {
     tt.plan(1)
@@ -45,6 +45,14 @@ tap.test('protondb.builder', (t) => {
     const headers = buildHeaderRequest(query)
     tt.hasProp(headers, 'referer', 'does not has referer property')
     tt.equal(headers.referer, `https://www.protondb.com/search?q=${query}`, 'referer property is not equal to the protondb search url')
+  })
+
+  t.test('buildHeaderRequest function must return an object with property "If-None-Match" and must but equal to the etag', (tt) => {
+    tt.plan(2)
+    const etag = '686897696a7c876b7e'
+    const headers = buildHeaderRequest(query, etag)
+    tt.hasProp(headers, 'If-None-Match', 'does not has etag property')
+    tt.equal(headers['If-None-Match'], etag)
   })
 })
 
