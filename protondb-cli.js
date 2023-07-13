@@ -64,16 +64,22 @@ const protondbCLI = yargs(hideBin(process.argv))
       description: 'Protondb URL for search game information.',
       default: config.DEFAULT_PROTONDB_URL,
       coerce: isValidUrl
-    }).example([
-      ['$0 gta --concurrency 5 --hits 15', 'Search the last 15 like gta using an conccurency of 5']
-    ]).fail(function (msg, _err, yargs) {
+    }).option('disable_cache', {
+      alias: 'dc',
+      type: 'boolean',
+      description: 'Force protondb-cli to not use the cache',
+      default: false
+    })
+      .example([
+        ['$0 gta --concurrency 5 --hits 15', 'Search the last 15 like gta using an conccurency of 5']
+      ]).fail(function (msg, _err, yargs) {
       // if (err) throw err // preserve stack
       // console.error(err.stack)
-      const errorStyle = chalk.bold.red
-      console.error(errorStyle(msg))
-      console.error(yargs.help())
-      process.exit(1)
-    })
+        const errorStyle = chalk.bold.red
+        console.error(errorStyle(msg))
+        console.error(yargs.help())
+        process.exit(1)
+      })
   }).argv
 
 start(protondbCLI)
