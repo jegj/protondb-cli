@@ -122,7 +122,7 @@ tap.test('algoliaFetcher', async (t) => {
 })
 
 tap.test('protondbFetcher', async (t) => {
-  t.plan(11)
+  t.plan(12)
 
   const fetcher = await esmock('../../lib/fetcher/index.js', {
     'node-fetch': generateFetchMock(fetchProtondbMockedData)
@@ -274,7 +274,7 @@ tap.test('protondbFetcher', async (t) => {
     tt.notOk(cache.write.calledOnce, 'cache write is being called on a cache hit')
   })
 
-  t.test('AAAA protondbFetcher must return the data from the server if there is a cache hit but the server responded with a 200 and also call cache write method with the new data from the server', async tt => {
+  t.test('protondbFetcher must return the data from the server if there is a cache hit but the server responded with a 200 and also call cache write method with the new data from the server', async tt => {
     tt.plan(3)
     const newETag = 'aa23dc3c9d457da272b79126k8le97daf-ss'
     const cache = {
@@ -308,5 +308,37 @@ tap.test('protondbFetcher', async (t) => {
     })
     await fetcher.protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries', cache })
     tt.ok(cache.write.calledOnce, 'cache write is not being called when the server responde a 200 with an etag')
+  })
+
+  t.test('AAAAA protondbFetcher must call the logger.info method when the verbose mode is enabled', async tt => {
+    tt.plan(1)
+    const cache = {
+      write: sinon.spy(),
+      data: {
+        etags: {
+          1486440: {
+            ...fetchProtondbMockedData, ...{ etag }
+          }
+        }
+      }
+    }
+    const mockFetch304Code = async (_url) => {
+      return {
+        ok: false,
+        json: async () => null,
+        status: 304
+      }
+    }
+    const fetcher = await esmock('../../lib/fetcher/index.js', {
+      'node-fetch': mockFetch304Code
+    })
+    const logger = {
+      info: sinon.spy(),
+      warn: sinon.spy()
+    }
+
+    await fetcher.protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries', cache, verbose: true }, logger)
+
+    tt.ok(logger.info.calledOnce, 'on verbose mode the logger.info method is not being called')
   })
 })
