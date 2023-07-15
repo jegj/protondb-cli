@@ -11,8 +11,6 @@
 - DONE: Make a GIF for Readme
 - DONE: Create dockerhub package
 - DONE: Add workflow to deploy gihub repos
-- TODO: Check why on container, gold label is not working on blessed
-- TODO: Add worflow for snap store
 - DONE: Show a better error message when query is null
 - DONE: Add integration workflow (with a cron )to check algolia keys are still valid
 - DONE: Fix engine section on the package.json
@@ -23,4 +21,4 @@
 - DONE: Remove Algolia data from code
 - TODO: Add json cli flag argument to return the data as JSON instead of show console ui
 - TODO: Improve error handling
-- TODO: Add command to clean up cache
+- TODO: Add cli flag to clean up cache
