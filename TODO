@@ -22,3 +22,4 @@
 - TODO: Add json cli flag argument to return the data as JSON instead of show console ui
 - TODO: Improve error handling
 - TODO: Add cli flag to clean up cache
+- TODO: Remove word-wrap dependecy
