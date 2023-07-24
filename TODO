@@ -23,3 +23,4 @@
 - TODO: Improve error handling
 - TODO: Add cli flag to clean up cache
 - TODO: Remove word-wrap dependecy
+- TODO: Check if it is possible to resize the cell/rows on resize event
