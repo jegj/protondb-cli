@@ -1,5 +1,5 @@
 import tap from 'tap'
-import { formatGame, format, formatGameName, formatGameTier, formatGameConfidence, sortGames } from '../../lib/presenter/formatter.js'
+import { formatGame, format, formatGameName, formatGameTier, formatGameConfidence, sortGames, wrapCollection } from '../../lib/presenter/formatter.js'
 import { TAG_TIERS, GAME_NA, TAG_CONFIDENCE } from '../../lib/presenter/formats.js'
 import { mergedGameDataComplete, mergedGameDataUncomplete, mergedGames } from '../mock/index.mock.js'
 import { createMergedGame } from '../factories/index.js'
@@ -268,5 +268,36 @@ tap.test('sortGames', async (t) => {
     const games = [game1, game2, game3, game4, game5, game6, game7, game8, game9, game10, game11]
     const sortedGames = sortGames(games)
     tt.same(sortedGames, [game3, game6, game1, game2, game4, game5, game11, game7, game8, game9, game10])
+  })
+})
+
+tap.test('wrapCollection', async t => {
+  t.plan(3)
+
+  t.test('wrapCollection must throw an error if the collection is not an Array', (tt) => {
+    tt.plan(2)
+    try {
+      const collection = 'no a collection'
+      wrapCollection(collection, 10)
+      tt.fail('error is expected')
+    } catch (error) {
+      tt.type(error, Error)
+      tt.match(error.message, 'collection must be an array')
+    }
+  })
+
+  t.test('wrapCollection must return an array with a single element if the item concatenated length together is lower than the width', tt => {
+    tt.plan(2)
+    const collection = ['Tag 1', 'Tag 2', 'Tag 3', 'Tag 4']
+    const wrappedCollection = wrapCollection(collection, 30)
+    tt.ok(Array.isArray(wrappedCollection))
+    tt.equal(wrappedCollection.length, 1, 'wrappedCollection has more than one item')
+  })
+
+  t.test('wrapCollection must return an array with more than one element if the collection concatenated length is higher than the fixed width', tt => {
+    tt.plan(1)
+    const collection = ['Tag 1', 'Tag 2', 'Tag 3', 'Tag 4', 'Tag 5', 'Tag 6', 'Tag 7']
+    const wrappedCollection = wrapCollection(collection, 30)
+    tt.equal(wrappedCollection.length, 2, 'wrappedCollection does not have the correct length')
   })
 })
