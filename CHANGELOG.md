@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/jegj/protondb-cli/compare/v1.6.0...v1.7.0) (2023-07-27)
+
+
+### Features
+
+* improve display view ([ccd53f4](https://github.com/jegj/protondb-cli/commit/ccd53f4dde212febd066c211538fc8b06608c5f0))
+
 # [1.6.0](https://github.com/jegj/protondb-cli/compare/v1.5.1...v1.6.0) (2023-07-13)
 
 
