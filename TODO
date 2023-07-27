@@ -10,12 +10,12 @@
 - DONE: Add select event on list for display more game information
 - DONE: Make a GIF for Readme
 - DONE: Create dockerhub package
-- DONE: Add workflow to deploy gihub repos
+- DONE: Add workflow to deploy github repos
 - DONE: Show a better error message when query is null
 - DONE: Add integration workflow (with a cron )to check algolia keys are still valid
 - DONE: Fix engine section on the package.json
 - DONE: Use config module for test check script
-- FIXME: Fix cell display when there are too many data or text to show
+- DONE: Fix cell display when there are too many data or text to show
 - DONE: Fix version option
 - DONE: Add caching using etags
 - DONE: Remove Algolia data from code
@@ -24,3 +24,4 @@
 - TODO: Add cli flag to clean up cache
 - DONE: Remove word-wrap dependecy
 - TODO: Check if it is possible to resize the cell/rows on resize event
+- TODO: One cache call instead of several
