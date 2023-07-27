@@ -48,9 +48,9 @@ provide the calification for the game:
                                                                                              }
 ```
 
-## Caching (TODO)
+## Caching
 
-ProtonDB use Etags for the resource which create a opportunity for caching resource from the ProtonDB API. The idea is simple, store the resource by Etag an objectId in a local file and send it in the request and analyze the response.
+ProtonDB use Etags for the resources which create a opportunity for caching resource from the ProtonDB API. The idea is simple, store the resource by Etag an objectId in a local file(`~/.config`) and send it in the request
 
 Example of request using Etag in `If-None-Match` header
 
@@ -71,5 +71,6 @@ curl --location --request GET 'https://www.protondb.com/api/v1/reports/summaries
 --header 'user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36' \
 --header 'If-None-Match: "01b384c6f71d9a2f86a1bddd203a7397-ssl"'
 ```
+TODO:
 
-Additionally, a local small cache with a duration of seconds to avoid requests at all to the protonDB API
+- Add a new cache layer with a duration of seconds to avoid send the HTTP request at all
