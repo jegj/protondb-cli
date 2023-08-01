@@ -3,7 +3,7 @@
 import yargs from 'yargs/yargs'
 import { hideBin } from 'yargs/helpers'
 import start from './lib/process/index.js'
-import { isValidUrl, isValidGameName } from './lib/utils.js'
+import { isValidGameName } from './lib/utils.js'
 import chalk from 'chalk'
 import getConfig from './lib/config/index.js'
 import fs from 'fs'
@@ -42,28 +42,6 @@ const protondbCLI = yargs(hideBin(process.argv))
       type: 'number',
       description: 'Limit the concurrency for the search',
       default: config.DEFAULT_PROTONDB_CLI_CONCURRENCY
-    }).option('algolia_query_url', {
-      alias: 'aqu',
-      type: 'string',
-      description: 'Algolia main URL for the search.',
-      default: config.DEFAULT_ALGOLIA_QUERY_URL,
-      coerce: isValidUrl
-    }).option('algolia_api_key', {
-      alias: 'aak',
-      type: 'string',
-      description: 'Algolia API key.',
-      default: Buffer.from(config.DEFAULT_X_ALGOLIA_API_KEY, 'base64').toString('utf-8')
-    }).option('algolia_application_id', {
-      alias: 'aai',
-      type: 'string',
-      description: 'Algolia application id.',
-      default: Buffer.from(config.DEFAULT_X_ALGOLIA_APPLICATION_ID, 'base64').toString('utf-8')
-    }).option('protondb_url', {
-      alias: 'pu',
-      type: 'string',
-      description: 'Protondb URL for search game information.',
-      default: config.DEFAULT_PROTONDB_URL,
-      coerce: isValidUrl
     }).option('disable_cache', {
       alias: 'dc',
       type: 'boolean',
@@ -71,7 +49,7 @@ const protondbCLI = yargs(hideBin(process.argv))
       default: false
     })
       .example([
-        ['$0 gta --concurrency 5 --hits 15', 'Search the last 15 like gta using an conccurency of 5']
+        ['$0 gta --concurrency 5 --hits 15', 'Search the last 15 like gta using a conccurency of 5']
       ]).fail(function (msg, _err, yargs) {
       // if (err) throw err // preserve stack
       // console.error(err.stack)
