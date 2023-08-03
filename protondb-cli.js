@@ -18,14 +18,12 @@ const config = getConfig()
 
 const protondbCLI = yargs(hideBin(process.argv))
   .scriptName('protondb-cli')
-  .env('PROTONDB_CLI')
   .version(info.version)
   .usage('$0 [game]', 'Search for games based on a key word and show their protondb compatability, score and any other information related', (yargs) => {
     yargs.positional('game', {
       describe: 'Game\'s name.',
       type: 'string',
       default: null,
-      defaultDescription: 'null. protondb-cli Use STDIN by default',
       normalize: true,
       coerce: isValidGameName
     }).option('verbose', {
@@ -45,14 +43,14 @@ const protondbCLI = yargs(hideBin(process.argv))
     }).option('disable_cache', {
       alias: 'dc',
       type: 'boolean',
-      description: 'Force protondb-cli to not use the cache',
+      description: 'Force protondb-cli not to use the cache',
       default: false
     })
       .example([
         ['$0 gta --concurrency 5 --hits 15', 'Search the last 15 like gta using a conccurency of 5']
       ]).fail(function (msg, _err, yargs) {
-      // if (err) throw err // preserve stack
-      // console.error(err.stack)
+        // if (err) throw err // preserve stack
+        // console.error(err.stack)
         const errorStyle = chalk.bold.red
         console.error(errorStyle(msg))
         console.error(yargs.help())
