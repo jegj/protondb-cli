@@ -27,3 +27,4 @@
 - TODO: One cache call instead of several
 - DONE: Evaluate removing algolia query url, algolia api key and algolia application id option
 - TODO: Research telegram bot
+- TODO: Change default value for concurrency
