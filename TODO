@@ -20,7 +20,6 @@
 - DONE: Add caching using etags
 - DONE: Remove Algolia data from code
 - TODO: Add json cli flag argument to return the data as JSON instead of show console ui
-- TODO: Improve error handling
 - TODO: Add cli flag to clean up cache
 - DONE: Remove word-wrap dependecy
 - TODO: Check if it is possible to resize the cell/rows on resize event
