@@ -9,12 +9,15 @@ import getConfig from './lib/config/index.js'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import os from 'os'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const pkg = path.join(__dirname, 'package.json')
 const info = JSON.parse(fs.readFileSync(pkg, 'utf8'))
 const config = getConfig()
+
+const DEFAULT_PROTONDB_CLI_CONCURRENCY = os.cpus().length
 
 const protondbCLI = yargs(hideBin(process.argv))
   .scriptName('protondb-cli')
@@ -39,7 +42,7 @@ const protondbCLI = yargs(hideBin(process.argv))
       alias: 'c',
       type: 'number',
       description: 'Limit the concurrency for the search',
-      default: config.DEFAULT_PROTONDB_CLI_CONCURRENCY
+      default: DEFAULT_PROTONDB_CLI_CONCURRENCY
     }).option('disable_cache', {
       alias: 'dc',
       type: 'boolean',
