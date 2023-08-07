@@ -48,6 +48,11 @@ const protondbCLI = yargs(hideBin(process.argv))
       type: 'boolean',
       description: 'Force protondb-cli not to use the cache',
       default: false
+    }).option('clear_cache', {
+      alias: 'cc',
+      type: 'boolean',
+      description: 'Clean up the local cache',
+      default: false
     })
       .example([
         ['$0 gta --concurrency 5 --hits 15', 'Search the last 15 like gta using a conccurency of 5']
