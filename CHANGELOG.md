@@ -1,3 +1,14 @@
+# [1.8.0](https://github.com/jegj/protondb-cli/compare/v1.7.0...v1.8.0) (2023-08-07)
+
+
+### Features
+
+* add option to clean up local cache ([9158281](https://github.com/jegj/protondb-cli/commit/91582817720918999d848795715a53c74027a4ca))
+* remove env var for the command ([d37d1cd](https://github.com/jegj/protondb-cli/commit/d37d1cdc1dcfc2ac6263d4f1017952e62b9da1b2))
+* remove url options and fix typo ([adc55c8](https://github.com/jegj/protondb-cli/commit/adc55c847319117ed800d380bbb6b5ae749e88f5))
+* update dependecies and remove audit warnings ([e1ce02e](https://github.com/jegj/protondb-cli/commit/e1ce02e93eabf74d5b5148a8e7e9b027c4267a30))
+* use cpu number as default concurrency ([8c05c3a](https://github.com/jegj/protondb-cli/commit/8c05c3a68abaad348eb7b4dc8f03884c52c4932c))
+
 # [1.7.0](https://github.com/jegj/protondb-cli/compare/v1.6.0...v1.7.0) (2023-07-27)
 
 
