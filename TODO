@@ -27,3 +27,4 @@
 - DONE: Evaluate removing algolia query url, algolia api key and algolia application id option
 - TODO: Research telegram bot
 - DONE: Change default value for concurrency
+- TODO: update github actions e.g docker/build-push-action@v4
