@@ -22,7 +22,6 @@
 - TODO: Add json cli flag argument to return the data as JSON instead of show console ui
 - DONE: Add cli flag to clean up cache
 - DONE: Remove word-wrap dependecy
-- TODO: Check if it is possible to resize the cell/rows on resize event
 - TODO: One cache call instead of several
 - DONE: Evaluate removing algolia query url, algolia api key and algolia application id option
 - TODO: Research telegram bot
