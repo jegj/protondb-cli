@@ -30,3 +30,4 @@
 - TODO: Add github action workflow to check response from protondb and change the the frequency
 - TODO: Find a way to debug the CLI better, displaying the console message does not work sometimes
 - TODO: Change GIF image
+- TODO: Research new url available: https://www.protondb.com/proxy/steam/api/appdetails/?appids=72850
