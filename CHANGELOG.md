@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/jegj/protondb-cli/compare/v1.8.0...v1.8.1) (2023-09-23)
+
+
+### Bug Fixes
+
+* display game, protonDb changed API JSON response ([1f5c914](https://github.com/jegj/protondb-cli/commit/1f5c914cbbb514cdcce442184bde61d589338780))
+
 # [1.8.0](https://github.com/jegj/protondb-cli/compare/v1.7.0...v1.8.0) (2023-08-07)
 
 
