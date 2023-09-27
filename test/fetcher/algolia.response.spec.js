@@ -23,11 +23,30 @@ tap.test('checkAlgoliaResponse function must return an error if a game from the 
         {
           lastUpdated: 1653580973,
           name: 'FIFA 22',
-          oslist: [Array],
+          oslist: ['Windows', 'Steam Deck Unsupported'],
           userScore: 79.45,
           objectID: '1506830'
         }
       ]
     })
   }, new Error('algolia "hit" doesnt have the property "releaseYear"'), 'algolia "hit" doesnt have the property "releaseYear"')
+})
+
+tap.test('checkAlgoliaResponse function must throw an error if the oslist is not a valid array', (tt) => {
+  tt.plan(1)
+  tt.throws(() => {
+    checkAlgoliaResponse({
+      hits: [
+        {
+          lastUpdated: 1653580973,
+          name: 'FIFA 22',
+          oslist: 'Windows',
+          userScore: 79.45,
+          objectID: '1506830',
+          releaseYear: 2021
+
+        }
+      ]
+    })
+  }, new Error('algolia "hit" doesnt have a valid "oslist" property'), 'algolia "hit" doesnt have a valid "oslist" property')
 })
