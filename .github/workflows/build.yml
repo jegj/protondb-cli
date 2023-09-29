@@ -45,7 +45,7 @@ jobs:
 
       - run: npm test
 
-  keys_check:
+  keys_api_check:
     runs-on: ubuntu-latest
     needs: [lint, tests]
 
@@ -59,7 +59,7 @@ jobs:
 
       - run: npm ci
 
-      - run: npm run test:keys
+      - run: npm run test:response
 
   release:
     name: Semantic release
