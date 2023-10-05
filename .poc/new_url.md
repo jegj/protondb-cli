@@ -4,10 +4,10 @@
 
 ## Possible properties
 
-- required_age
 - developers
 - publishers
 - genres
+- recommendations
 ```json
 {
   "72850": {
