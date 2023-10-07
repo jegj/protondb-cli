@@ -1,7 +1,7 @@
 import tap from 'tap'
 import esmock from 'esmock'
 import sinon from 'sinon'
-import { fetchAlgoliaMockedData, fetchProtondbMockedData } from '../mock/index.mock.js'
+import { fetchAlgoliaMockedData, fetchProtondbMockedData, protondbProxyMock } from '../mock/index.mock.js'
 
 const mockFetchErr = async (url) => {
   throw new Error('unknown url: ' + url)
@@ -340,5 +340,74 @@ tap.test('protondbFetcher', async (t) => {
     await fetcher.protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries', cache, verbose: true }, logger)
 
     tt.ok(logger.info.calledOnce, 'on verbose mode the logger.info method is not being called')
+  })
+})
+
+tap.test('protondbProxyFetcher', async (t) => {
+  t.plan(6)
+
+  const fetcher = await esmock(
+    '../../lib/fetcher/index.js',
+    { 'node-fetch': generateFetchMock(protondbProxyMock) }
+  )
+
+  t.test('protondbProxyFetcher must throw an error if the appid(objectId) is not provided', async tt => {
+    tt.plan(2)
+    try {
+      await fetcher.protondbProxyFetcher()
+      tt.fail('error is expected')
+    } catch (error) {
+      tt.type(error, Error)
+      tt.match(error.message, 'appid is required')
+    }
+  })
+
+  t.test('protondbProxyFetcher must throw an error if the url is not provided', async tt => {
+    tt.plan(2)
+    try {
+      await fetcher.protondbProxyFetcher({ appid: 72850 })
+      tt.fail('error is expected')
+    } catch (error) {
+      tt.type(error, Error)
+      tt.match(error.message, 'url is required')
+    }
+  })
+
+  t.test('protondbProxyFetcher must return null if there is a problem requesting to protondbProxy API', async tt => {
+    tt.plan(1)
+    const fetcher = await esmock('../../lib/fetcher/index.js', {
+      'node-fetch': mockFetchErr
+    })
+    const result = await fetcher.protondbProxyFetcher({ appid: 72850, url: 'https://www.protondb.com/proxy/steam/api/appdetails' })
+    tt.equal(result, null, 'result is not null')
+  })
+
+  t.test('protondbProxyFetcher must return null if protondbProxy API return an invalid http code for the initial fetch', async tt => {
+    tt.plan(1)
+    const fetcher = await esmock('../../lib/fetcher/index.js', {
+      'node-fetch': mockFetchInvalidCode
+    })
+    const result = await fetcher.protondbProxyFetcher({ appid: 72850, url: 'https://www.protondb.com/proxy/steam/api/appdetails' })
+    tt.equal(result, null, 'result is not null')
+  })
+
+  t.test('protondbProxyFetcher  must return an object if there is not a problem with the protondbProxy API', async tt => {
+    tt.plan(1)
+    const result = await fetcher.protondbProxyFetcher({ appid: 72850, url: 'https://www.protondb.com/proxy/steam/api/appdetails' })
+    tt.hasProp(result, '72850', 'does not has the appid property')
+  })
+
+  t.test('protondbProxyFetcher must return null if there is problem requesting data to protondbProxy API and must logged it when verbose is on', async tt => {
+    tt.plan(2)
+    const fetcher = await esmock('../../lib/fetcher/index.js', {
+      'node-fetch': mockFetchErr
+    })
+    const logger = {
+      warn: sinon.spy()
+    }
+
+    const result = await fetcher.protondbProxyFetcher({ appid: 72850, url: 'https://www.protondb.com/proxy/steam/api/appdetails', verbose: true }, logger)
+    tt.ok(logger.warn.calledOnce, 'on verbose mode the logger.warn method is not being called')
+    tt.equal(result, null, 'result is not null')
   })
 })
