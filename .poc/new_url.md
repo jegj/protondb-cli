@@ -4,8 +4,6 @@
 
 ## Possible properties
 
-- developers
-- publishers
 - genres
 - recommendations
 ```json

@@ -22,7 +22,19 @@ export const fetchAlgoliaMockedData = {
       releaseYear: 2020,
       tags: [Array],
       objectID: '1313860'
+    },
+    {
+      lastUpdated: 1623346705,
+      name: 'The Elder Scrolls V: Skyrim',
+      oslist: [Array],
+      userScore: 75.22,
+      followers: 59900,
+      technologies: [Array],
+      releaseYear: 2020,
+      tags: [Array],
+      objectID: '72850'
     }
+
   ],
   exhaustiveFacetsCount: true,
   exhaustiveNbHits: true,
