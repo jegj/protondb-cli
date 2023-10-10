@@ -23,7 +23,7 @@
     "test:response": "npm start --prefix ./lib/fetcher",
     "unit": "tap",
     "unit:junit": "tap-mocha-reporter xunit < out.tap > test/junit-testresults.xml",
-    "unit:report": "tap --cov --coverage-report=html --coverage-report=cobertura | tee out.tap",
+    "unit:report": "tap report --coverage-report=html --coverage-report=cobertura | tee out.tap",
     "prepare": "node -e \"try { require('husky').install() } catch (e) {if (e.code !== 'MODULE_NOT_FOUND') throw e}\""
   },
   "repository": {
@@ -61,7 +61,6 @@
     "@commitlint/config-conventional": "^17.7.0",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
-    "c8": "^8.0.1",
     "eslint": "^8.51.0",
     "esmock": "^2.5.2",
     "husky": "^8.0.3",
