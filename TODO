@@ -22,11 +22,11 @@
 - TODO: Add json cli flag argument to return the data as JSON instead of show console ui
 - DONE: Add cli flag to clean up cache
 - DONE: Remove word-wrap dependecy
-- TODO: One cache call instead of several
+- DONE: One cache write call instead of several
 - DONE: Evaluate removing algolia query url, algolia api key and algolia application id option
 - DONE: Change default value for concurrency
 - DONE: update github actions e.g docker/build-push-action@v4
-- TODO: Add github action workflow to check response from protondb and change the the frequency
-- TODO: Find a way to debug the CLI better, displaying the console message does not work sometimes
-- TODO: Change GIF image
+- DONE: Add github action workflow to check response from protondb and change the the frequency
+- DONE: Find a way to debug the CLI better, displaying the console message does not work sometimes
+- DONE: Change GIF image
 - TODO: Research new url available: https://www.protondb.com/proxy/steam/api/appdetails/?appids=72850

@@ -1,7 +1,7 @@
 import tap from 'tap'
 import esmock from 'esmock'
 import sinon from 'sinon'
-import { fetchAlgoliaMockedData, fetchProtondbMockedData } from '../mock/index.mock.js'
+import { fetchAlgoliaMockedData, fetchProtondbMockedData, protondbProxyMock } from '../mock/index.mock.js'
 
 const mockFetchErr = async (url) => {
   throw new Error('unknown url: ' + url)
@@ -232,7 +232,7 @@ tap.test('protondbFetcher', async (t) => {
     }
   })
 
-  t.test('protondbFetcher must return the data from the server if there is a cache miss and call the cache write method with the target objectId and save the game data with a new etag property', async tt => {
+  t.test('protondbFetcher must return the data from the server if there is a cache miss and add a new item in the cache for future writing', async tt => {
     tt.plan(1)
     const cache = {
       write: sinon.spy(),
@@ -241,7 +241,7 @@ tap.test('protondbFetcher', async (t) => {
       }
     }
     await fetcher.protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries', cache })
-    tt.ok(cache.write.calledOnce, 'cache not being called')
+    tt.ok(Object.prototype.hasOwnProperty.call(cache.data.etags, '1486440'), 'cache must have a new entry from the server')
   })
 
   t.test('protondbFetcher must return the data from the cache if there is a cache hit and the server responded 304 with the respective If-None-Match header', async tt => {
@@ -274,7 +274,7 @@ tap.test('protondbFetcher', async (t) => {
     tt.notOk(cache.write.calledOnce, 'cache write is being called on a cache hit')
   })
 
-  t.test('protondbFetcher must return the data from the server if there is a cache hit but the server responded with a 200 and also call cache write method with the new data from the server', async tt => {
+  t.test('protondbFetcher must return the data from the server if there is a cache hit but the server responded with a 200 and also add a new item in the cache', async tt => {
     tt.plan(3)
     const newETag = 'aa23dc3c9d457da272b79126k8le97daf-ss'
     const cache = {
@@ -307,10 +307,10 @@ tap.test('protondbFetcher', async (t) => {
       'node-fetch': mockFetch200Code
     })
     await fetcher.protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries', cache })
-    tt.ok(cache.write.calledOnce, 'cache write is not being called when the server responde a 200 with an etag')
+    tt.equal(cache.data.etags['1486440'].etag, newETag, 'cache must have the new etag in the cache')
   })
 
-  t.test('AAAAA protondbFetcher must call the logger.info method when the verbose mode is enabled', async tt => {
+  t.test('protondbFetcher must call the logger.info method when the verbose mode is enabled', async tt => {
     tt.plan(1)
     const cache = {
       write: sinon.spy(),
@@ -340,5 +340,74 @@ tap.test('protondbFetcher', async (t) => {
     await fetcher.protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries', cache, verbose: true }, logger)
 
     tt.ok(logger.info.calledOnce, 'on verbose mode the logger.info method is not being called')
+  })
+})
+
+tap.test('protondbProxyFetcher', async (t) => {
+  t.plan(6)
+
+  const fetcher = await esmock(
+    '../../lib/fetcher/index.js',
+    { 'node-fetch': generateFetchMock(protondbProxyMock) }
+  )
+
+  t.test('protondbProxyFetcher must throw an error if the appid(objectId) is not provided', async tt => {
+    tt.plan(2)
+    try {
+      await fetcher.protondbProxyFetcher()
+      tt.fail('error is expected')
+    } catch (error) {
+      tt.type(error, Error)
+      tt.match(error.message, 'appid is required')
+    }
+  })
+
+  t.test('protondbProxyFetcher must throw an error if the url is not provided', async tt => {
+    tt.plan(2)
+    try {
+      await fetcher.protondbProxyFetcher({ appid: 72850 })
+      tt.fail('error is expected')
+    } catch (error) {
+      tt.type(error, Error)
+      tt.match(error.message, 'url is required')
+    }
+  })
+
+  t.test('protondbProxyFetcher must return null if there is a problem requesting to protondbProxy API', async tt => {
+    tt.plan(1)
+    const fetcher = await esmock('../../lib/fetcher/index.js', {
+      'node-fetch': mockFetchErr
+    })
+    const result = await fetcher.protondbProxyFetcher({ appid: 72850, url: 'https://www.protondb.com/proxy/steam/api/appdetails' })
+    tt.equal(result, null, 'result is not null')
+  })
+
+  t.test('protondbProxyFetcher must return null if protondbProxy API return an invalid http code for the initial fetch', async tt => {
+    tt.plan(1)
+    const fetcher = await esmock('../../lib/fetcher/index.js', {
+      'node-fetch': mockFetchInvalidCode
+    })
+    const result = await fetcher.protondbProxyFetcher({ appid: 72850, url: 'https://www.protondb.com/proxy/steam/api/appdetails' })
+    tt.equal(result, null, 'result is not null')
+  })
+
+  t.test('protondbProxyFetcher  must return an object if there is not a problem with the protondbProxy API', async tt => {
+    tt.plan(1)
+    const result = await fetcher.protondbProxyFetcher({ appid: 72850, url: 'https://www.protondb.com/proxy/steam/api/appdetails' })
+    tt.hasProp(result, '72850', 'does not has the appid property')
+  })
+
+  t.test('protondbProxyFetcher must return null if there is problem requesting data to protondbProxy API and must logged it when verbose is on', async tt => {
+    tt.plan(2)
+    const fetcher = await esmock('../../lib/fetcher/index.js', {
+      'node-fetch': mockFetchErr
+    })
+    const logger = {
+      warn: sinon.spy()
+    }
+
+    const result = await fetcher.protondbProxyFetcher({ appid: 72850, url: 'https://www.protondb.com/proxy/steam/api/appdetails', verbose: true }, logger)
+    tt.ok(logger.warn.calledOnce, 'on verbose mode the logger.warn method is not being called')
+    tt.equal(result, null, 'result is not null')
   })
 })

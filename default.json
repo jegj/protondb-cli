@@ -3,5 +3,6 @@
   "DEFAULT_ALGOLIA_QUERY_URL": "https://94he6yatei-dsn.algolia.net/1/indexes/steamdb/query",
   "DEFAULT_X_ALGOLIA_API_KEY": "OWJhMGU2OWZiMjk3NDMxNmNkYWVjOGY1ZjI1NzA4OGY=",
   "DEFAULT_X_ALGOLIA_APPLICATION_ID": "OTRIRTZZQVRFSQ==",
-  "DEFAULT_PROTONDB_URL": "https://www.protondb.com/api/v1/reports/summaries"
+  "DEFAULT_PROTONDB_URL": "https://www.protondb.com/api/v1/reports/summaries",
+  "DEFAULT_PROTONDBPROXY_URL": "https://www.protondb.com/proxy/steam/api/appdetails"
 }

@@ -5,13 +5,12 @@
   "description": "CLI for the protondb project",
   "main": "protondb-cli.js",
   "engines": {
-    "node": ">=16.x",
+    "node": ">=18.x",
     "npm": ">=8.19.2"
   },
   "scripts": {
     "start": "NODE_ENV=development node ./protondb-cli.js",
     "debug": "NODE_PATH=. node --inspect-brk=0.0.0.0:9229 ./protondb-cli.js",
-    "coverage": "NODE_ENV=testing NODE_PATH=lib jest test --coverage",
     "lint": "npm run lint:standard",
     "lint:fix": "standard --fix",
     "lint:markdown": "markdownlint-cli2",
@@ -21,9 +20,10 @@
     "test:report": "npm run lint && npm run unit:report",
     "test:watch": "npm run unit -- -w --no-coverage-report -R terse",
     "test:keys": "npm start --prefix ./lib/core",
-    "unit": "c8 tap",
+    "test:response": "npm start --prefix ./lib/fetcher",
+    "unit": "tap",
     "unit:junit": "tap-mocha-reporter xunit < out.tap > test/junit-testresults.xml",
-    "unit:report": "tap --cov --coverage-report=html --coverage-report=cobertura | tee out.tap",
+    "unit:report": "tap report --coverage-report=html --coverage-report=cobertura | tee out.tap",
     "prepare": "node -e \"try { require('husky').install() } catch (e) {if (e.code !== 'MODULE_NOT_FOUND') throw e}\""
   },
   "repository": {
@@ -57,20 +57,19 @@
     "package.json"
   ],
   "devDependencies": {
-    "@commitlint/cli": "^17.6.7",
-    "@commitlint/config-conventional": "^17.6.7",
+    "@commitlint/cli": "^17.7.2",
+    "@commitlint/config-conventional": "^17.7.0",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
-    "c8": "^7.13.0",
-    "eslint": "^8.46.0",
-    "esmock": "^2.3.5",
+    "eslint": "^8.51.0",
+    "esmock": "^2.5.2",
     "husky": "^8.0.3",
-    "markdownlint-cli2": "^0.7.1",
-    "semantic-release": "^21.0.2",
-    "sinon": "^15.2.0",
+    "markdownlint-cli2": "^0.10.0",
+    "semantic-release": "^22.0.5",
+    "sinon": "^16.1.0",
     "snazzy": "^9.0.0",
     "standard": "^17.0.0",
-    "tap": "^16.3.8"
+    "tap": "^18.4.5"
   },
   "publishConfig": {
     "access": "public"

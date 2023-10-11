@@ -1,9 +1,9 @@
-name: "Keys check"
+name: "External APIs check"
+description: "Send request to the external APIs to check the keys and the responses"
 
 on:
   schedule:
-    - cron: "30 1 1,15 * *"
-
+    - cron: "0 0 * * 0"
 
 jobs:
   keys_check:
@@ -19,4 +19,4 @@ jobs:
 
       - run: npm ci
 
-      - run: npm run test:keys
+      - run: npm run test:response
