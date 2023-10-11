@@ -1,3 +1,15 @@
+# [1.9.0](https://github.com/jegj/protondb-cli/compare/v1.8.1...v1.9.0) (2023-10-11)
+
+
+### Features
+
+* check algolia response and add basic script for checking ([93a2de5](https://github.com/jegj/protondb-cli/commit/93a2de55e602e6e938d5483df0a92b05bbaac618))
+* check protondb response ([be40289](https://github.com/jegj/protondb-cli/commit/be402894dcc913ce7ff7636744273c1e7040a408))
+* improve cache write ([df5eece](https://github.com/jegj/protondb-cli/commit/df5eece9e58efbebe046e0ec1b6e7cbb976496c0))
+* include more data from a new API ([d7eb8af](https://github.com/jegj/protondb-cli/commit/d7eb8af643ec0573cc5870719ba453e243ff7a72))
+* remove followers property ([2e4fe0f](https://github.com/jegj/protondb-cli/commit/2e4fe0f14af015d70f33cb84b904f18be07827e0))
+* rename props ([1ed274f](https://github.com/jegj/protondb-cli/commit/1ed274f4846769b936c6afe906c8630da44762ac))
+
 ## [1.8.1](https://github.com/jegj/protondb-cli/compare/v1.8.0...v1.8.1) (2023-09-23)
 
 
