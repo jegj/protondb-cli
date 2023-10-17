@@ -1,5 +1,4 @@
 name: "External APIs check"
-description: "Send request to the external APIs to check the keys and the responses"
 
 on:
   schedule:
