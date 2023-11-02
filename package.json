@@ -42,7 +42,7 @@
   "dependencies": {
     "blessed": "0.1.81",
     "chalk": "5.3.0",
-    "lowdb": "6.0.1",
+    "lowdb": "^6.1.1",
     "node-fetch": "3.3.2",
     "ora": "7.0.1",
     "p-map": "6.0.0",
@@ -57,19 +57,19 @@
     "package.json"
   ],
   "devDependencies": {
-    "@commitlint/cli": "^17.7.2",
-    "@commitlint/config-conventional": "^17.7.0",
+    "@commitlint/cli": "^18.2.0",
+    "@commitlint/config-conventional": "^18.1.0",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
-    "eslint": "^8.51.0",
-    "esmock": "^2.5.2",
+    "eslint": "^8.52.0",
+    "esmock": "^2.5.8",
     "husky": "^8.0.3",
     "markdownlint-cli2": "^0.10.0",
-    "semantic-release": "^22.0.5",
-    "sinon": "^16.1.0",
+    "semantic-release": "^22.0.6",
+    "sinon": "^17.0.1",
     "snazzy": "^9.0.0",
     "standard": "^17.0.0",
-    "tap": "^18.4.5"
+    "tap": "^18.5.4"
   },
   "publishConfig": {
     "access": "public"
