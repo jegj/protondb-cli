@@ -40,5 +40,6 @@ Describe the support of the community under the tier
 ## Using Docker
 
 ```sh
+$ docker pull jegj/protondb-cli
 $ docker run -it --rm jegj/protondb-cli fifa
 ```

@@ -2,6 +2,8 @@
 
 `https://www.protondb.com/proxy/steam/api/appdetails/?appids=72850`
 
+https://wiki.teamfortress.com/wiki/User:RJackson/StorefrontAPI
+
 ## Possible properties
 
 - genres
