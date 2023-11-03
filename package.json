@@ -69,7 +69,7 @@
     "sinon": "^17.0.1",
     "snazzy": "^9.0.0",
     "standard": "^17.0.0",
-    "tap": "^18.5.4"
+    "tap": "^18.5.5"
   },
   "publishConfig": {
     "access": "public"
