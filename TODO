@@ -30,3 +30,5 @@
 - DONE: Change GIF image
 - DONE: Research new url available: https://www.protondb.com/proxy/steam/api/appdetails/?appids=72850
 - TODO: Cache for http request responses
+- TODO: Write cache module
+- TODO: Use https://github.com/nodejs/undici/tree/main instead of node-fetch
