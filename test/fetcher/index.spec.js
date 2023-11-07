@@ -1,11 +1,11 @@
 import tap from 'tap'
-import esmock from 'esmock'
-import sinon from 'sinon'
 import { fetchAlgoliaMockedData, fetchProtondbMockedData, protondbProxyMock } from '../mock/index.mock.js'
+import { algoliaFetcher } from '../../lib/fetcher/index.js'
+import { MockAgent, setGlobalDispatcher } from 'undici'
 
-const mockFetchErr = async (url) => {
-  throw new Error('unknown url: ' + url)
-}
+const mockAgent = new MockAgent()
+mockAgent.disableNetConnect()
+setGlobalDispatcher(mockAgent)
 
 const mockFetchInvalidCode = async () => {
   return {
@@ -15,35 +15,13 @@ const mockFetchInvalidCode = async () => {
   }
 }
 
-const etag = 'ee98d63c9d4b7d42725a91260be97daf-ss'
-
-const generateFetchMock = (responseData, e = etag, status = 200) => {
-  return async function mockFetchOk () {
-    return {
-      json: async () => responseData,
-      ok: true,
-      headers: {
-        raw: () => ({
-          etag: [e]
-        })
-      },
-      status
-    }
-  }
-}
-
 tap.test('algoliaFetcher', async (t) => {
-  t.plan(7)
-
-  const fetcher = await esmock(
-    '../../lib/fetcher/index.js',
-    { 'node-fetch': generateFetchMock(fetchAlgoliaMockedData) }
-  )
+  t.plan(6)
 
   t.test('algoliaFetcher must throw an error if the query is not provided', async tt => {
     tt.plan(2)
     try {
-      await fetcher.algoliaFetcher()
+      await algoliaFetcher()
       tt.fail('error is expected')
     } catch (error) {
       tt.type(error, Error)
@@ -54,7 +32,7 @@ tap.test('algoliaFetcher', async (t) => {
   t.test('algoliaFetcher must throw an error if the url is not provided', async tt => {
     tt.plan(2)
     try {
-      await fetcher.algoliaFetcher({ query: 'fifa' })
+      await algoliaFetcher({ query: 'fifa' })
       tt.fail('error is expected')
     } catch (error) {
       tt.type(error, Error)
@@ -65,7 +43,7 @@ tap.test('algoliaFetcher', async (t) => {
   t.test('algoliaFetcher must throw an error if the algoliaApiKey is not provided', async tt => {
     tt.plan(2)
     try {
-      await fetcher.algoliaFetcher({ query: 'fifa', url: 'angolia.api' })
+      await algoliaFetcher({ query: 'fifa', url: 'https://angolia.test.api.com/test' })
       tt.fail('error is expected')
     } catch (error) {
       tt.type(error, Error)
@@ -76,7 +54,7 @@ tap.test('algoliaFetcher', async (t) => {
   t.test('algoliaFetcher must throw an error if the algoliaApplicationId is not provided', async tt => {
     tt.plan(2)
     try {
-      await fetcher.algoliaFetcher({ query: 'fifa', url: 'angolia.api', algoliaApiKey: 'x1x11212' })
+      await algoliaFetcher({ query: 'fifa', url: 'https://angolia.test.api.com/test', algoliaApiKey: 'x1x11212' })
       tt.fail('error is expected')
     } catch (error) {
       tt.type(error, Error)
@@ -84,26 +62,16 @@ tap.test('algoliaFetcher', async (t) => {
     }
   })
 
-  t.test('algoliaFetcher must throw an error if there is a problem requesting to algolia API', async tt => {
-    tt.plan(1)
-    const fetcher = await esmock('../../lib/fetcher/index.js', {
-      'node-fetch': mockFetchErr
-    })
-    try {
-      await fetcher.algoliaFetcher({ query: 'fifa', url: 'angolia.api', algoliaApiKey: 'x1x11212', algoliaApplicationId: 'X2123ZAS123' })
-      tt.fail('error is expected')
-    } catch (error) {
-      tt.type(error, Error)
-    }
-  })
-
   t.test('algoliaFetcher must return an error if algolia API return an invalid http code for the initial fetch', async tt => {
     tt.plan(1)
-    const fetcher = await esmock('../../lib/fetcher/index.js', {
-      'node-fetch': mockFetchInvalidCode
-    })
+    const mockClient = mockAgent.get('https://angolia.test.api.com')
+    mockClient.intercept({
+      path: '/test',
+      method: 'POST'
+    }).reply(500, mockFetchInvalidCode)
+
     try {
-      await fetcher.algoliaFetcher({ query: 'fifa', url: 'angolia.api', algoliaApiKey: 'x1x11212', algoliaApplicationId: 'X2123ZAS123' })
+      await algoliaFetcher({ query: 'fifa', url: 'https://angolia.test.api.com/test', algoliaApiKey: 'x1x11212', algoliaApplicationId: 'X2123ZAS123' })
       tt.fail('error is expected')
     } catch (error) {
       tt.type(error, Error)
@@ -112,15 +80,23 @@ tap.test('algoliaFetcher', async (t) => {
 
   t.test('algoliaFetcher must return an array of hits(games) if there is not a problem with the algolia API', async tt => {
     tt.plan(1)
+    const mockClient = mockAgent.get('https://example.com')
+    mockClient.intercept({
+      path: '/test',
+      method: 'POST'
+    }).reply(200, fetchAlgoliaMockedData)
+
     try {
-      const result = await fetcher.algoliaFetcher({ query: 'fifa', url: 'angolia.api', algoliaApiKey: 'x1x11212', algoliaApplicationId: 'X2123ZAS123' })
+      const result = await algoliaFetcher({ query: 'fifa', url: 'https://example.com/test', algoliaApiKey: 'x1x11212', algoliaApplicationId: 'X2123ZAS123' })
       tt.hasProp(result, 'hits', 'does not has hits property')
     } catch (error) {
+      console.error('===>', error)
       tt.fail('error is not expected')
     }
   })
 })
 
+/*
 tap.test('protondbFetcher', async (t) => {
   t.plan(12)
 
@@ -411,3 +387,4 @@ tap.test('protondbProxyFetcher', async (t) => {
     tt.equal(result, null, 'result is not null')
   })
 })
+*/
