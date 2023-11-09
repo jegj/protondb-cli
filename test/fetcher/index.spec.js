@@ -1,19 +1,14 @@
 import tap from 'tap'
+import sinon from 'sinon'
 import { fetchAlgoliaMockedData, fetchProtondbMockedData, protondbProxyMock } from '../mock/index.mock.js'
-import { algoliaFetcher } from '../../lib/fetcher/index.js'
+import { algoliaFetcher, protondbFetcher } from '../../lib/fetcher/index.js'
 import { MockAgent, setGlobalDispatcher } from 'undici'
 
 const mockAgent = new MockAgent()
 mockAgent.disableNetConnect()
 setGlobalDispatcher(mockAgent)
 
-const mockFetchInvalidCode = async () => {
-  return {
-    ok: false,
-    json: async () => null,
-    status: 500
-  }
-}
+const etag = 'ee98d63c9d4b7d42725a91260be97daf-ss'
 
 tap.test('algoliaFetcher', async (t) => {
   t.plan(6)
@@ -68,7 +63,7 @@ tap.test('algoliaFetcher', async (t) => {
     mockClient.intercept({
       path: '/test',
       method: 'POST'
-    }).reply(500, mockFetchInvalidCode)
+    }).reply(500, { status: 'failed' })
 
     try {
       await algoliaFetcher({ query: 'fifa', url: 'https://angolia.test.api.com/test', algoliaApiKey: 'x1x11212', algoliaApplicationId: 'X2123ZAS123' })
@@ -90,24 +85,18 @@ tap.test('algoliaFetcher', async (t) => {
       const result = await algoliaFetcher({ query: 'fifa', url: 'https://example.com/test', algoliaApiKey: 'x1x11212', algoliaApplicationId: 'X2123ZAS123' })
       tt.hasProp(result, 'hits', 'does not has hits property')
     } catch (error) {
-      console.error('===>', error)
       tt.fail('error is not expected')
     }
   })
 })
 
-/*
 tap.test('protondbFetcher', async (t) => {
-  t.plan(12)
-
-  const fetcher = await esmock('../../lib/fetcher/index.js', {
-    'node-fetch': generateFetchMock(fetchProtondbMockedData)
-  })
+  t.plan(10)
 
   t.test('protondbFetcher must throw an error if the query is not provided', async tt => {
     tt.plan(2)
     try {
-      await fetcher.protondbFetcher()
+      await protondbFetcher()
       tt.fail('error is expected')
     } catch (error) {
       tt.type(error, Error)
@@ -118,7 +107,7 @@ tap.test('protondbFetcher', async (t) => {
   t.test('protondbFetcher must throw an error if the objectId is not provided', async tt => {
     tt.plan(2)
     try {
-      await fetcher.protondbFetcher({ query: 'fifa' })
+      await protondbFetcher({ query: 'fifa' })
       tt.fail('error is expected')
     } catch (error) {
       tt.type(error, Error)
@@ -129,7 +118,7 @@ tap.test('protondbFetcher', async (t) => {
   t.test('protondbFetcher must throw an error if the url is not provided', async tt => {
     tt.plan(2)
     try {
-      await fetcher.protondbFetcher({ query: 'fifa', objectId: '1486440' })
+      await protondbFetcher({ query: 'fifa', objectId: '1486440' })
       tt.fail('error is expected')
     } catch (error) {
       tt.type(error, Error)
@@ -139,12 +128,17 @@ tap.test('protondbFetcher', async (t) => {
 
   t.test('protondbFetcher must return null if there is a problem requesting to protondb API', async tt => {
     tt.plan(1)
-    const fetcher = await esmock('../../lib/fetcher/index.js', {
-      'node-fetch': mockFetchErr
+    const mockClient = mockAgent.get('https://www.protondb.com')
+    mockClient.intercept({
+      path: '/api/v1/reports/summaries/1486440.json',
+      method: 'GET'
+    }).reply(200, () => {
+      throw new Error('unexpected error before sending request')
     })
+
     try {
       const logger = { warn: sinon.spy() }
-      const result = await fetcher.protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries' }, logger)
+      const result = await protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries' }, logger)
       tt.equal(result, null)
     } catch (error) {
       tt.fail('error is not expected')
@@ -153,12 +147,17 @@ tap.test('protondbFetcher', async (t) => {
 
   t.test('protondbFetcher must call the logger warn method when verbose is true and when there is a problem requesting to protondb API', async tt => {
     tt.plan(1)
-    const fetcher = await esmock('../../lib/fetcher/index.js', {
-      'node-fetch': mockFetchErr
+    const mockClient = mockAgent.get('https://www.protondb.com')
+    mockClient.intercept({
+      path: '/api/v1/reports/summaries/1486440.json',
+      method: 'GET'
+    }).reply(200, () => {
+      throw new Error('unexpected error before sending request')
     })
+
     try {
       const logger = { warn: sinon.spy() }
-      await fetcher.protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries', verbose: true }, logger)
+      await protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries', verbose: true }, logger)
       tt.ok(logger.warn.calledOnce, 'logger is not being called')
     } catch (error) {
       tt.fail('error is not expected')
@@ -167,12 +166,17 @@ tap.test('protondbFetcher', async (t) => {
 
   t.test('protondbFetcher must not call the logger warn method when verbose is false and when there is a problem requesting to protondb API', async tt => {
     tt.plan(1)
-    const fetcher = await esmock('../../lib/fetcher/index.js', {
-      'node-fetch': mockFetchErr
+    const mockClient = mockAgent.get('https://www.protondb.com')
+    mockClient.intercept({
+      path: '/api/v1/reports/summaries/1486440.json',
+      method: 'GET'
+    }).reply(200, () => {
+      throw new Error('unexpected error before sending request')
     })
+
     try {
       const logger = { warn: sinon.spy() }
-      await fetcher.protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries', verbose: false }, logger)
+      await protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries', verbose: false }, logger)
       tt.equal(logger.warn.calledOnce, false, 'logger is being called when verbose is false')
     } catch (error) {
       tt.fail('error is not expected')
@@ -181,12 +185,14 @@ tap.test('protondbFetcher', async (t) => {
 
   t.test('protondbFetcher must return null if protondb API return an invalid http code for the game', async tt => {
     tt.plan(1)
-    const fetcher = await esmock('../../lib/fetcher/index.js', {
-      'node-fetch': mockFetchInvalidCode
-    })
+    const mockClient = mockAgent.get('https://www.protondb.com')
+    mockClient.intercept({
+      path: '/api/v1/reports/summaries/1486440.json',
+      method: 'GET'
+    }).reply(500, { status: 'failed' })
     try {
       const logger = { warn: sinon.spy() }
-      const result = await fetcher.protondbFetcher({ name: 'fifa', query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries' }, logger)
+      const result = await protondbFetcher({ name: 'fifa', query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries' }, logger)
       tt.equal(result, null)
     } catch (error) {
       tt.fail('error is not expected')
@@ -195,8 +201,13 @@ tap.test('protondbFetcher', async (t) => {
 
   t.test('protondbFetcher must return a json if there is not a problem with the algolia API', async tt => {
     tt.plan(6)
+    const mockClient = mockAgent.get('https://www.protondb.com')
+    mockClient.intercept({
+      path: '/api/v1/reports/summaries/1486440.json',
+      method: 'GET'
+    }).reply(200, fetchProtondbMockedData)
     try {
-      const result = await fetcher.protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries' })
+      const result = await protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries' })
       tt.hasProp(result, 'bestReportedTier', 'does not has bestReportedTier property')
       tt.hasProp(result, 'confidence', 'does not has confidence property')
       tt.hasProp(result, 'score', 'does not has score property')
@@ -210,18 +221,23 @@ tap.test('protondbFetcher', async (t) => {
 
   t.test('protondbFetcher must return the data from the server if there is a cache miss and add a new item in the cache for future writing', async tt => {
     tt.plan(1)
+    const mockClient = mockAgent.get('https://www.protondb.com')
+    mockClient.intercept({
+      path: '/api/v1/reports/summaries/1486440.json',
+      method: 'GET'
+    }).reply(200, fetchProtondbMockedData)
     const cache = {
       write: sinon.spy(),
       data: {
         etags: {} // after read()
       }
     }
-    await fetcher.protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries', cache })
+    await protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries', cache })
     tt.ok(Object.prototype.hasOwnProperty.call(cache.data.etags, '1486440'), 'cache must have a new entry from the server')
   })
 
   t.test('protondbFetcher must return the data from the cache if there is a cache hit and the server responded 304 with the respective If-None-Match header', async tt => {
-    tt.plan(3)
+    tt.plan(2)
     const cache = {
       write: sinon.spy(),
       data: {
@@ -233,23 +249,17 @@ tap.test('protondbFetcher', async (t) => {
       }
     }
 
-    const mockFetch304Code = async (_url, requestOpts) => {
-      const headers = requestOpts.headers
-      tt.hasProp(headers, 'If-None-Match', 'headers does not have the if-none-match header on a cache hit')
-      tt.equal(headers['If-None-Match'], etag, 'etag does not match on a cache hit')
-      return {
-        ok: false,
-        json: async () => null,
-        status: 304
-      }
-    }
-    const fetcher = await esmock('../../lib/fetcher/index.js', {
-      'node-fetch': mockFetch304Code
-    })
-    await fetcher.protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries', cache })
+    const mockClient = mockAgent.get('https://www.protondb.com')
+    mockClient.intercept({
+      path: '/api/v1/reports/summaries/1486440.json',
+      method: 'GET'
+    }).reply(304, {})
+    const game = await protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries', cache })
     tt.notOk(cache.write.calledOnce, 'cache write is being called on a cache hit')
+    tt.equal(game, cache.data.etags['1486440'])
   })
 
+  /*
   t.test('protondbFetcher must return the data from the server if there is a cache hit but the server responded with a 200 and also add a new item in the cache', async tt => {
     tt.plan(3)
     const newETag = 'aa23dc3c9d457da272b79126k8le97daf-ss'
@@ -282,7 +292,7 @@ tap.test('protondbFetcher', async (t) => {
     const fetcher = await esmock('../../lib/fetcher/index.js', {
       'node-fetch': mockFetch200Code
     })
-    await fetcher.protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries', cache })
+    await protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries', cache })
     tt.equal(cache.data.etags['1486440'].etag, newETag, 'cache must have the new etag in the cache')
   })
 
@@ -313,11 +323,13 @@ tap.test('protondbFetcher', async (t) => {
       warn: sinon.spy()
     }
 
-    await fetcher.protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries', cache, verbose: true }, logger)
+    await protondbFetcher({ query: 'fifa', objectId: '1486440', url: 'https://www.protondb.com/api/v1/reports/summaries', cache, verbose: true }, logger)
 
     tt.ok(logger.info.calledOnce, 'on verbose mode the logger.info method is not being called')
   })
+  */
 })
+/*
 
 tap.test('protondbProxyFetcher', async (t) => {
   t.plan(6)
