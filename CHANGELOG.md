@@ -1,3 +1,20 @@
+# [1.10.0](https://github.com/jegj/protondb-cli/compare/v1.9.1...v1.10.0) (2023-11-11)
+
+
+### Bug Fixes
+
+* change the way how to get headers ([0becd5d](https://github.com/jegj/protondb-cli/commit/0becd5d351b5a0d4d8be3418c5b1aef41b50ebae))
+* mock interceptor and tests ([069d8f9](https://github.com/jegj/protondb-cli/commit/069d8f9616ddc60c54591de12519bffeb366725e))
+* tests for undici ([6476724](https://github.com/jegj/protondb-cli/commit/6476724468664a5fef9cdcc09f165fc224d86f02))
+
+
+### Features
+
+* add undici package ([50daadc](https://github.com/jegj/protondb-cli/commit/50daadc0ddb399b2944cf5c7d359d72660d5abd9))
+* fix main script for core package ([63b21a0](https://github.com/jegj/protondb-cli/commit/63b21a0e15f962cdfc2cacbdb79a2850bcc9538d))
+* fix test for angolia api call but breaking the other calls ([291b36f](https://github.com/jegj/protondb-cli/commit/291b36f701ac4b8c921d6f8760f71fbf47a634f3))
+* refactor cache module ([1196fc1](https://github.com/jegj/protondb-cli/commit/1196fc132efa73f9b250abb9a91b2bb554f80094))
+
 ## [1.9.1](https://github.com/jegj/protondb-cli/compare/v1.9.0...v1.9.1) (2023-11-03)
 
 
