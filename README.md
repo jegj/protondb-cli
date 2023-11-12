@@ -4,7 +4,7 @@
 [![license](http://img.shields.io/npm/l/protondb-cli.svg)](https://www.npmjs.com/package/protondb-cli)
 
 # protondb-cli
-A simple CLI for [ProtonDB project](https://www.protondb.com/).
+A simple unofficial CLI for [ProtonDB project](https://www.protondb.com/).
 Let's face it, if you know about ProtonDB you must love video
 games and Linux and what better than an CLI for a Linux fan
 to check your games compatibility on Steam.
