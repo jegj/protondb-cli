@@ -4,6 +4,7 @@
 [![license](http://img.shields.io/npm/l/protondb-cli.svg)](https://www.npmjs.com/package/protondb-cli)
 
 # protondb-cli
+
 A simple unofficial CLI for [ProtonDB project](https://www.protondb.com/).
 Let's face it, if you know about ProtonDB you must love video
 games and Linux and what better than an CLI for a Linux fan
@@ -12,16 +13,19 @@ to check your games compatibility on Steam.
 ![protondb-cli.gif](docs/imgs/readme.gif)
 
 ## Installation
-```bash
+
+```sh
 npm i protondb-cli -g
 ```
+
 ## Usage
 
-```
+```sh
 protondb-cli "Counter strike"
 ```
 
 ### Tiers
+
 Describe the support on Linux with ProtonDB
 
 | Tier      | Description                                                               |
@@ -33,13 +37,13 @@ Describe the support on Linux with ProtonDB
 | Borked    | Either won't start or is crucially unplayable                             |
 | N/A       | Wihtout Tier. Comunity haven't report this game yet                       |
 
-
 ### Confidence
+
 Describe the support of the community under the tier
 
 ## Using Docker
 
 ```sh
-$ docker pull jegj/protondb-cli
-$ docker run -it --rm jegj/protondb-cli fifa
+docker pull jegj/protondb-cli
+docker run -it --rm jegj/protondb-cli fifa
 ```
