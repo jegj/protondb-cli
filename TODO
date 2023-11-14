@@ -29,7 +29,6 @@
 - DONE: Find a way to debug the CLI better, displaying the console message does not work sometimes
 - DONE: Change GIF image
 - DONE: Research new url available: https://www.protondb.com/proxy/steam/api/appdetails/?appids=72850
-- TODO: Cache for http request responses
 - DONE: Write cache module
 - DONE: Use https://github.com/nodejs/undici/tree/main instead of node-fetch
 - TODO: Find a way to display the correct version in docker
