@@ -19,7 +19,9 @@ const config = getConfig()
 
 const DEFAULT_PROTONDB_CLI_CONCURRENCY = os.cpus().length
 
-const protondbCLI = yargs(hideBin(process.argv))
+const argv = hideBin(process.argv)
+
+const protondbCLI = yargs(argv)
   .scriptName('protondb-cli')
   .version(info.version)
   .usage('$0 [game]', 'Search for games based on a key word and show their protondb compatability, score and any other information related', (yargs) => {
@@ -56,12 +58,13 @@ const protondbCLI = yargs(hideBin(process.argv))
     })
       .example([
         ['$0 gta --concurrency 5 --hits 15', 'Search the last 15 like gta using a conccurency of 5']
-      ]).fail(function (msg, _err, yargs) {
-        // if (err) throw err // preserve stack
-        // console.error(err.stack)
+      ]).fail(function (msg, err, yargs) {
+        if (err instanceof Error && (argv.includes('-v') || argv.includes('--verbose'))) {
+          console.error(err)
+        }
         const errorStyle = chalk.bold.red
         console.error(errorStyle(msg))
-        console.error(yargs.help())
+        console.log(yargs.help())
         process.exit(1)
       })
   }).argv
