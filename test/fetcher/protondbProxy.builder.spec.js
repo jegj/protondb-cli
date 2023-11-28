@@ -1,4 +1,3 @@
-// import tap from 'tap'
 import { test, describe } from 'node:test'
 import assert from 'node:assert'
 import { buildUrl } from '../../lib/fetcher/protondbProxy.builder.js'
