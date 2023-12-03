@@ -11,7 +11,7 @@ setGlobalDispatcher(mockAgent)
 
 const etag = 'ee98d63c9d4b7d42725a91260be97daf-ss'
 
-describe('algoliaFetcher', async (t) => {
+describe('algoliaFetcher', async () => {
   test('algoliaFetcher must throw an error if the query is not provided', async () => {
     try {
       await algoliaFetcher()
