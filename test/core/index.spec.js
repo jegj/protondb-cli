@@ -1,4 +1,5 @@
-import tap from 'tap'
+import { test } from 'node:test'
+import assert from 'node:assert'
 import { fetchAlgoliaMockedData, fetchProtondbMockedData, protondbProxyMock } from '../mock/index.mock.js'
 import esmock from 'esmock'
 import sinon from 'sinon'
@@ -12,8 +13,7 @@ const query = 'fifa'
 const hitsPerPage = 5
 const options = { query, hitsPerPage, algoliaApiKey, algoliaApplicationId, algoliaUrl, protondbUrl, protondbProxyUrl }
 
-tap.test('getGamesReport must throw an error when Algolia API is not reachable', async (tt) => {
-  tt.plan(2)
+test('getGamesReport must throw an error when Algolia API is not reachable', async () => {
   const core = await esmock('../../lib/core/index.js', {
     '../../lib/fetcher/index.js': {
       algoliaFetcher: () => { throw new Error('unreachable') }
@@ -22,15 +22,14 @@ tap.test('getGamesReport must throw an error when Algolia API is not reachable',
 
   try {
     await core.getGamesReport(options)
-    tt.fail('error is expected')
+    assert.fail('error is expected')
   } catch (error) {
-    tt.type(error, Error)
-    tt.match(error.message, 'unreachable')
+    assert(error instanceof Error)
+    assert.match(error.message, /unreachable/)
   }
 })
 
-tap.test('getGamesReport must return an array of results always', async (tt) => {
-  tt.plan(1)
+test('getGamesReport must return an array of results always', async () => {
   const core = await esmock('../../lib/core/index.js', {
     '../../lib/fetcher/index.js': {
       algoliaFetcher: () => fetchAlgoliaMockedData,
@@ -41,14 +40,13 @@ tap.test('getGamesReport must return an array of results always', async (tt) => 
 
   try {
     const games = await core.getGamesReport(options)
-    tt.ok(Array.isArray(games))
+    assert(Array.isArray(games))
   } catch (error) {
-    tt.fail('error is not expected')
+    assert.fail('error is not expected')
   }
 })
 
-tap.test('getGamesReport must call the cache read method if the cache is a valid object', async (tt) => {
-  tt.plan(1)
+test('getGamesReport must call the cache read method if the cache is a valid object', async () => {
   const core = await esmock('../../lib/core/index.js', {
     '../../lib/fetcher/index.js': {
       algoliaFetcher: () => fetchAlgoliaMockedData,
@@ -58,11 +56,10 @@ tap.test('getGamesReport must call the cache read method if the cache is a valid
   })
   const cache = { read: sinon.spy() }
   await core.getGamesReport(options, cache)
-  tt.ok(cache.read.calledOnce, 'cache read method is not being called')
+  assert(cache.read.calledOnce, 'cache read method is not being called')
 })
 
-tap.test('getGamesReport must return an array of objects, the merge from algolia call + protondb call', async (tt) => {
-  tt.plan(46) // array of size 3 x 15 assert + 1 assert
+test('getGamesReport must return an array of objects, the merge from algolia call + protondb call', async () => {
   const core = await esmock('../../lib/core/index.js', {
     '../../lib/fetcher/index.js': {
       algoliaFetcher: () => fetchAlgoliaMockedData,
@@ -73,31 +70,31 @@ tap.test('getGamesReport must return an array of objects, the merge from algolia
 
   try {
     const games = await core.getGamesReport(options)
-    tt.ok(Array.isArray(games))
+    assert(Array.isArray(games))
     games.forEach(game => {
-      tt.hasProp(game, 'lastUpdated')
-      tt.hasProp(game, 'name')
-      tt.hasProp(game, 'oslist')
-      tt.hasProp(game, 'userScore')
-      tt.hasProp(game, 'followers')
-      tt.hasProp(game, 'technologies')
-      tt.hasProp(game, 'releaseYear')
-      tt.hasProp(game, 'tags')
-      tt.hasProp(game, 'objectID')
-      tt.hasProp(game, 'bestReportedTier')
-      tt.hasProp(game, 'confidence')
-      tt.hasProp(game, 'score')
-      tt.hasProp(game, 'tier')
-      tt.hasProp(game, 'total')
-      tt.hasProp(game, 'trendingTier')
+      assert(Object.prototype.hasOwnProperty.call(game, 'lastUpdated'))
+      assert(Object.prototype.hasOwnProperty.call(game, 'name'))
+      assert(Object.prototype.hasOwnProperty.call(game, 'oslist'))
+      assert(Object.prototype.hasOwnProperty.call(game, 'userScore'))
+      assert(Object.prototype.hasOwnProperty.call(game, 'followers'))
+      assert(Object.prototype.hasOwnProperty.call(game, 'technologies'))
+      assert(Object.prototype.hasOwnProperty.call(game, 'releaseYear'))
+      assert(Object.prototype.hasOwnProperty.call(game, 'tags'))
+      assert(Object.prototype.hasOwnProperty.call(game, 'objectID'))
+      assert(Object.prototype.hasOwnProperty.call(game, 'bestReportedTier'))
+      assert(Object.prototype.hasOwnProperty.call(game, 'confidence'))
+      assert(Object.prototype.hasOwnProperty.call(game, 'score'))
+      assert(Object.prototype.hasOwnProperty.call(game, 'tier'))
+      assert(Object.prototype.hasOwnProperty.call(game, 'total'))
+      assert(Object.prototype.hasOwnProperty.call(game, 'trendingTier'))
     })
   } catch (error) {
-    tt.fail('error is not expected')
+    console.log(error)
+    assert.fail('error is not expected')
   }
 })
 
-tap.test('getGamesReport must return an array of objects, the information from algolia with the key protondbNotFound as true and the tier and confidence as null when the protondb api returns a 404', async (tt) => {
-  tt.plan(16)
+test('getGamesReport must return an array of objects, the information from algolia with the key protondbNotFound as true and the tier and confidence as null when the protondb api returns a 404', async () => {
   const core = await esmock('../../lib/core/index.js', {
     '../../lib/fetcher/index.js': {
       algoliaFetcher: () => fetchAlgoliaMockedData,
@@ -114,29 +111,28 @@ tap.test('getGamesReport must return an array of objects, the information from a
 
   try {
     const games = await core.getGamesReport(options)
-    tt.ok(Array.isArray(games))
-    tt.hasProp(games[1], 'lastUpdated')
-    tt.hasProp(games[1], 'name')
-    tt.hasProp(games[1], 'oslist')
-    tt.hasProp(games[1], 'userScore')
-    tt.hasProp(games[1], 'followers')
-    tt.hasProp(games[1], 'technologies')
-    tt.hasProp(games[1], 'releaseYear')
-    tt.hasProp(games[1], 'tags')
-    tt.hasProp(games[1], 'objectID')
-    tt.hasProp(games[1], 'protondbNotFound')
-    tt.hasProp(games[1], 'tier')
-    tt.hasProp(games[1], 'confidence')
-    tt.equal(games[1].tier, null)
-    tt.equal(games[1].confidence, null)
-    tt.ok(games[1].protondbNotFound)
+    assert(Array.isArray(games))
+    Object.prototype.hasOwnProperty.call(games[1], 'lastUpdated')
+    Object.prototype.hasOwnProperty.call(games[1], 'name')
+    Object.prototype.hasOwnProperty.call(games[1], 'oslist')
+    Object.prototype.hasOwnProperty.call(games[1], 'userScore')
+    Object.prototype.hasOwnProperty.call(games[1], 'followers')
+    Object.prototype.hasOwnProperty.call(games[1], 'technologies')
+    Object.prototype.hasOwnProperty.call(games[1], 'releaseYear')
+    Object.prototype.hasOwnProperty.call(games[1], 'tags')
+    Object.prototype.hasOwnProperty.call(games[1], 'objectID')
+    Object.prototype.hasOwnProperty.call(games[1], 'protondbNotFound')
+    Object.prototype.hasOwnProperty.call(games[1], 'tier')
+    Object.prototype.hasOwnProperty.call(games[1], 'confidence')
+    assert.equal(games[1].tier, null)
+    assert.equal(games[1].confidence, null)
+    assert(games[1].protondbNotFound)
   } catch (error) {
-    tt.fail('error is not expected')
+    assert.fail('error is not expected')
   }
 })
 
-tap.test('getGamesReport must get data from the protondbProxy API, add it to the algolia + protondb response and include recommendations and genres as new properties', async (tt) => {
-  tt.plan(14)
+test('getGamesReport must get data from the protondbProxy API, add it to the algolia + protondb response and include recommendations and genres as new properties', async () => {
   const core = await esmock('../../lib/core/index.js', {
     '../../lib/fetcher/index.js': {
       algoliaFetcher: () => fetchAlgoliaMockedData,
@@ -153,21 +149,21 @@ tap.test('getGamesReport must get data from the protondbProxy API, add it to the
 
   try {
     const games = await core.getGamesReport(options)
-    tt.ok(Array.isArray(games))
-    tt.hasProp(games[2], 'lastUpdated')
-    tt.hasProp(games[2], 'name')
-    tt.hasProp(games[2], 'oslist')
-    tt.hasProp(games[2], 'userScore')
-    tt.hasProp(games[2], 'followers')
-    tt.hasProp(games[2], 'technologies')
-    tt.hasProp(games[2], 'releaseYear')
-    tt.hasProp(games[2], 'tags')
-    tt.hasProp(games[2], 'objectID')
-    tt.hasProp(games[2], 'tier')
-    tt.hasProp(games[2], 'confidence')
-    tt.hasProp(games[2], 'recommendations', 'does not have recommendations')
-    tt.hasProp(games[2], 'genres', 'does not have genres')
+    assert(Array.isArray(games))
+    Object.prototype.hasOwnProperty.call(games[2], 'lastUpdated')
+    Object.prototype.hasOwnProperty.call(games[2], 'name')
+    Object.prototype.hasOwnProperty.call(games[2], 'oslist')
+    Object.prototype.hasOwnProperty.call(games[2], 'userScore')
+    Object.prototype.hasOwnProperty.call(games[2], 'followers')
+    Object.prototype.hasOwnProperty.call(games[2], 'technologies')
+    Object.prototype.hasOwnProperty.call(games[2], 'releaseYear')
+    Object.prototype.hasOwnProperty.call(games[2], 'tags')
+    Object.prototype.hasOwnProperty.call(games[2], 'objectID')
+    Object.prototype.hasOwnProperty.call(games[2], 'tier')
+    Object.prototype.hasOwnProperty.call(games[2], 'confidence')
+    Object.prototype.hasOwnProperty.call(games[2], 'recommendations', 'does not have recommendations')
+    Object.prototype.hasOwnProperty.call(games[2], 'genres', 'does not have genres')
   } catch (error) {
-    tt.fail('error is not expected')
+    assert.fail('error is not expected')
   }
 })

@@ -21,7 +21,7 @@
     "test:watch": "npm run unit -- -w --no-coverage-report -R terse",
     "test:keys": "npm start --prefix ./lib/core",
     "test:response": "npm start --prefix ./lib/fetcher",
-    "unit": "tap",
+    "unit": "node --test  --loader esmock  test",
     "unit:junit": "tap-mocha-reporter xunit < out.tap > test/junit-testresults.xml",
     "unit:report": "tap report --coverage-report=html --coverage-report=cobertura | tee out.tap",
     "prepare": "node -e \"try { require('husky').install() } catch (e) {if (e.code !== 'MODULE_NOT_FOUND') throw e}\""
