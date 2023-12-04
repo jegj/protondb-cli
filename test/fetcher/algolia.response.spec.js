@@ -1,23 +1,27 @@
-import tap from 'tap'
+import { test } from 'node:test'
+import assert from 'node:assert'
 import { checkAlgoliaResponse } from '../../lib/fetcher/algolia.response.js'
 
-tap.test('checkAlgoliaResponse function must return an error if the responde from Algolia does not have the "hits" properties', (tt) => {
-  tt.plan(1)
-  tt.throws(() => {
+test('checkAlgoliaResponse function must return an error if the responde from Algolia does not have the "hits" properties', () => {
+  assert.throws(() => {
     checkAlgoliaResponse({})
-  }, new Error('algolia response does not have "hits" property'), 'algolia response does not have "hits" property')
+  }, {
+    name: 'Error',
+    message: 'algolia response does not have "hits" property'
+  })
 })
 
-tap.test('checkAlgoliaResponse function must return an error if the "hits" property from Algolia response is not an array', (tt) => {
-  tt.plan(1)
-  tt.throws(() => {
+test('checkAlgoliaResponse function must return an error if the "hits" property from Algolia response is not an array', () => {
+  assert.throws(() => {
     checkAlgoliaResponse({ hits: 'response' })
-  }, new Error('algolia "hits" is not an array'), 'algolia "hits" is not an array')
+  }, {
+    name: 'Error',
+    message: 'algolia "hits" is not an array'
+  })
 })
 
-tap.test('checkAlgoliaResponse function must return an error if a game from the "hits" does not have the required properties', (tt) => {
-  tt.plan(1)
-  tt.throws(() => {
+test('checkAlgoliaResponse function must return an error if a game from the "hits" does not have the required properties', () => {
+  assert.throws(() => {
     checkAlgoliaResponse({
       hits: [
         {
@@ -29,12 +33,14 @@ tap.test('checkAlgoliaResponse function must return an error if a game from the 
         }
       ]
     })
-  }, new Error('algolia "hit" doesnt have the property "releaseYear"'), 'algolia "hit" doesnt have the property "releaseYear"')
+  }, {
+    name: 'Error',
+    message: 'algolia "hit" doesnt have the property "releaseYear"'
+  })
 })
 
-tap.test('checkAlgoliaResponse function must throw an error if the oslist is not a valid array', (tt) => {
-  tt.plan(1)
-  tt.throws(() => {
+test('checkAlgoliaResponse function must throw an error if the oslist is not a valid array', () => {
+  assert.throws(() => {
     checkAlgoliaResponse({
       hits: [
         {
@@ -48,5 +54,8 @@ tap.test('checkAlgoliaResponse function must throw an error if the oslist is not
         }
       ]
     })
-  }, new Error('algolia "hit" doesnt have a valid "oslist" property'), 'algolia "hit" doesnt have a valid "oslist" property')
+  }, {
+    name: 'Error',
+    message: 'algolia "hit" doesnt have a valid "oslist" property'
+  })
 })

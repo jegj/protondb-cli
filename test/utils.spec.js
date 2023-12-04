@@ -1,66 +1,93 @@
-import tap from 'tap'
 import { isValidUrl, isValidGameName } from '../lib/utils.js'
+import { test } from 'node:test'
+import assert from 'node:assert'
 
-tap.test('isValidUrl must throw an error when the url param is not a valid URL', (tt) => {
-  tt.plan(6)
-  tt.throws(() => {
+test('isValidUrl must throw an error when the url param is not a valid URL', () => {
+  assert.throws(() => {
     isValidUrl(111)
-  }, Error)
+  }, {
+    name: 'TypeError',
+    message: 'Invalid URL'
+  })
 
-  tt.throws(() => {
+  assert.throws(() => {
     isValidUrl(false)
-  }, Error)
+  }, {
+    name: 'TypeError',
+    message: /Invalid URL/
+  })
 
-  tt.throws(() => {
+  assert.throws(() => {
     isValidUrl({})
-  }, Error)
+  }, {
+    name: 'TypeError',
+    message: /Invalid URL/
+  })
 
-  tt.throws(() => {
+  assert.throws(() => {
     isValidUrl('some.random.string')
-  }, Error)
+  }, {
+    name: 'TypeError',
+    message: /Invalid URL/
+  })
 
-  tt.throws(() => {
+  assert.throws(() => {
     isValidUrl('www.page.com')
-  }, Error)
+  }, {
+    name: 'TypeError',
+    message: /Invalid URL/
+  })
 
-  tt.throws(() => {
+  assert.throws(() => {
     isValidUrl('ftp://some.ftp.server.com')
-  }, Error)
+  }, {
+    name: 'Error',
+    message: /Invalid url protocol/
+  })
 })
 
-tap.test('isValidUrl must not throw an error when the url param is a valid URL', (tt) => {
-  tt.plan(2)
-  tt.doesNotThrow(() => {
+test('isValidUrl must not throw an error when the url param is a valid URL', () => {
+  assert.doesNotThrow(() => {
     isValidUrl('http://some.api.com')
-  }, Error)
+  })
 
-  tt.doesNotThrow(() => {
+  assert.doesNotThrow(() => {
     isValidUrl('https://some.api.com')
-  }, Error)
+  })
 })
 
-tap.test('isValidGameName must throw an error when the game name is not a valid or empty string', (tt) => {
-  tt.plan(4)
-  tt.throws(() => {
+test('isValidGameName must throw an error when the game name is not a valid or empty string', () => {
+  assert.throws(() => {
     isValidGameName(false)
-  }, Error)
+  }, {
+    name: 'Error',
+    message: /Invalid game name/
+  })
 
-  tt.throws(() => {
+  assert.throws(() => {
     isValidGameName({}, 'for a empty object')
-  }, Error)
+  }, {
+    name: 'Error',
+    message: /Invalid game name/
+  })
 
-  tt.throws(() => {
+  assert.throws(() => {
     isValidGameName(null)
-  }, Error)
+  }, {
+    name: 'Error',
+    message: /Invalid game name/
+  })
 
-  tt.throws(() => {
+  assert.throws(() => {
     isValidGameName(undefined)
-  }, Error)
+  }, {
+    name: 'Error',
+    message: /Invalid game name/
+  })
 })
 
-tap.test('isValidGameName must not throw an error when the game name is a valid string', (tt) => {
-  tt.plan(1)
-  tt.doesNotThrow(() => {
+test('isValidGameName must not throw an error when the game name is a valid string', () => {
+  assert.doesNotThrow(() => {
     isValidGameName('game1')
   })
 })

@@ -1,103 +1,89 @@
-import tap from 'tap'
+import { test, describe } from 'node:test'
+import assert from 'node:assert'
 import { buildHeaderRequest, buildUrl } from '../../lib/fetcher/protondb.builder.js'
-
 const query = 'skyrim'
 
-tap.test('protondb.builder', (t) => {
-  t.plan(7)
-
-  t.test('buildHeaderRequest function must return an object always', (tt) => {
-    tt.plan(1)
+describe('protondb.builder', () => {
+  test('buildHeaderRequest function must return an object always', () => {
     const response = buildHeaderRequest(query)
-    tt.equal(typeof response === 'object', true)
+    assert(typeof response === 'object')
   })
 
-  t.test('buildHeaderRequest function must throw an error if the argument "query" is not provided in the function', (tt) => {
-    tt.plan(1)
-    tt.throws(() => {
+  test('buildHeaderRequest function must throw an error if the argument "query" is not provided in the function', () => {
+    assert.throws(() => {
       buildHeaderRequest()
-    }, new Error('query is required for build the referer header'))
+    }, {
+      name: 'Error',
+      message: 'query is required for build the referer header'
+    })
   })
 
-  t.test('buildHeaderRequest function must return an object with the property "accept" and must be equal to "*/*" for protondb http request', (tt) => {
-    tt.plan(2)
+  test('buildHeaderRequest function must return an object with the property "accept" and must be equal to "*/*" for protondb http request', () => {
     const headers = buildHeaderRequest(query)
-    tt.hasProp(headers, 'accept', 'does not has accept property')
-    tt.equal(headers.accept, '*/*', 'accept property is not equal to */*')
+    assert(Object.prototype.hasOwnProperty.call(headers, 'accept'), 'does not has accept property')
+    assert.equal(headers.accept, '*/*', 'accept property is not equal to */*')
   })
 
-  t.test('buildHeaderRequest function must return an object with the property "authority" and must be equal to "www.protondb.com" for protondb http request', (tt) => {
-    tt.plan(2)
+  test('buildHeaderRequest function must return an object with the property "authority" and must be equal to "www.protondb.com" for protondb http request', () => {
     const headers = buildHeaderRequest(query)
-    tt.hasProp(headers, 'authority', 'does not has authority property')
-    tt.equal(headers.authority, 'www.protondb.com', 'authority property is not equal to www.protondb.com')
+    assert(Object.prototype.hasOwnProperty.call(headers, 'authority'), 'does not has authority property')
+    assert.equal(headers.authority, 'www.protondb.com', 'authority property is not equal to www.protondb.com')
   })
 
-  t.test('buildHeaderRequest function must return an object with the property "accept-language" and must be equal to "www.protondb.com" for protondb http request', (tt) => {
-    tt.plan(2)
+  test('buildHeaderRequest function must return an object with the property "accept-language" and must be equal to "www.protondb.com" for protondb http request', () => {
     const headers = buildHeaderRequest(query)
-    tt.hasProp(headers, 'accept-language', 'does not has accept-language property')
-    tt.equal(headers['accept-language'], 'en-US,en;q=0.8', 'accept-language property is not equal to en-US,en;q=0.8')
+    assert(Object.prototype.hasOwnProperty.call(headers, 'accept-language'), 'does not has accept-language property')
+    assert.equal(headers['accept-language'], 'en-US,en;q=0.8', 'accept-language property is not equal to en-US,en;q=0.8')
   })
 
-  t.test('buildHeaderRequest function must return an object with the property "referer" and must be equal to "https://www.protondb.com/search?q=" + the query for protondb http request', (tt) => {
-    tt.plan(2)
+  test('buildHeaderRequest function must return an object with the property "referer" and must be equal to "https://www.protondb.com/search?q=" + the query for protondb http request', () => {
     const headers = buildHeaderRequest(query)
-    tt.hasProp(headers, 'referer', 'does not has referer property')
-    tt.equal(headers.referer, `https://www.protondb.com/search?q=${query}`, 'referer property is not equal to the protondb search url')
+    assert(Object.prototype.hasOwnProperty.call(headers, 'referer'), 'does not has referer property')
+    assert.equal(headers.referer, `https://www.protondb.com/search?q=${query}`, 'referer property is not equal to the protondb search url')
   })
 
-  t.test('buildHeaderRequest function must return an object with property "If-None-Match" and must but equal to the etag', (tt) => {
-    tt.plan(2)
+  test('buildHeaderRequest function must return an object with property "If-None-Match" and must but equal to the etag', () => {
     const etag = '686897696a7c876b7e'
     const headers = buildHeaderRequest(query, etag)
-    tt.hasProp(headers, 'If-None-Match', 'does not has etag property')
-    tt.equal(headers['If-None-Match'], etag)
+    assert(Object.prototype.hasOwnProperty.call(headers, 'If-None-Match'), 'does not has etag property')
+    assert.equal(headers['If-None-Match'], etag, 'etag is not equal')
   })
 })
 
-tap.test('protondb.buildUrl', (t) => {
-  t.plan(4)
-
-  t.test('buildUrl function must throw an error if the url is not provided', (tt) => {
-    tt.plan(2)
+describe('protondb.buildUrl', () => {
+  test('buildUrl function must throw an error if the url is not provided', () => {
     try {
       buildUrl()
-      tt.fail('error is expected')
+      assert.fail('error is expected')
     } catch (error) {
-      tt.type(error, Error)
-      tt.match(error.message, 'url is required')
+      assert.match(error.message, /url is required/, 'message does not match the expression "url is required"')
     }
   })
 
-  t.test('buildUrl function must throw an error if the objectId is not provided', (tt) => {
-    tt.plan(2)
+  test('buildUrl function must throw an error if the objectId is not provided', () => {
     try {
       buildUrl('https://www.protondb.com/api/v1/reports/summaries')
-      tt.fail('error is expected')
+      assert.fail('error is expected')
     } catch (error) {
-      tt.type(error, Error)
-      tt.match(error.message, 'objectId is required')
+      assert.match(error.message, /objectId is required/, 'message does not match the expression "objectId is required"')
     }
   })
 
-  t.test('buildUrl function must return the final url even if the url params comes without a slash at the end', (tt) => {
-    tt.plan(1)
+  test('buildUrl function must return the final url even if the url params comes without a slash at the end', () => {
     try {
       const url = buildUrl('https://www.protondb.com/api/v1/reports/summaries', '1486440')
-      tt.equal(url, 'https://www.protondb.com/api/v1/reports/summaries/1486440.json')
+      assert.equal(url, 'https://www.protondb.com/api/v1/reports/summaries/1486440.json', 'url is not equal')
     } catch (error) {
-      tt.fail('error is not expected')
+      assert.fail('error is not expected')
     }
   })
 
-  t.test('buildUrl function must return a final url with objectId', (tt) => {
-    tt.plan(1)
+  test('buildUrl function must return a final url with objectId', () => {
     try {
       const url = buildUrl('https://www.protondb.com/api/v1/reports/summaries/', '1486440')
-      tt.equal(url, 'https://www.protondb.com/api/v1/reports/summaries/1486440.json')
+      assert.equal(url, 'https://www.protondb.com/api/v1/reports/summaries/1486440.json', 'url is not equal')
     } catch (error) {
-      tt.fail('error is not expected')
+      assert.fail('error is not expected')
     }
   })
 })
