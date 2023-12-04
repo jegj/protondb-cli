@@ -1,3 +1,11 @@
+# [1.11.0](https://github.com/jegj/protondb-cli/compare/v1.10.0...v1.11.0) (2023-12-04)
+
+
+### Features
+
+* display stack trace when verbose mode is enabled ([6e4a580](https://github.com/jegj/protondb-cli/commit/6e4a58018058ba7ce960e0bc32e33b849bd1b86b))
+* update dependecies ([397e620](https://github.com/jegj/protondb-cli/commit/397e620d4b2db38158b597a26c9b4c1ee791ecce))
+
 # [1.10.0](https://github.com/jegj/protondb-cli/compare/v1.9.1...v1.10.0) (2023-11-11)
 
 
