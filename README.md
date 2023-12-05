@@ -1,9 +1,9 @@
+# protondb-cli
+
 [![CI](https://github.com/jegj/protondb-cli/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/jegj/protondb-cli/actions/workflows/build.yml)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://standardjs.com/)
 [![view on npm](http://img.shields.io/npm/v/protondb-cli.svg)](https://www.npmjs.com/package/protondb-cli)
 [![license](http://img.shields.io/npm/l/protondb-cli.svg)](https://www.npmjs.com/package/protondb-cli)
-
-# protondb-cli
 
 A simple unofficial CLI for [ProtonDB project](https://www.protondb.com/).
 Let's face it, if you know about ProtonDB you must love video
