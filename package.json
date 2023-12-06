@@ -16,12 +16,10 @@
     "lint:markdown": "markdownlint-cli2",
     "lint:standard": "standard | snazzy",
     "test": "npm run lint && npm run unit",
-    "test:ci": "npm run unit -- -R terse --cov --coverage-report=lcovonly",
-    "test:report": "npm run lint && npm run unit:report",
-    "test:watch": "npm run unit -- -w --no-coverage-report -R terse",
+    "test:watch": "c8 --100 node --test --watch --loader esmock test",
     "test:keys": "npm start --prefix ./lib/core",
     "test:response": "npm start --prefix ./lib/fetcher",
-    "unit": "c8 --100 node --test  --loader esmock  test",
+    "unit": "c8 --100 node --test --loader esmock test",
     "prepare": "node -e \"try { require('husky').install() } catch (e) {if (e.code !== 'MODULE_NOT_FOUND') throw e}\""
   },
   "repository": {
