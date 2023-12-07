@@ -19,7 +19,9 @@
     "test:watch": "c8 --100 node --test --watch --loader esmock test",
     "test:keys": "npm start --prefix ./lib/core",
     "test:response": "npm start --prefix ./lib/fetcher",
-    "unit": "c8 --100 node --test --loader esmock test",
+    "unit": "c8 --100 node --test --loader esmock test/**/*.spec.js",
+    "unit:coverage": "node --test --experimental-test-coverage  --loader esmock test/**/*.spec.js",
+    "test:coverage": "npm run lint && npm run unit:coverage",
     "prepare": "node -e \"try { require('husky').install() } catch (e) {if (e.code !== 'MODULE_NOT_FOUND') throw e}\""
   },
   "repository": {
