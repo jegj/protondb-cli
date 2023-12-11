@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-      node: [18.x, 20.x]
+      node: [18, 20]
 
     steps:
       - uses: actions/checkout@v3
