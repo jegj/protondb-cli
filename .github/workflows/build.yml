@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         platform: [ubuntu-latest]
-        node-version: [ 18.x ]
+        node: [ 18.x, 20.x ]
     name: lint
     runs-on: ${{ matrix.platform }}
     steps:
@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.x]
+      node: [18.x, 20.x]
 
     steps:
       - uses: actions/checkout@v3
@@ -39,7 +39,7 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ matrix.node }}
 
       - run: npm ci
 
@@ -47,6 +47,10 @@ jobs:
 
   keys_api_check:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [18.x, 20.x]
+
     needs: [lint, tests]
 
     steps:
@@ -55,7 +59,7 @@ jobs:
       - name: Use Node.js 18.x
         uses: actions/setup-node@v3
         with:
-          node-version: 18.x
+          node-version: ${{ matrix.node }}
 
       - run: npm ci
 
