@@ -1,7 +1,0 @@
-"node-arg": [
-  "--no-warnings",
-  "--experimental-loader",
-  "esmock"
-]
-files:
-  - 'test/**/*.spec.js'
