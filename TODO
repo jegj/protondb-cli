@@ -32,3 +32,5 @@
 - DONE: Write cache module
 - DONE: Use https://github.com/nodejs/undici/tree/main instead of node-fetch
 - TODO: Find a way to display the correct version in docker
+- TODO: Display OS support
+- TODO: Display minimun & recommended requirements
