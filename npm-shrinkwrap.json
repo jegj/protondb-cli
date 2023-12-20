@@ -13,8 +13,8 @@
         "chalk": "5.3.0",
         "lowdb": "6.1.1",
         "ora": "7.0.1",
-        "p-map": "6.0.0",
-        "undici": "5.28.2",
+        "p-map": "7.0.0",
+        "undici": "6.0.1",
         "yargs": "17.7.2"
       },
       "bin": {
@@ -9371,11 +9371,11 @@
       }
     },
     "node_modules/p-map": {
-      "version": "6.0.0",
-      "resolved": "https://registry.npmjs.org/p-map/-/p-map-6.0.0.tgz",
-      "integrity": "sha512-T8BatKGY+k5rU+Q/GTYgrEf2r4xRMevAN5mtXc2aPc4rS1j3s+vWTaO2Wag94neXuCAUAs8cxBL9EeB5EA6diw==",
+      "version": "7.0.0",
+      "resolved": "https://registry.npmjs.org/p-map/-/p-map-7.0.0.tgz",
+      "integrity": "sha512-EZl03dLKv3RypkrjlevZoNwQMSy4bAblWcR18zhonktnN4fUs3asFQKSe0awn982omGxamvbejqQKQYDJYHCEg==",
       "engines": {
-        "node": ">=16"
+        "node": ">=18"
       },
       "funding": {
         "url": "https://github.com/sponsors/sindresorhus"
@@ -11245,14 +11245,14 @@
       }
     },
     "node_modules/undici": {
-      "version": "5.28.2",
-      "resolved": "https://registry.npmjs.org/undici/-/undici-5.28.2.tgz",
-      "integrity": "sha512-wh1pHJHnUeQV5Xa8/kyQhO7WFa8M34l026L5P/+2TYiakvGy5Rdc8jWZVyG7ieht/0WgJLEd3kcU5gKx+6GC8w==",
+      "version": "6.0.1",
+      "resolved": "https://registry.npmjs.org/undici/-/undici-6.0.1.tgz",
+      "integrity": "sha512-eZFYQLeS9BiXpsU0cuFhCwfeda2MnC48EVmmOz/eCjsTgmyTdaHdVsPSC/kwC2GtW2e0uH0HIPbadf3/bRWSxw==",
       "dependencies": {
         "@fastify/busboy": "^2.0.0"
       },
       "engines": {
-        "node": ">=14.0"
+        "node": ">=18.0"
       }
     },
     "node_modules/undici-types": {
@@ -18151,9 +18151,9 @@
       }
     },
     "p-map": {
-      "version": "6.0.0",
-      "resolved": "https://registry.npmjs.org/p-map/-/p-map-6.0.0.tgz",
-      "integrity": "sha512-T8BatKGY+k5rU+Q/GTYgrEf2r4xRMevAN5mtXc2aPc4rS1j3s+vWTaO2Wag94neXuCAUAs8cxBL9EeB5EA6diw=="
+      "version": "7.0.0",
+      "resolved": "https://registry.npmjs.org/p-map/-/p-map-7.0.0.tgz",
+      "integrity": "sha512-EZl03dLKv3RypkrjlevZoNwQMSy4bAblWcR18zhonktnN4fUs3asFQKSe0awn982omGxamvbejqQKQYDJYHCEg=="
     },
     "p-reduce": {
       "version": "2.1.0",
@@ -19455,9 +19455,9 @@
       }
     },
     "undici": {
-      "version": "5.28.2",
-      "resolved": "https://registry.npmjs.org/undici/-/undici-5.28.2.tgz",
-      "integrity": "sha512-wh1pHJHnUeQV5Xa8/kyQhO7WFa8M34l026L5P/+2TYiakvGy5Rdc8jWZVyG7ieht/0WgJLEd3kcU5gKx+6GC8w==",
+      "version": "6.0.1",
+      "resolved": "https://registry.npmjs.org/undici/-/undici-6.0.1.tgz",
+      "integrity": "sha512-eZFYQLeS9BiXpsU0cuFhCwfeda2MnC48EVmmOz/eCjsTgmyTdaHdVsPSC/kwC2GtW2e0uH0HIPbadf3/bRWSxw==",
       "requires": {
         "@fastify/busboy": "^2.0.0"
       }
