@@ -1,3 +1,13 @@
+# [1.12.0](https://github.com/jegj/protondb-cli/compare/v1.11.0...v1.12.0) (2024-01-06)
+
+
+### Features
+
+* add developers ([b8c9b7a](https://github.com/jegj/protondb-cli/commit/b8c9b7aaaf44c18c23bf030fc186612f2bf5f5d3))
+* add publishers ([f3aa040](https://github.com/jegj/protondb-cli/commit/f3aa040eda1eb5e6129524b159888e5a6c1fc5c0))
+* add release date ([be68070](https://github.com/jegj/protondb-cli/commit/be680707455e3f3d7766b85486d7f61853c9d540))
+* upgrade dependecies ([62a179d](https://github.com/jegj/protondb-cli/commit/62a179dcbc99e69fbc04d3ec8dda0706b768edd6))
+
 # [1.11.0](https://github.com/jegj/protondb-cli/compare/v1.10.0...v1.11.0) (2023-12-04)
 
 
