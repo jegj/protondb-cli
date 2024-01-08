@@ -35,3 +35,4 @@
 - DONE: Display OS support
 - TODO: Display minimun & recommended requirements
 - DONE: Display developers, publishers, release date & metacritic
+- TODO: Find why ora@8.0.1 breaks the blessed UI
