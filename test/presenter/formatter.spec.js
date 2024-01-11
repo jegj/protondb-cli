@@ -1,4 +1,5 @@
-import { formatGame, format, formatGameName, formatGameTier, formatGameConfidence, sortGames, wrapCollection } from '../../lib/presenter/formatter.js'
+/* eslint-disable no-useless-escape */
+import { formatGame, format, formatGameName, formatGameTier, formatGameConfidence, formatMinimunRequirements, sortGames, wrapCollection } from '../../lib/presenter/formatter.js'
 import { TAG_TIERS, GAME_NA, TAG_CONFIDENCE } from '../../lib/presenter/formats.js'
 import { mergedGameDataComplete, mergedGameDataUncomplete, mergedGames } from '../mock/index.mock.js'
 import { createMergedGame } from '../factories/index.js'
@@ -251,5 +252,19 @@ describe('wrapCollection', async () => {
     const collection = ['Tag 1', 'Tag 2', 'Tag 3', 'Tag 4', 'Tag 5', 'Tag 6', 'Tag 7']
     const wrappedCollection = wrapCollection(collection, 30)
     assert.equal(wrappedCollection.length, 2, 'wrappedCollection does not have the correct length')
+  })
+})
+
+describe('formatMinimunRequirements', { only: true }, async () => {
+  const data = {
+    pc_requirements: {
+      minimum: '<strong>Minimum:<\/strong><br><ul class="bb_ul"><li>Requires a 64-bit processor and operating system<br><\/li><li><strong>OS:<\/strong> 64-bit Windows 10<br><\/li><li><strong>Processor:<\/strong> Core i7-6700 or Ryzen 5 1600<br><\/li><li><strong>Memory:<\/strong> 12 GB RAM<br><\/li><li><strong>Graphics:<\/strong> GeForce GTX 1060 6GB or Radeon RX 580 8GB or Arc A380<br><\/li><li><strong>DirectX:<\/strong> Version 12<br><\/li><li><strong>Storage:<\/strong> 70 GB available space<br><\/li><li><strong>Additional Notes:<\/strong> SSD required. Attention: In this game you will encounter a variety of visual effects that may provide seizures or loss of consciousness in a minority of people. If you or someone you know experiences any of the above symptoms while playing, stop and seek medical attention immediately.<\/li><\/ul>',
+      recommended: '<strong>Recommended:<\/strong><br><ul class="bb_ul"><li>Requires a 64-bit processor and operating system<br><\/li><li><strong>OS:<\/strong> 64-bit Windows 10<br><\/li><li><strong>Processor:<\/strong> Core i7-12700 or Ryzen 7 7800X3D<br><\/li><li><strong>Memory:<\/strong> 16 GB RAM<br><\/li><li><strong>Graphics:<\/strong> GeForce RTX 2060 SUPER or Radeon RX 5700 XT or Arc A770<br><\/li><li><strong>DirectX:<\/strong> Version 12<br><\/li><li><strong>Storage:<\/strong> 70 GB available space<br><\/li><li><strong>Additional Notes:<\/strong> SSD required.<\/li><\/ul>'
+    }
+  }
+  test('formatMinimunRequirements must return an object with the processor property', { only: true }, () => {
+    const result = formatMinimunRequirements(data)
+    assert(Object.prototype.hasOwnProperty.call(result, 'processor'), 'does not has processor property')
+    // assert.equal(result.processor, 'Core i7-6700 or Ryzen 5 1600')
   })
 })
