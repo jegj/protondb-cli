@@ -282,4 +282,19 @@ describe('formatRequirements', { only: true }, async () => {
     assert.equal(minimum.graphics, 'GeForce GTX 1060 6GB or Radeon RX 580 8GB or Arc A380')
     assert.equal(minimum.storage, '70 GB available space')
   })
+
+  test('formatRequirements recommended object must have os, processor, memory, graphics and storage properties with their respective values', { only: true }, () => {
+    const result = formatRequirements(data)
+    const recommended = result.recommended
+    assert(Object.prototype.hasOwnProperty.call(recommended, 'os'), 'does not has os property')
+    assert(Object.prototype.hasOwnProperty.call(recommended, 'processor'), 'does not has processor property')
+    assert(Object.prototype.hasOwnProperty.call(recommended, 'memory'), 'does not has memory property')
+    assert(Object.prototype.hasOwnProperty.call(recommended, 'graphics'), 'does not has graphics property')
+    assert(Object.prototype.hasOwnProperty.call(recommended, 'storage'), 'does not has storage property')
+    assert.equal(recommended.os, '64-bit Windows 10')
+    assert.equal(recommended.processor, 'Core i7-12700 or Ryzen 7 7800X3D')
+    assert.equal(recommended.memory, '16 GB RAM')
+    assert.equal(recommended.graphics, 'GeForce RTX 2060 SUPER or Radeon RX 5700 XT or Arc A770')
+    assert.equal(recommended.storage, '70 GB available space')
+  })
 })
