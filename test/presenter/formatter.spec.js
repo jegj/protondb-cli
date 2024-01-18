@@ -256,20 +256,34 @@ describe('wrapCollection', async () => {
 })
 
 describe('formatRequirements', async () => {
-  const data = {
+  const dataType1 = {
     pc_requirements: {
       minimum: '<strong>Minimum:<\/strong><br><ul class="bb_ul"><li>Requires a 64-bit processor and operating system<br><\/li><li><strong>OS:<\/strong> 64-bit Windows 10<br><\/li><li><strong>Processor:<\/strong> Core i7-6700 or Ryzen 5 1600<br><\/li><li><strong>Memory:<\/strong> 12 GB RAM<br><\/li><li><strong>Graphics:<\/strong> GeForce GTX 1060 6GB or Radeon RX 580 8GB or Arc A380<br><\/li><li><strong>DirectX:<\/strong> Version 12<br><\/li><li><strong>Storage:<\/strong> 70 GB available space<br><\/li><li><strong>Additional Notes:<\/strong> SSD required. Attention: In this game you will encounter a variety of visual effects that may provide seizures or loss of consciousness in a minority of people. If you or someone you know experiences any of the above symptoms while playing, stop and seek medical attention immediately.<\/li><\/ul>',
       recommended: '<strong>Recommended:<\/strong><br><ul class="bb_ul"><li>Requires a 64-bit processor and operating system<br><\/li><li><strong>OS:<\/strong> 64-bit Windows 10<br><\/li><li><strong>Processor:<\/strong> Core i7-12700 or Ryzen 7 7800X3D<br><\/li><li><strong>Memory:<\/strong> 16 GB RAM<br><\/li><li><strong>Graphics:<\/strong> GeForce RTX 2060 SUPER or Radeon RX 5700 XT or Arc A770<br><\/li><li><strong>DirectX:<\/strong> Version 12<br><\/li><li><strong>Storage:<\/strong> 70 GB available space<br><\/li><li><strong>Additional Notes:<\/strong> SSD required.<\/li><\/ul>'
     }
   }
-  test('formatRequirements must return an object with the minimum & recommended requirements as a objects always', () => {
-    const result = formatRequirements(data)
+
+  const dataType2 = {
+    pc_requirements: {
+      minimum: '<strong>Minimum:<\/strong><br>\t\t\t\t\t\t\t\t<ul class=\"bb_ul\"><li><strong>OS *:<\/strong> Windows 7\/Vista\/XP PC (32 or 64 bit)<br>\t\t\t\t\t\t\t\t<\/li><li><strong>Processor:<\/strong> Dual Core 2.0GHz or equivalent processor<br>\t\t\t\t\t\t\t\t<\/li><li><strong>Memory:<\/strong> 2GB System RAM<br>\t\t\t\t\t\t\t\t<\/li><li><strong>Hard Disk Space:<\/strong> 6GB free HDD Space<br>\t\t\t\t\t\t\t\t<\/li><li><strong>Video Card:<\/strong> Direct X 9.0c compliant video card with 512 MB of RAM<br>\t\t\t\t\t\t\t\t<\/li><li><strong>Sound:<\/strong> DirectX compatible sound card<br>\t\t\t\t\t\t\t\t<\/li><\/ul>',
+      recommended: '<strong>Recommended:<\/strong><br>\t\t\t\t\t\t\t\t<ul class=\"bb_ul\"><li><strong>Processor:<\/strong> Quad-core Intel or AMD CPU<br>\t\t\t\t\t\t\t\t<\/li><li><strong>Memory:<\/strong> 4GB System RAM<br>\t\t\t\t\t\t\t\t<\/li><li><strong>Video Card:<\/strong> DirectX 9.0c compatible NVIDIA or AMD ATI video card with 1GB of RAM (Nvidia GeForce GTX 260 or higher; ATI Radeon 4890 or higher)<br>\t\t\t\t\t\t\t\t<\/li><\/ul>'
+    }
+  }
+
+  test('formatRequirements must return an object with the minimum & recommended requirements as a objects always for the first format', () => {
+    const result = formatRequirements(dataType1)
     assert(Object.prototype.hasOwnProperty.call(result, 'minimum'), 'does not has minimun property')
     assert(Object.prototype.hasOwnProperty.call(result, 'recommended'), 'does not has recommended property')
   })
 
-  test('formatRequirements minimum object must have os, processor, memory, graphics, directx, storage  and additional_notes properties with their respective values', () => {
-    const result = formatRequirements(data)
+  test('formatRequirements must return an object with the minimum & recommended requirements as a objects always for the second format', () => {
+    const result = formatRequirements(dataType2)
+    assert(Object.prototype.hasOwnProperty.call(result, 'minimum'), 'does not has minimun property')
+    assert(Object.prototype.hasOwnProperty.call(result, 'recommended'), 'does not has recommended property')
+  })
+
+  test('formatRequirements minimum object must have os, processor, memory, graphics, directx, storage  and additional_notes properties with their respective values for the first format', () => {
+    const result = formatRequirements(dataType1)
     const minimum = result.minimum
     assert(Object.prototype.hasOwnProperty.call(minimum, 'os'), 'does not has os property')
     assert(Object.prototype.hasOwnProperty.call(minimum, 'processor'), 'does not has processor property')
@@ -287,15 +301,34 @@ describe('formatRequirements', async () => {
     assert.match(minimum.additional_notes, /SSD required/)
   })
 
-  test('formatRequirements recommended object must have os, processor, memory, graphics, directx, storage  and additional_notes properties with their respective values', () => {
-    const result = formatRequirements(data)
+  test('formatRequirements minimum object must have os, processor, memory, graphics, directx, storage  and additional_notes properties with their respective values for the second format', () => {
+    const result = formatRequirements(dataType2)
+    const minimum = result.minimum
+    assert(Object.prototype.hasOwnProperty.call(minimum, 'os'), 'does not has os property')
+    assert(Object.prototype.hasOwnProperty.call(minimum, 'processor'), 'does not has processor property')
+    assert(Object.prototype.hasOwnProperty.call(minimum, 'memory'), 'does not has memory property')
+    assert(Object.prototype.hasOwnProperty.call(minimum, 'graphics'), 'does not has graphics property')
+    assert(Object.prototype.hasOwnProperty.call(minimum, 'directx'), 'does not has directx property')
+    assert(Object.prototype.hasOwnProperty.call(minimum, 'storage'), 'does not has storage property')
+    assert(Object.prototype.hasOwnProperty.call(minimum, 'additional_notes'), 'does not has additional_notes property')
+    assert.equal(minimum.os, '64-bit Windows 10')
+    assert.equal(minimum.processor, 'Core i7-6700 or Ryzen 5 1600')
+    assert.equal(minimum.memory, '12 GB RAM')
+    assert.equal(minimum.graphics, 'GeForce GTX 1060 6GB or Radeon RX 580 8GB or Arc A380')
+    assert.equal(minimum.directx, 'Version 12')
+    assert.equal(minimum.storage, '70 GB available space')
+    assert.match(minimum.additional_notes, /SSD required/)
+  })
+
+  test('formatRequirements recommended object must have os, processor, memory, graphics, directx, storage  and additional_notes properties with their respective values for the first format', () => {
+    const result = formatRequirements(dataType1)
     const recommended = result.recommended
     assert(Object.prototype.hasOwnProperty.call(recommended, 'os'), 'does not has os property')
     assert(Object.prototype.hasOwnProperty.call(recommended, 'processor'), 'does not has processor property')
     assert(Object.prototype.hasOwnProperty.call(recommended, 'memory'), 'does not has memory property')
     assert(Object.prototype.hasOwnProperty.call(recommended, 'graphics'), 'does not has graphics property')
     assert(Object.prototype.hasOwnProperty.call(recommended, 'directx'), 'does not has directx property')
-     assert(Object.prototype.hasOwnProperty.call(recommended, 'additional_notes'), 'does not has additional_notes property')
+    assert(Object.prototype.hasOwnProperty.call(recommended, 'additional_notes'), 'does not has additional_notes property')
     assert.equal(recommended.os, '64-bit Windows 10')
     assert.equal(recommended.processor, 'Core i7-12700 or Ryzen 7 7800X3D')
     assert.equal(recommended.memory, '16 GB RAM')
@@ -303,5 +336,16 @@ describe('formatRequirements', async () => {
     assert.equal(recommended.directx, 'Version 12')
     assert.equal(recommended.storage, '70 GB available space')
     assert.match(recommended.additional_notes, /SSD required/)
+  })
+
+  test('formatRequirements recommended object must have os, processor, memory, graphics, directx, storage  and additional_notes properties with their respective values for the second format', () => {
+    const result = formatRequirements(dataType2)
+    const recommended = result.recommended
+    assert(Object.prototype.hasOwnProperty.call(recommended, 'processor'), 'does not has processor property')
+    assert(Object.prototype.hasOwnProperty.call(recommended, 'memory'), 'does not has memory property')
+    assert(Object.prototype.hasOwnProperty.call(recommended, 'video_card'), 'does not has video_card property')
+    assert.equal(recommended.processor, 'Quad-core Intel or AMD CPU')
+    assert.equal(recommended.memory, '4GB System RAM')
+    assert.match(recommended.video_card, /DirectX 9.0c compatible NVIDIA/)
   })
 })
