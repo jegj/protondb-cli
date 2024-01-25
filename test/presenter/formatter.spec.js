@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-escape */
-import { formatGame, format, formatGameName, formatGameTier, formatGameConfidence, formatRequirements, sortGames, wrapCollection } from '../../lib/presenter/formatter.js'
+import { formatGame, format, formatGameName, formatGameTier, formatGameConfidence, formatRequirements, sortGames, wrapCollection, generateRequirementsEntries } from '../../lib/presenter/formatter.js'
 import { TAG_TIERS, GAME_NA, TAG_CONFIDENCE } from '../../lib/presenter/formats.js'
 import { mergedGameDataComplete, mergedGameDataUncomplete, mergedGames } from '../mock/index.mock.js'
 import { createMergedGame } from '../factories/index.js'
@@ -344,5 +344,53 @@ describe('formatRequirements', async () => {
     assert.equal(recommended.processor.text, 'Quad-core Intel or AMD CPU')
     assert.equal(recommended.memory.text, '4GB System RAM')
     assert.match(recommended.videocard.text, /DirectX 9.0c compatible NVIDIA/)
+  })
+})
+
+describe('generateRequirementEntries', async () => {
+  test('generateRequirementEntries must not add elements to the array if there are not requirements', () => {
+    const data = []
+    const requirements = {}
+    const result = generateRequirementsEntries(requirements, data)
+    assert.equal(result.length, 0)
+  })
+
+  test('generateRequirementEntries must add elements to the array if there are requirements', () => {
+    const data = []
+    const requirements = {
+      processor: {
+        title: 'Processor',
+        text: 'Core i7-6700 or Ryzen 5 1600'
+      },
+      memory: {
+        title: 'Memory',
+        text: '16 GB RAM'
+      }
+    }
+    const result = generateRequirementsEntries(requirements, data)
+    assert.equal(result.length, 2)
+    assert.deepEqual(result[0], [`{bold}${requirements.processor.title}{/bold}`, requirements.processor.text])
+    assert.deepEqual(result[1], [`{bold}${requirements.memory.title}{/bold}`, requirements.memory.text])
+  })
+
+  test('generateRequirementEntries must add elements and keep the array if there are requirements', () => {
+    const data = [
+      ['{bold}Videocard{/bold}', 'DirectX 9.0c compatible NVIDIA']
+    ]
+    const requirements = {
+      processor: {
+        title: 'Processor',
+        text: 'Core i7-6700 or Ryzen 5 1600'
+      },
+      memory: {
+        title: 'Memory',
+        text: '16 GB RAM'
+      }
+    }
+    const result = generateRequirementsEntries(requirements, data)
+    assert.equal(result.length, 3)
+    assert.deepEqual(result[0], ['{bold}Videocard{/bold}', 'DirectX 9.0c compatible NVIDIA'])
+    assert.deepEqual(result[1], [`{bold}${requirements.processor.title}{/bold}`, requirements.processor.text])
+    assert.deepEqual(result[2], [`{bold}${requirements.memory.title}{/bold}`, requirements.memory.text])
   })
 })
