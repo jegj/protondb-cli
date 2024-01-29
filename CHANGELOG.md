@@ -1,3 +1,28 @@
+# [1.13.0](https://github.com/jegj/protondb-cli/compare/v1.12.0...v1.13.0) (2024-01-29)
+
+
+### Bug Fixes
+
+* avoid display undefined when the game does not have the properties ([8cdc000](https://github.com/jegj/protondb-cli/commit/8cdc0008cd81a87395e1d37aae1eae754b93dd72))
+* display requirements only when present ([1df266e](https://github.com/jegj/protondb-cli/commit/1df266ef964828fc0a5c26a562cb4edbaade04ad))
+* husky v9 support ([844bc6e](https://github.com/jegj/protondb-cli/commit/844bc6ee89a1bea02667666b8cec75a9d41d0c8e))
+
+
+### Features
+
+* add protondb url ([77c7052](https://github.com/jegj/protondb-cli/commit/77c70524fb9c4f90a85fc0622df2ad4457c5d1d0))
+* add recommended requirements and refactor code ([fe17159](https://github.com/jegj/protondb-cli/commit/fe171599e2c606a646766ed5e2eff56b48aa1096))
+* display dinamically requirementes properties ([8c65863](https://github.com/jegj/protondb-cli/commit/8c658636cc319048b1ed4e1f3926951cb425378c))
+* display requirements and change from table to list for better responsive ([452c630](https://github.com/jegj/protondb-cli/commit/452c630dd56b7def58d2b4a36a3adde562919622))
+* handle minium requirements ([e3b3891](https://github.com/jegj/protondb-cli/commit/e3b3891776332e127c3111ac59770e31d4569817))
+* include original title in the requirements ([cf5bd23](https://github.com/jegj/protondb-cli/commit/cf5bd23e3644ffdce8bb767c6be40475d17bdc34))
+* instal dependecy ([2176f9a](https://github.com/jegj/protondb-cli/commit/2176f9a927399bb253a2075cc60a126d56059452))
+* refactor display code ([6bfc980](https://github.com/jegj/protondb-cli/commit/6bfc980d91d4c222fafe53a15c3dd0fbfe48216e))
+* refactor some code for display ([d0ea3b3](https://github.com/jegj/protondb-cli/commit/d0ea3b3c54a1f55f3d387d3b9b9f03829035842b))
+* rename Steam Info to Steam URL ([5c0d7a5](https://github.com/jegj/protondb-cli/commit/5c0d7a5ef3084934e354d7d2f127f39f0792fb7c))
+* support another requirements format ([dfffb8d](https://github.com/jegj/protondb-cli/commit/dfffb8d7b56de5616f49bab12cd57ec11ea498bd))
+* upgrade dependecies ([bab3326](https://github.com/jegj/protondb-cli/commit/bab3326a61f670587c9b49fd16e815b8f842805f))
+
 # [1.12.0](https://github.com/jegj/protondb-cli/compare/v1.11.0...v1.12.0) (2024-01-06)
 
 
