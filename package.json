@@ -62,9 +62,9 @@
     "c8": "^9.0.0",
     "eslint": "^8.56.0",
     "esmock": "^2.6.0",
-    "husky": "^8.0.3",
-    "markdownlint-cli2": "^0.11.0",
-    "semantic-release": "^22.0.12",
+    "husky": "^9.0.6",
+    "markdownlint-cli2": "^0.12.1",
+    "semantic-release": "^23.0.0",
     "sinon": "^17.0.1",
     "snazzy": "^9.0.0",
     "standard": "^17.0.0"
