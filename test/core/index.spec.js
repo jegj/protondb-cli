@@ -89,7 +89,6 @@ test('getGamesReport must return an array of objects, the merge from algolia cal
       assert(Object.prototype.hasOwnProperty.call(game, 'trendingTier'))
     })
   } catch (error) {
-    console.log(error)
     assert.fail('error is not expected')
   }
 })
