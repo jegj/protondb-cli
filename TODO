@@ -36,6 +36,6 @@
 - DONE: Display minimun & recommended requirements
 - DONE: Display developers, publishers, release date & metacritic
 - TODO: Find why ora@8.0.1 breaks the blessed UI
-- TODO: Update chart of requests
 - DONE: Add protondb url
 - TODO: Some game have a different key for the requirements e.g Half life 2, COunter strike
+- TODO: Add support for husky@9.x
