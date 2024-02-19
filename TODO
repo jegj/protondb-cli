@@ -31,11 +31,11 @@
 - DONE: Research new url available: https://www.protondb.com/proxy/steam/api/appdetails/?appids=72850
 - DONE: Write cache module
 - DONE: Use https://github.com/nodejs/undici/tree/main instead of node-fetch
-- TODO: Find a way to display the correct version in docker
 - DONE: Display OS support
 - DONE: Display minimun & recommended requirements
 - DONE: Display developers, publishers, release date & metacritic
-- TODO: Find why ora@8.0.1 breaks the blessed UI
 - DONE: Add protondb url
+- TODO: Find a way to display the correct version in docker
+- TODO: Find why ora@8.0.1 breaks the blessed UI
 - TODO: Some game have a different key for the requirements e.g Half life 2, COunter strike
 - TODO: Add support for husky@9.x
