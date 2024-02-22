@@ -15,7 +15,7 @@
         "node-html-parser": "6.1.12",
         "ora": "7.0.1",
         "p-map": "7.0.1",
-        "undici": "^6.6.2",
+        "undici": "6.6.2",
         "yargs": "17.7.2"
       },
       "bin": {
