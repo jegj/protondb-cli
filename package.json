@@ -22,7 +22,7 @@
     "unit": "c8 --100 node --test --loader esmock test/**/*.spec.js",
     "unit:coverage": "node --test --experimental-test-coverage  --loader esmock test/**/*.spec.js",
     "test:coverage": "npm run lint && npm run unit:coverage",
-    "prepare": "node -e \"try { require('husky').install() } catch (e) {if (e.code !== 'MODULE_NOT_FOUND') throw e}\""
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -63,7 +63,7 @@
     "c8": "^9.1.0",
     "eslint": "^8.56.0",
     "esmock": "^2.6.3",
-    "husky": "^8.0.3",
+    "husky": "^9.0.11",
     "markdownlint-cli2": "^0.12.1",
     "semantic-release": "^23.0.2",
     "sinon": "^17.0.1",
