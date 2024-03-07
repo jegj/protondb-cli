@@ -44,7 +44,7 @@
     "node-html-parser": "6.1.12",
     "ora": "7.0.1",
     "p-map": "7.0.1",
-    "undici": "6.6.2",
+    "undici": "6.7.0",
     "yargs": "17.7.2"
   },
   "files": [
@@ -61,8 +61,8 @@
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "c8": "^9.1.0",
-    "eslint": "^8.56.0",
-    "esmock": "^2.6.3",
+    "eslint": "^8.57.0",
+    "esmock": "^2.6.4",
     "husky": "^9.0.11",
     "markdownlint-cli2": "^0.12.1",
     "semantic-release": "^23.0.2",
