@@ -10,6 +10,6 @@ ENV LC_ALL C.UTF-8
 COPY . /app
 WORKDIR /app
 ENV NODE_ENV production
-RUN npm install --omit=dev
+RUN npm install --omit=dev --ignore-scripts
 
 ENTRYPOINT ["node", "protondb-cli.js"]
