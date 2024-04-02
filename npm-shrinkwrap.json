@@ -31,7 +31,7 @@
         "esmock": "^2.6.4",
         "husky": "^8.0.3",
         "markdownlint-cli2": "^0.12.1",
-        "semantic-release": "^23.0.0",
+        "semantic-release": "^22.0.12",
         "sinon": "^17.0.1",
         "snazzy": "^9.0.0",
         "standard": "^17.0.0"
@@ -2700,9 +2700,9 @@
       }
     },
     "node_modules/env-ci": {
-      "version": "11.0.0",
-      "resolved": "https://registry.npmjs.org/env-ci/-/env-ci-11.0.0.tgz",
-      "integrity": "sha512-apikxMgkipkgTvMdRT9MNqWx5VLOci79F4VBd7Op/7OPjjoanjdAvn6fglMCCEf/1bAh8eOiuEVCUs4V3qP3nQ==",
+      "version": "10.0.0",
+      "resolved": "https://registry.npmjs.org/env-ci/-/env-ci-10.0.0.tgz",
+      "integrity": "sha512-U4xcd/utDYFgMh0yWj07R1H6L5fwhVbmxBCpnL0DbVSDZVnsC82HONw0wxtxNkIAcua3KtbomQvIk5xFZGAQJw==",
       "dev": true,
       "dependencies": {
         "execa": "^8.0.0",
@@ -2781,9 +2781,9 @@
       }
     },
     "node_modules/env-ci/node_modules/npm-run-path": {
-      "version": "5.2.0",
-      "resolved": "https://registry.npmjs.org/npm-run-path/-/npm-run-path-5.2.0.tgz",
-      "integrity": "sha512-W4/tgAXFqFA0iL7fk0+uQ3g7wkL8xJmx3XdK0VGb4cHW//eZTtKGvFBBoRKVTpY7n6ze4NL9ly7rgXcHufqXKg==",
+      "version": "5.3.0",
+      "resolved": "https://registry.npmjs.org/npm-run-path/-/npm-run-path-5.3.0.tgz",
+      "integrity": "sha512-ppwTtiJZq0O/ai0z7yfudtBpWIoxM8yE6nHi1X47eFR2EWORqfbu6CnPlNsjeN683eT0qG6H/Pyf9fCcvjnnnQ==",
       "dev": true,
       "dependencies": {
         "path-key": "^4.0.0"
@@ -5247,6 +5247,7 @@
       "resolved": "https://registry.npmjs.org/marked/-/marked-11.2.0.tgz",
       "integrity": "sha512-HR0m3bvu0jAPYiIvLUUQtdg1g6D247//lvcekpHO1WMvbwDlwSkZAX9Lw4F4YHE1T0HaaNve0tuAWuV1UJ6vtw==",
       "dev": true,
+      "peer": true,
       "bin": {
         "marked": "bin/marked.js"
       },
@@ -9142,9 +9143,9 @@
       }
     },
     "node_modules/semantic-release": {
-      "version": "23.0.0",
-      "resolved": "https://registry.npmjs.org/semantic-release/-/semantic-release-23.0.0.tgz",
-      "integrity": "sha512-Jz7jEWO2igTtske112gC4PPE2whCMVrsgxUPG3/SZI7VE357suIUZFlJd1Yu0g2I6RPc2HxNEfUg7KhmDTjwqg==",
+      "version": "22.0.12",
+      "resolved": "https://registry.npmjs.org/semantic-release/-/semantic-release-22.0.12.tgz",
+      "integrity": "sha512-0mhiCR/4sZb00RVFJIUlMuiBkW3NMpVIW2Gse7noqEMoFGkvfPPAImEQbkBV8xga4KOPP4FdTRYuLLy32R1fPw==",
       "dev": true,
       "dependencies": {
         "@semantic-release/commit-analyzer": "^11.0.0",
@@ -9153,9 +9154,9 @@
         "@semantic-release/npm": "^11.0.0",
         "@semantic-release/release-notes-generator": "^12.0.0",
         "aggregate-error": "^5.0.0",
-        "cosmiconfig": "^9.0.0",
+        "cosmiconfig": "^8.0.0",
         "debug": "^4.0.0",
-        "env-ci": "^11.0.0",
+        "env-ci": "^10.0.0",
         "execa": "^8.0.0",
         "figures": "^6.0.0",
         "find-versions": "^5.1.0",
@@ -9165,7 +9166,7 @@
         "hosted-git-info": "^7.0.0",
         "import-from-esm": "^1.3.1",
         "lodash-es": "^4.17.21",
-        "marked": "^11.0.0",
+        "marked": "^9.0.0",
         "marked-terminal": "^6.0.0",
         "micromatch": "^4.0.2",
         "p-each-series": "^3.0.0",
@@ -9181,7 +9182,7 @@
         "semantic-release": "bin/semantic-release.js"
       },
       "engines": {
-        "node": ">=20.8.1"
+        "node": "^18.17 || >=20.6.1"
       }
     },
     "node_modules/semantic-release/node_modules/@semantic-release/error": {
@@ -9191,6 +9192,32 @@
       "dev": true,
       "engines": {
         "node": ">=18"
+      }
+    },
+    "node_modules/semantic-release/node_modules/cosmiconfig": {
+      "version": "8.3.6",
+      "resolved": "https://registry.npmjs.org/cosmiconfig/-/cosmiconfig-8.3.6.tgz",
+      "integrity": "sha512-kcZ6+W5QzcJ3P1Mt+83OUv/oHFqZHIx8DuxG6eZ5RGMERoLqp4BuGjhHLYGK+Kf5XVkQvqBSmAy/nGWN3qDgEA==",
+      "dev": true,
+      "dependencies": {
+        "import-fresh": "^3.3.0",
+        "js-yaml": "^4.1.0",
+        "parse-json": "^5.2.0",
+        "path-type": "^4.0.0"
+      },
+      "engines": {
+        "node": ">=14"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/d-fischer"
+      },
+      "peerDependencies": {
+        "typescript": ">=4.9.5"
+      },
+      "peerDependenciesMeta": {
+        "typescript": {
+          "optional": true
+        }
       }
     },
     "node_modules/semantic-release/node_modules/execa": {
@@ -9247,6 +9274,18 @@
       },
       "funding": {
         "url": "https://github.com/sponsors/sindresorhus"
+      }
+    },
+    "node_modules/semantic-release/node_modules/marked": {
+      "version": "9.1.6",
+      "resolved": "https://registry.npmjs.org/marked/-/marked-9.1.6.tgz",
+      "integrity": "sha512-jcByLnIFkd5gSXZmjNvS1TlmRhCXZjIzHYlaGkPlLIekG55JDR2Z4va9tZwCiP+/RDERiNhMOFu01xd6O5ct1Q==",
+      "dev": true,
+      "bin": {
+        "marked": "bin/marked.js"
+      },
+      "engines": {
+        "node": ">= 16"
       }
     },
     "node_modules/semantic-release/node_modules/mimic-fn": {
@@ -12490,9 +12529,9 @@
       "integrity": "sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw=="
     },
     "env-ci": {
-      "version": "11.0.0",
-      "resolved": "https://registry.npmjs.org/env-ci/-/env-ci-11.0.0.tgz",
-      "integrity": "sha512-apikxMgkipkgTvMdRT9MNqWx5VLOci79F4VBd7Op/7OPjjoanjdAvn6fglMCCEf/1bAh8eOiuEVCUs4V3qP3nQ==",
+      "version": "10.0.0",
+      "resolved": "https://registry.npmjs.org/env-ci/-/env-ci-10.0.0.tgz",
+      "integrity": "sha512-U4xcd/utDYFgMh0yWj07R1H6L5fwhVbmxBCpnL0DbVSDZVnsC82HONw0wxtxNkIAcua3KtbomQvIk5xFZGAQJw==",
       "dev": true,
       "requires": {
         "execa": "^8.0.0",
@@ -12541,9 +12580,9 @@
           "dev": true
         },
         "npm-run-path": {
-          "version": "5.2.0",
-          "resolved": "https://registry.npmjs.org/npm-run-path/-/npm-run-path-5.2.0.tgz",
-          "integrity": "sha512-W4/tgAXFqFA0iL7fk0+uQ3g7wkL8xJmx3XdK0VGb4cHW//eZTtKGvFBBoRKVTpY7n6ze4NL9ly7rgXcHufqXKg==",
+          "version": "5.3.0",
+          "resolved": "https://registry.npmjs.org/npm-run-path/-/npm-run-path-5.3.0.tgz",
+          "integrity": "sha512-ppwTtiJZq0O/ai0z7yfudtBpWIoxM8yE6nHi1X47eFR2EWORqfbu6CnPlNsjeN683eT0qG6H/Pyf9fCcvjnnnQ==",
           "dev": true,
           "requires": {
             "path-key": "^4.0.0"
@@ -14335,7 +14374,8 @@
       "version": "11.2.0",
       "resolved": "https://registry.npmjs.org/marked/-/marked-11.2.0.tgz",
       "integrity": "sha512-HR0m3bvu0jAPYiIvLUUQtdg1g6D247//lvcekpHO1WMvbwDlwSkZAX9Lw4F4YHE1T0HaaNve0tuAWuV1UJ6vtw==",
-      "dev": true
+      "dev": true,
+      "peer": true
     },
     "marked-terminal": {
       "version": "6.2.0",
@@ -16973,9 +17013,9 @@
       }
     },
     "semantic-release": {
-      "version": "23.0.0",
-      "resolved": "https://registry.npmjs.org/semantic-release/-/semantic-release-23.0.0.tgz",
-      "integrity": "sha512-Jz7jEWO2igTtske112gC4PPE2whCMVrsgxUPG3/SZI7VE357suIUZFlJd1Yu0g2I6RPc2HxNEfUg7KhmDTjwqg==",
+      "version": "22.0.12",
+      "resolved": "https://registry.npmjs.org/semantic-release/-/semantic-release-22.0.12.tgz",
+      "integrity": "sha512-0mhiCR/4sZb00RVFJIUlMuiBkW3NMpVIW2Gse7noqEMoFGkvfPPAImEQbkBV8xga4KOPP4FdTRYuLLy32R1fPw==",
       "dev": true,
       "requires": {
         "@semantic-release/commit-analyzer": "^11.0.0",
@@ -16984,9 +17024,9 @@
         "@semantic-release/npm": "^11.0.0",
         "@semantic-release/release-notes-generator": "^12.0.0",
         "aggregate-error": "^5.0.0",
-        "cosmiconfig": "^9.0.0",
+        "cosmiconfig": "^8.0.0",
         "debug": "^4.0.0",
-        "env-ci": "^11.0.0",
+        "env-ci": "^10.0.0",
         "execa": "^8.0.0",
         "figures": "^6.0.0",
         "find-versions": "^5.1.0",
@@ -16996,7 +17036,7 @@
         "hosted-git-info": "^7.0.0",
         "import-from-esm": "^1.3.1",
         "lodash-es": "^4.17.21",
-        "marked": "^11.0.0",
+        "marked": "^9.0.0",
         "marked-terminal": "^6.0.0",
         "micromatch": "^4.0.2",
         "p-each-series": "^3.0.0",
@@ -17014,6 +17054,18 @@
           "resolved": "https://registry.npmjs.org/@semantic-release/error/-/error-4.0.0.tgz",
           "integrity": "sha512-mgdxrHTLOjOddRVYIYDo0fR3/v61GNN1YGkfbrjuIKg/uMgCd+Qzo3UAXJ+woLQQpos4pl5Esuw5A7AoNlzjUQ==",
           "dev": true
+        },
+        "cosmiconfig": {
+          "version": "8.3.6",
+          "resolved": "https://registry.npmjs.org/cosmiconfig/-/cosmiconfig-8.3.6.tgz",
+          "integrity": "sha512-kcZ6+W5QzcJ3P1Mt+83OUv/oHFqZHIx8DuxG6eZ5RGMERoLqp4BuGjhHLYGK+Kf5XVkQvqBSmAy/nGWN3qDgEA==",
+          "dev": true,
+          "requires": {
+            "import-fresh": "^3.3.0",
+            "js-yaml": "^4.1.0",
+            "parse-json": "^5.2.0",
+            "path-type": "^4.0.0"
+          }
         },
         "execa": {
           "version": "8.0.1",
@@ -17050,6 +17102,12 @@
           "version": "3.0.0",
           "resolved": "https://registry.npmjs.org/is-stream/-/is-stream-3.0.0.tgz",
           "integrity": "sha512-LnQR4bZ9IADDRSkvpqMGvt/tEJWclzklNgSw48V5EAaAeDd6qGvN8ei6k5p0tvxSR171VmGyHuTiAOfxAbr8kA==",
+          "dev": true
+        },
+        "marked": {
+          "version": "9.1.6",
+          "resolved": "https://registry.npmjs.org/marked/-/marked-9.1.6.tgz",
+          "integrity": "sha512-jcByLnIFkd5gSXZmjNvS1TlmRhCXZjIzHYlaGkPlLIekG55JDR2Z4va9tZwCiP+/RDERiNhMOFu01xd6O5ct1Q==",
           "dev": true
         },
         "mimic-fn": {
