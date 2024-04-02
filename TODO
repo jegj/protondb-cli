@@ -35,7 +35,7 @@
 - DONE: Display minimun & recommended requirements
 - DONE: Display developers, publishers, release date & metacritic
 - DONE: Add protondb url
-- DONE: Add support for husky@9.x
+- TODO: Add support for husky@9.x
 - TODO: Find a way to display the correct version in docker
 - TODO: Find why ora@8.0.1 breaks the blessed UI
 - TODO: Some game have a different key for the requirements e.g Half life 2, COunter strike
