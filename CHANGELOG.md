@@ -1,3 +1,11 @@
+## [1.13.1](https://github.com/jegj/protondb-cli/compare/v1.13.0...v1.13.1) (2024-04-02)
+
+
+### Bug Fixes
+
+* upgrade dependecies for security reasons ([4e52d78](https://github.com/jegj/protondb-cli/commit/4e52d78091d8dd0afe6d9540c15f4d4f9289b4bf))
+* vulnerability by upgrading common dependecies ([f28b9c9](https://github.com/jegj/protondb-cli/commit/f28b9c98f0358792ac9b0eea609d51af710d4e66))
+
 # [1.13.0](https://github.com/jegj/protondb-cli/compare/v1.12.0...v1.13.0) (2024-01-29)
 
 
