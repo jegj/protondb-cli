@@ -44,7 +44,7 @@
     "node-html-parser": "6.1.13",
     "ora": "8.0.1",
     "p-map": "7.0.2",
-    "undici": "6.16.1",
+    "undici": "6.18.1",
     "yargs": "17.7.2"
   },
   "files": [
