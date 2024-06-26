@@ -1,3 +1,10 @@
+# [1.14.0](https://github.com/jegj/protondb-cli/compare/v1.13.1...v1.14.0) (2024-06-26)
+
+
+### Features
+
+* upgrade deps and force release ([1ce81ae](https://github.com/jegj/protondb-cli/commit/1ce81ae7056a12a56a6d16acfcc5c03a62ca25ab))
+
 ## [1.13.1](https://github.com/jegj/protondb-cli/compare/v1.13.0...v1.13.1) (2024-04-02)
 
 
