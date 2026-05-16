@@ -41,6 +41,7 @@
   "license": "GPLv3",
   "dependencies": {
     "@clack/prompts": "1.4.0",
+    "blessed": "0.1.81",
     "chalk": "5.6.2",
     "lowdb": "7.0.1",
     "node-html-parser": "7.1.0",

@@ -16,6 +16,7 @@ export interface ProtondbCLIOptions {
   clear_cache: boolean
   detail?: boolean
   json?: boolean
+  'old-view'?: boolean
 }
 
 const config = getConfig()
@@ -91,6 +92,12 @@ export default async function start(
 
   if (cache) {
     await cache.write()
+  }
+
+  if (protondbCLI['old-view'] && isTty && mode !== 'json') {
+    const { presentLegacyData } = await import('../presenter/legacy/index.js')
+    presentLegacyData(result)
+    return
   }
 
   await render(result, { mode, isTty })
