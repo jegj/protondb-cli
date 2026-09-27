@@ -73,7 +73,8 @@ test('checkProtondbProxyResponse function must throw an error if a required prop
     },
     {
       name: 'Error',
-      message: 'protondbproxy response doesnt have the property "recommendations"'
+      message:
+        'protondbproxy response doesnt have the property "recommendations"'
     }
   )
 })
