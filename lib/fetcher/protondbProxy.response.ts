@@ -2,18 +2,18 @@ const REQUIRED_PROTONDB_PROXY_PROPS = ['genres', 'recommendations']
 
 export function checkProtondbProxyResponse(
   protondbProxyResponse: unknown,
-  appId: string,
   requiredProps: string[] = REQUIRED_PROTONDB_PROXY_PROPS
 ): void {
   const proxyResponse = protondbProxyResponse as Record<string, unknown>
+  const returnedAppId = Object.keys(proxyResponse)[0]
 
-  if (!Object.hasOwn(proxyResponse, appId)) {
-    throw new Error(`protondbproxy response doesnt have the appid "${appId}"`)
+  if (!returnedAppId) {
+    throw new Error('protondbproxy response doesnt have any appid')
   }
 
-  const game = proxyResponse[appId] as Record<string, unknown>
+  const game = proxyResponse[returnedAppId] as Record<string, unknown>
 
-  if (!Object.hasOwn(game, 'success') && game.success) {
+  if (!Object.hasOwn(game, 'success') || !game.success) {
     throw new Error(
       'protondbproxy game response doesnt have a valid success property'
     )

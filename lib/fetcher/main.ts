@@ -64,7 +64,7 @@ const protondbProxyOptions = { appid: 72850, url: protondbProxyUrl }
 ;(async () => {
   try {
     const result = await protondbProxyFetcher(protondbProxyOptions)
-    checkProtondbProxyResponse(result, '72850')
+    checkProtondbProxyResponse(result)
   } catch (e) {
     console.error((e as Error).message)
     process.exit(1)
