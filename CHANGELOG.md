@@ -21,6 +21,13 @@
 
 * upgrade deps and force release ([1ce81ae](https://github.com/jegj/protondb-cli/commit/1ce81ae7056a12a56a6d16acfcc5c03a62ca25ab))
 
+## [2.0.2](https://github.com/jegj/protondb-cli/compare/v2.0.1...v2.0.2) (2026-09-27)
+
+
+### Bug Fixes
+
+* key protondb proxy response by returned appid instead of requested ([cfbdc54](https://github.com/jegj/protondb-cli/commit/cfbdc545b0d32fbe4e8580c9a619ff82627f679f))
+
 ## [2.0.1](https://github.com/jegj/protondb-cli/compare/v2.0.0...v2.0.1) (2026-05-15)
 
 
