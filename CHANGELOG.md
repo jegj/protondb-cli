@@ -21,6 +21,13 @@
 
 * upgrade deps and force release ([1ce81ae](https://github.com/jegj/protondb-cli/commit/1ce81ae7056a12a56a6d16acfcc5c03a62ca25ab))
 
+## [2.0.3](https://github.com/jegj/protondb-cli/compare/v2.0.2...v2.0.3) (2026-09-27)
+
+
+### Bug Fixes
+
+* stop force-installing npm@latest before publishing ([732075e](https://github.com/jegj/protondb-cli/commit/732075eac0b840dc092bdeb97517665c9d14555e))
+
 ## [2.0.2](https://github.com/jegj/protondb-cli/compare/v2.0.1...v2.0.2) (2026-09-27)
 
 
