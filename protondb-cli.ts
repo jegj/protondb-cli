@@ -78,6 +78,11 @@ const protondbCLI = yargs(argv)
           description: 'Emit JSON output (no color, no picker)',
           default: false
         })
+        .option('old-view', {
+          type: 'boolean',
+          description: 'Use the legacy blessed-based full-screen TUI (v1.15.0 style)',
+          default: false
+        })
         .example([
           [
             '$0 gta --concurrency 5 --hits 15',

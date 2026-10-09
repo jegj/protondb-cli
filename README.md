@@ -39,6 +39,7 @@ game name, tier, confidence, OS list, and user score.
 | `-c` / `--concurrency` | Limit concurrency for the search.                            |
 | `--disable_cache` | Bypass the local cache.                                           |
 | `--clear_cache` | Wipe the local cache.                                               |
+| `--old-view`  | Use the v1.15.0 blessed-based full-screen TUI instead of the default inline picker. |
 
 ```sh
 protondb-cli "Half-Life" --detail
